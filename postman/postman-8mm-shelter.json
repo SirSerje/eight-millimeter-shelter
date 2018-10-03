@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "4cb45d0d-364c-4c71-9858-6d2de84cdabf",
+		"name": "movie-shelve-api",
+		"description": "Набор запросов для работы с movie-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all movies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies"
+					]
+				},
+				"description": "получить все фильмы"
+			},
+			"response": []
+		},
+		{
+			"name": "get movie by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"15"
+					]
+				},
+				"description": "получить фильм по его id"
+			},
+			"response": []
+		},
+		{
+			"name": "remove movie by id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id\n",
+							"value": "2",
+							"description": "ID фильма который надо удалить\n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"15"
+					]
+				},
+				"description": "удалить фильм по id"
+			},
+			"response": []
+		},
+		{
+			"name": "add movie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "movie",
+							"value": "{title:'movie title', release:'2012', format:'VHS',stars:['star1', star2]'}",
+							"description": "тело фильма которое надо добавить в базу\n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies"
+					]
+				},
+				"description": "добавить новый фильм"
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "2",
+							"description": "ID фильма который обновляем\n",
+							"type": "text"
+						},
+						{
+							"key": "movie",
+							"value": "{}",
+							"description": "тело фильма который заносим по данному ID\n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"15"
+					]
+				},
+				"description": "Отредактировать конкретный фильм"
+			},
+			"response": []
+		},
+		{
+			"name": "[NOT IMPLEMENTED] download file with all movies",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"download"
+					]
+				},
+				"description": "загрузить текстовый файл со всеми фильмами"
+			},
+			"response": []
+		},
+		{
+			"name": "[NOT IMPLEMENTED] upload file with movies",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"download"
+					]
+				},
+				"description": "выгрузить на сервер текстовый файл с фильмами"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3b5a90ea-50ef-4899-91b6-6f05dd72a220",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3ac884fe-3182-40ef-9545-87d98968a8c9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
