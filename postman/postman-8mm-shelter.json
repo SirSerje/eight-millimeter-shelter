@@ -100,12 +100,13 @@
 							"key": "id\n",
 							"value": "2",
 							"description": "ID фильма который надо удалить\n",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:4125/api/movies/15",
+					"raw": "http://localhost:4125/api/movies/16",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -114,7 +115,7 @@
 					"path": [
 						"api",
 						"movies",
-						"15"
+						"16"
 					]
 				},
 				"description": "удалить фильм по id"

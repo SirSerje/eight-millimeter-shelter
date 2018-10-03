@@ -76,8 +76,11 @@ router.route('/movies/:movieId')
     res.json({message: `${req.params.movieId} update this movie`});
   })
   //DELETE
-  .delete(function (req, res) {
-    res.json({message: `${req.params.movieId} movie deleted`});
+  .delete(function(req, res) {
+    firebase.database().ref('movie/' + req.params.movieId).remove()
+      .then(i =>
+        res.json({message: `${req.params.movieId} movie deleted`})
+      );
   });
 
 app.use('/api', router);
