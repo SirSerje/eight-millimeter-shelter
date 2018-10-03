@@ -12,6 +12,7 @@ const app = express();
 const router = express.Router();
 const admin = require('firebase-admin');
 const firebase = require("firebase");
+const PORT = 4125
 
 var config = {
   apiKey: "AIzaSyBs17-j5048eEmoPJk7WxX8zx47Io6XMwk",
@@ -24,11 +25,10 @@ var config = {
 
 firebase.initializeApp(config);
 var database = firebase.database();
-var all = database.ref().once('value').then(function (snapshot) {
-  console.log(snapshot.val().movie);
-})
+// var all = database.ref().once('value').then(function (snapshot) {
+//   console.log(snapshot.val().movie);
+// })
 
-const PORT = 4125
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -46,7 +46,22 @@ router.get('/', function (req, res) {
 });
 
 router.route('/movies').post(function (req, res) {
+
+console.log('! body', req.body)
+console.log('! params', req.params)
+   //FIXME: requests body returns empty object instead data.Check postman also
+  /*firebase.database().ref('movie/' + 'movie_1').set({
+    test  :'!!'
+  }, function(error) {
+    if (error) {
+      res.json({message: 'ERROR'});
+    } else {
+      res.json({message: 'movie created!'});
+    }
+  })*/
   res.json({message: 'movie created!'});
+
+
 }).get(function (req, res) {
   database.ref().once('value').then(function (snapshot) {
     res.json(snapshot.val().movie);
