@@ -1,0 +1,10 @@
+{
+  "movie" : {
+    "movie_0" : {
+      "format" : "VHS",
+      "release" : 1974,
+      "stars" : [ "Mel Brooks", "Clevon Little", "Harvey Korman", "Gene Wilder", "Slim Pickens", "Madeline Kahn" ],
+      "title" : "Blazing Saddles"
+    }
+  }
+}

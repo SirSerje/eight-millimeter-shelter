@@ -8,8 +8,25 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const app = express()
-const router = express.Router()
+const app = express();
+const router = express.Router();
+const admin = require('firebase-admin');
+const firebase = require("firebase");
+
+var config = {
+  apiKey: "AIzaSyBs17-j5048eEmoPJk7WxX8zx47Io6XMwk",
+  authDomain: "movie-shelve.firebaseapp.com",
+  databaseURL: "https://movie-shelve.firebaseio.com",
+  projectId: "movie-shelve",
+  storageBucket: "movie-shelve.appspot.com",
+  messagingSenderId: "168547079024"
+};
+
+firebase.initializeApp(config);
+var database = firebase.database();
+var all = database.ref().once('value').then(function (snapshot) {
+  console.log(snapshot.val().movie);
+})
 
 const PORT = 4125
 
@@ -31,7 +48,9 @@ router.get('/', function (req, res) {
 router.route('/movies').post(function (req, res) {
   res.json({message: 'movie created!'});
 }).get(function (req, res) {
-  res.json({message: 'get all movies list!'});
+  database.ref().once('value').then(function (snapshot) {
+    res.json(snapshot.val().movie);
+  })
 });
 
 router.route('/movies/:movieId')
