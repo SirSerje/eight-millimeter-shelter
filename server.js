@@ -50,8 +50,8 @@ router.get('/', function (req, res) {
 
 //ADD
 router.route('/movies').post(function (req, res) {
-
-  firebase.database().ref('movie/' + LAST_ID++).set(
+  LAST_ID++;
+  firebase.database().ref('movie/' + LAST_ID).set(
     req.body.movie, function(error) {
     if (error) {
       res.json({message: 'ERROR'});
