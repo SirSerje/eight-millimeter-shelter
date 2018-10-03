@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4cb45d0d-364c-4c71-9858-6d2de84cdabf",
+		"_postman_id": "ee83113b-7d57-4d30-8c17-a481053ec8e0",
 		"name": "movie-shelve-api",
 		"description": "Набор запросов для работы с movie-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -123,12 +123,24 @@
 		},
 		{
 			"name": "add movie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8449d33a-9779-4fee-8822-cfefd7f2a934",
+						"type": "text/javascript",
+						"exec": [
+							"{movie}"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
+						"value": "application/json"
 					},
 					{
 						"key": "Cache-Control",
@@ -136,15 +148,8 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "movie",
-							"value": "{title:'movie title', release:'2012', format:'VHS',stars:['star1', star2]'}",
-							"description": "тело фильма которое надо добавить в базу\n",
-							"type": "text"
-						}
-					]
+					"mode": "raw",
+					"raw": " {\n \t\"movie\": {\n\t\t\"title\":\"Commando\",\n\t\t\"release\":1985,\n\t\t\"format\":\"VHS\",\n\t\t\"stars\":[\"Arnold Schwaznegger\", \"Rae Dawn Chong\", \"Dan Hedaya\"]\n\t}\t\n}"
 				},
 				"url": {
 					"raw": "http://localhost:4125/api/movies",
@@ -158,7 +163,7 @@
 						"movies"
 					]
 				},
-				"description": "добавить новый фильм"
+				"description": "добавить новый фильм. для корректного запроса выбрать body > raw"
 			},
 			"response": []
 		},
