@@ -14,7 +14,7 @@ const admin = require('firebase-admin');
 const firebase = require("firebase");
 const PORT = 4125
 
-var config = {
+let config = {
   apiKey: "AIzaSyBs17-j5048eEmoPJk7WxX8zx47Io6XMwk",
   authDomain: "movie-shelve.firebaseapp.com",
   databaseURL: "https://movie-shelve.firebaseio.com",
@@ -24,14 +24,14 @@ var config = {
 };
 
 firebase.initializeApp(config);
-var database = firebase.database();
+let database = firebase.database();
 
 //variable, which holds highest ID
-var LAST_ID = -1;
+let LAST_ID = -1;
 
 database.ref().once('value').then(function (snapshot) {
    LAST_ID = Math.max.apply(null, Object.keys(snapshot.val().movie));
-})
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 // middleware to use for all requests
 router.use(function (req, res, next) {
   // do logging
-  console.log('Something is happening.');
+  //console.log('Something is happening.');
   next();
 });
 
@@ -57,6 +57,7 @@ router.route('/movies').post(function (req, res) {
       res.json({message: 'ERROR'});
     } else {
       res.json({message: 'movie created!'});
+      //FIXME #2 add error handling for requests
     }
   })
 //GET ALL
@@ -64,6 +65,7 @@ router.route('/movies').post(function (req, res) {
   database.ref().once('value').then(function (snapshot) {
     res.json(snapshot.val().movie);
   })
+  .catch();  //FIXME #2 add error handling for requests
 });
 
 //GET BY ID
@@ -75,14 +77,16 @@ router.route('/movies/:movieId')
   .put(function (req, res) {
     firebase.database().ref('movie/' + req.params.movieId).update(req.body.movie).then(i =>
       res.json({message: `${req.params.movieId} update this movie`})
-    );
+    )
+      .catch();  //FIXME #2 add error handling for requests
   })
   //DELETE
   .delete(function(req, res) {
     firebase.database().ref('movie/' + req.params.movieId).remove()
       .then(i =>
         res.json({message: `${req.params.movieId} movie deleted`})
-      );
+      )
+      .catch(); //FIXME #2 add error handling for requests
   });
 
 app.use('/api', router);
