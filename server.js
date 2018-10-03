@@ -73,7 +73,9 @@ router.route('/movies/:movieId')
   })
   //UPDATE
   .put(function (req, res) {
-    res.json({message: `${req.params.movieId} update this movie`});
+    firebase.database().ref('movie/' + req.params.movieId).update(req.body.movie).then(i =>
+      res.json({message: `${req.params.movieId} update this movie`})
+    );
   })
   //DELETE
   .delete(function(req, res) {

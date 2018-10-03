@@ -43,7 +43,7 @@
 			"response": []
 		},
 		{
-			"name": "get movie by id",
+			"name": "[NOT IMPLEMENTED] get movie by id",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -170,12 +170,24 @@
 		},
 		{
 			"name": "update",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c646db00-ed2a-4473-9007-9a70c6e31f12",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
+						"value": "application/json"
 					},
 					{
 						"key": "Cache-Control",
@@ -183,24 +195,11 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "id",
-							"value": "2",
-							"description": "ID фильма который обновляем\n",
-							"type": "text"
-						},
-						{
-							"key": "movie",
-							"value": "{}",
-							"description": "тело фильма который заносим по данному ID\n",
-							"type": "text"
-						}
-					]
+					"mode": "raw",
+					"raw": " {\n \t\"movie\": {\n\t\t\"title\":\"Commando\",\n\t\t\"release\":2002,\n\t\t\"format\":\"VHS\",\n\t\t\"stars\":[\"Arnold Schwaznegger\", \"Rae Dawn Chong\", \"Dan Hedaya\"]\n\t}\t\n}"
 				},
 				"url": {
-					"raw": "http://localhost:4125/api/movies/15",
+					"raw": "http://localhost:4125/api/movies/20",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -209,7 +208,7 @@
 					"path": [
 						"api",
 						"movies",
-						"15"
+						"20"
 					]
 				},
 				"description": "Отредактировать конкретный фильм"
