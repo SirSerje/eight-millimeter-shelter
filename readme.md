@@ -1,6 +1,6 @@
-#Currently project under develop
+# Currently project under develop
 
-#!IMPORTANT
+# !IMPORTANT
 db currently run without any auth in dev mode, so, make changes carefully.
 
 ___________________________________
