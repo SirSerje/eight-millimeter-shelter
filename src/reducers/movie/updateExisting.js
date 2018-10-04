@@ -1,4 +1,4 @@
-import { MOVIE_UPDATE_EXISTING} from "../../constants";
+import { MOVIE_UPDATE_EXISTING } from "../../constants";
 
 const initialState = {movies: []}
 

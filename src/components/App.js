@@ -4,7 +4,6 @@ import * as actions from "../actions";
 import './../App.css';
 import {connect} from "react-redux";
 
-
 class App extends Component {
 
   constructor(params) {
@@ -25,6 +24,12 @@ class App extends Component {
     this.deleteHandler = this.deleteHandler.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
   }
+
+
+componentDidMount() {
+  this.props.updateExisting(15, {foo:'rab'})
+}
+
 
   initHandler() {this.props.init()}
   getAllHandler() {this.props.getAll()}
@@ -74,7 +79,6 @@ const mapStateToProps = (state, ownProps = {}) => {
 }
 
 const mapDispatchToProps = dispatch => {
-  console.log('mapDispatchToProps called');
   return {
     addTodo: item => dispatch(actions.addTodo(item)),
 
@@ -83,6 +87,7 @@ const mapDispatchToProps = dispatch => {
     getAllById: id => dispatch(actions.movieGetById(id)),
     addNew: body => dispatch(actions.movieAddNew(body)),
     movieDelete: id => dispatch(actions.movieDelete(id)),
+
     updateExisting: (id, body) => dispatch(actions.movieUpdateExisting(id, body)),
   }
 }
