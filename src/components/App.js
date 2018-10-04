@@ -9,7 +9,14 @@ class App extends Component {
 
   constructor(params) {
     super(params)
-    this.state = {movies: {}}
+    //FIXME: this is mock data. remove later @sir.serje
+    this.state = {movies: [ {
+        "format" : "VHS",
+        "release" : 1974,
+        "stars" : [ "Mel Brooks", "Clevon Little", "Harvey Korman", "Gene Wilder", "Slim Pickens", "Madeline Kahn" ],
+        "title" : "Blazing Saddles"
+      } ]
+    }
 
     this.initHandler = this.initHandler.bind(this);
     this.getAllHandler = this.getAllHandler.bind(this);
@@ -23,8 +30,8 @@ class App extends Component {
   getAllHandler() {this.props.getAll()}
   getByIdHandler() {this.props.getAllById(15)}
   addHandler() {this.props.addNew({foo:'bar'})}
-  deleteHandler() {this.props.deleteHandler(13)}
-  updateHandler() {this.props.updateExisting(15, {foo:'bar'})}
+  deleteHandler() {this.props.movieDelete(13)}
+  updateHandler() {this.props.updateExisting(15, {foo:'rab'})}
 
   render() {
     return (
@@ -36,6 +43,7 @@ class App extends Component {
             8mm📽
           </p>
         <p>
+          <b>API methods:</b>
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
           <button onClick={this.getByIdHandler}>getAllById</button>
@@ -45,6 +53,8 @@ class App extends Component {
 
 
         </p>
+        <span>List:</span>
+        <p>{this.state.movies.map(item => `${item.title} - ${item.release} -  ${item.format} - ${item.stars}`)}</p>
          {/* <a
             className="App-link"
             href="https://reactjs.org"
@@ -65,7 +75,7 @@ const mapStateToProps = (state, ownProps = {}) => {
 
 const mapDispatchToProps = dispatch => {
   console.log('mapDispatchToProps called');
-  return ({
+  return {
     addTodo: item => dispatch(actions.addTodo(item)),
 
     init: () => dispatch(actions.init()),
@@ -74,6 +84,6 @@ const mapDispatchToProps = dispatch => {
     addNew: body => dispatch(actions.movieAddNew(body)),
     movieDelete: id => dispatch(actions.movieDelete(id)),
     updateExisting: (id, body) => dispatch(actions.movieUpdateExisting(id, body)),
-  })
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

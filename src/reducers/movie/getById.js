@@ -7,6 +7,7 @@ let movies = (state = initialState, action) => {
   let {type, payload} = action
 
   if (type === MOVIE_GET_BY_ID) {
+    console.log('reducer MOVIE_GET_BY_ID:', action)
     const movie = {
       id: 17,
       isComplete: false,
