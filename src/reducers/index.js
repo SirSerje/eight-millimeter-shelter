@@ -1,5 +1,12 @@
 import {combineReducers} from "redux";
-import counter from "./counter";
+import addTodo from "./addTodo";
+import appInitReducer from "./appInitReducer";
+import * as moviesReducer from './movie'
 
-const reducers = combineReducers({counter});
+
+const reducers = combineReducers({
+  addTodo,
+  appInitReducer,
+  moviesReducer
+});
 export default reducers;
