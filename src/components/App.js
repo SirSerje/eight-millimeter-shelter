@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './../logo.svg';
 import * as actions from "../actions";
 import './../App.css';
 import {connect} from "react-redux";
@@ -8,14 +7,7 @@ class App extends Component {
 
   constructor(params) {
     super(params)
-    //FIXME: this is mock data. remove later @sir.serje
-    this.state = {movies: [ {
-        "format" : "VHS",
-        "release" : 1974,
-        "stars" : [ "Mel Brooks", "Clevon Little", "Harvey Korman", "Gene Wilder", "Slim Pickens", "Madeline Kahn" ],
-        "title" : "Blazing Saddles"
-      } ]
-    }
+    this.state = {}
 
     this.initHandler = this.initHandler.bind(this);
     this.getAllHandler = this.getAllHandler.bind(this);
@@ -26,10 +18,9 @@ class App extends Component {
   }
 
 
-componentDidMount() {
-  this.props.updateExisting(15, {foo:'rab'})
-}
-
+  componentDidMount() {
+    this.props.getAll()
+  }
 
   initHandler() {this.props.init()}
   getAllHandler() {this.props.getAll()}
@@ -56,10 +47,13 @@ componentDidMount() {
           <button onClick={this.deleteHandler}>movieDelete</button>
           <button onClick={this.updateHandler}>updateExisting</button>
 
-
         </p>
+
         <span>List:</span>
-        <p>{this.state.movies.map(item => `${item.title} - ${item.release} -  ${item.format} - ${item.stars}`)}</p>
+        {/*FIXME: ID should be set properly, temporary hack*/}
+        <div>{this.props.movies.length && this.props.movies.map(item =>
+          <p key={Math.round(Math.random()*20000)}>{item.title} - {item.release} -  {item.format} - {item.stars}</p>
+        )}</div>
          {/* <a
             className="App-link"
             href="https://reactjs.org"
@@ -74,9 +68,10 @@ componentDidMount() {
   }
 }
 
-const mapStateToProps = (state, ownProps = {}) => {
-  return {movies: state.movies}
-}
+const mapStateToProps = state => {
+  //state.XX, where XX depends on reducer name
+  return {movies: state.getAll}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
