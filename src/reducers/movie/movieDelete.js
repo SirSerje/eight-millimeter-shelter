@@ -1,4 +1,4 @@
-import { MOVIE_GET_ALL } from "../../constants";
+import { MOVIE_DELETE} from "../../constants";
 
 const initialState = {movies: []}
 
@@ -6,7 +6,7 @@ let movies = (state = initialState, action) => {
 
   let {type, payload} = action
 
-  if (type === MOVIE_GET_ALL) {
+  if (type === MOVIE_DELETE) {
     const movie = {
       id: 17,
       isComplete: false,

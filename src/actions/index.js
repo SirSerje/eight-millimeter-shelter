@@ -37,10 +37,11 @@ export const movieDelete = (payload) => {
     payload
   }
 }
-export const movieUpdateExisting = (payload) => {
+export const movieUpdateExisting = (a,b) => {
+  console.log('action called', a,b)
   return {
     type: actionTypes.MOVIE_UPDATE_EXISTING,
-    payload
+    a
   }
 }
 

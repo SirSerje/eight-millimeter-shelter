@@ -1,28 +1,27 @@
 import { APP_INIT } from "../constants";
 
- todos = (state = {todos: []}, action) => {
+const initialState = {movies: []}
+
+let movies = (state = initialState, action) => {
 
   let {type, payload} = action
 
   if (type === APP_INIT) {
-    const todo = {
+    const movie = {
       id: 17,
       isComplete: false,
       name: payload,
     }
     return {
-      ...state,
-      todos: [
-        ...state.todos,
-        todo
+      movies: [
+        movie
       ]
     };
   }
 
   return {
-    ...state,
-    todos
+    movies
   };
 }
 
-export default todos
+export default movies
