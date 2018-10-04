@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "react-start": "react-scripts start",
+    "build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "keywords": [
     "node",
@@ -16,6 +20,9 @@
   "author": "sir.serje@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "2.0.4",
     "body-parser": "^1.18.3",
     "errorhandler": "^1.5.0",
     "express": "^4.16.3",
@@ -29,5 +36,14 @@
     "nodemon": "^1.18.4",
     "serve-favicon": "^2.5.0",
     "winston": "^3.1.0"
-  }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
