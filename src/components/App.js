@@ -3,12 +3,18 @@ import * as actions from "../actions";
 import './../App.css';
 import {connect} from "react-redux";
 import DEFAULT_MOVIE from "../constants/defaultMovie";
+import MovieDashboardComponent from "./MovieDashboardComponent";
+import 'bootstrap/dist/css/bootstrap.css'
 
 class App extends Component {
 
   constructor(params) {
     super(params)
-    this.state = {deleteInput:-1,updateInput:-1, byId:-1}
+    this.state = {
+      deleteInput:-1,
+      updateInput:-1,
+      byIdInput:-1
+    }
 
     this.initHandler = this.initHandler.bind(this);
     this.getAllHandler = this.getAllHandler.bind(this);
@@ -25,17 +31,9 @@ class App extends Component {
     this.props.getAll()
   }
 
-  deleteInputHandler(event) {
-    this.setState({deleteInput: event.target.value});
-  }
-
-  updateInputHandler(event) {
-    this.setState({updateInput: event.target.value});
-  }
-
-  byIdHandler(event) {
-    this.setState({byId: event.target.value});
-  }
+  deleteInputHandler(event) { this.setState({deleteInput: event.target.value}); }
+  updateInputHandler(event) { this.setState({updateInput: event.target.value}); }
+  byIdHandler(event) { this.setState({byIdInput: event.target.value}); }
 
   initHandler() {this.props.init()}
   getAllHandler() {this.props.getAll()}
@@ -59,7 +57,7 @@ class App extends Component {
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
           <button onClick={this.getByIdHandler}>getAllById</button>
-          <input type="text" value={this.state.byId} onChange={this.byIdHandler} />
+          <input type="text" value={this.state.byIdInput} onChange={this.byIdHandler} />
           <button onClick={this.addHandler}>addNew</button>
           <button onClick={this.deleteHandler}>movieDelete</button>
           <input type="text" value={this.state.deleteInput} onChange={this.deleteInputHandler} />
@@ -71,7 +69,9 @@ class App extends Component {
         <span>List:</span>
         {/*FIXME: ID should be set properly, temporary hack*/}
         {console.log('on render >>>>',this.props.movies.movie)}
-
+        {this.props.movies.movie  && <MovieDashboardComponent
+          movieData={this.props.movies.movie}
+        />}
         <div>{this.props.movies.movie && this.props.movies.movie.map(item =>{
           console.log('MAP', item)
           if(item ===null) {return}
