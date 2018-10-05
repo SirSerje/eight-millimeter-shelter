@@ -43,7 +43,7 @@
 			"response": []
 		},
 		{
-			"name": "[NOT IMPLEMENTED] get movie by id",
+			"name": "get movie by id",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -63,7 +63,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:4125/api/movies/15",
+					"raw": "http://localhost:4125/api/movies/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
