@@ -11,7 +11,8 @@ let movies = (state = initialState, action) => {
   }
 
   if (type === MOVIE_GET_ALL_SUCCESS) {
-    return {...state,movie:movie.movie}
+    console.log(movie)
+    return {...state, movie}
   }
 
   //----------------------------------------------

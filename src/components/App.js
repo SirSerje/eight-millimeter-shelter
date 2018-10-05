@@ -8,7 +8,7 @@ class App extends Component {
 
   constructor(params) {
     super(params)
-    this.state = {}
+    this.state = {deleteInput:-1,updateInput:-1, byId:-1}
 
     this.initHandler = this.initHandler.bind(this);
     this.getAllHandler = this.getAllHandler.bind(this);
@@ -16,18 +16,32 @@ class App extends Component {
     this.addHandler = this.addHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
+    this.deleteInputHandler = this.deleteInputHandler.bind(this);
+    this.updateInputHandler = this.updateInputHandler.bind(this);
+    this.byIdHandler = this.byIdHandler.bind(this);
   }
-
 
   componentDidMount() {
     this.props.getAll()
+  }
+
+  deleteInputHandler(event) {
+    this.setState({deleteInput: event.target.value});
+  }
+
+  updateInputHandler(event) {
+    this.setState({updateInput: event.target.value});
+  }
+
+  byIdHandler(event) {
+    this.setState({byId: event.target.value});
   }
 
   initHandler() {this.props.init()}
   getAllHandler() {this.props.getAll()}
   getByIdHandler() {this.props.getAllById(0)}
   addHandler() {this.props.addNew(DEFAULT_MOVIE())}
-  deleteHandler() {this.props.movieDelete(2)}
+  deleteHandler() {this.props.movieDelete(this.state.deleteInput)}
   updateHandler() {this.props.updateExisting(0, DEFAULT_MOVIE())}
 
   render() {
@@ -45,16 +59,24 @@ class App extends Component {
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
           <button onClick={this.getByIdHandler}>getAllById</button>
+          <input type="text" value={this.state.byId} onChange={this.byIdHandler} />
           <button onClick={this.addHandler}>addNew</button>
           <button onClick={this.deleteHandler}>movieDelete</button>
+          <input type="text" value={this.state.deleteInput} onChange={this.deleteInputHandler} />
           <button onClick={this.updateHandler}>updateExisting</button>
+          <input type="text" value={this.state.updateInput} onChange={this.updateInputHandler} />
 
         </p>
 
         <span>List:</span>
         {/*FIXME: ID should be set properly, temporary hack*/}
-        <div>{this.props.movies.length && this.props.movies.map(item =>
-          <p key={Math.round(Math.random()*20000)}>{item.title} - {item.release} -  {item.format} - {item.stars}</p>
+        {console.log('on render >>>>',this.props.movies.movie)}
+
+        <div>{this.props.movies.movie && this.props.movies.movie.map(item =>{
+          console.log('MAP', item)
+          if(item ===null) {return}
+         return <p key={Math.round(Math.random()*20000)}>{item.title} - {item.release} -  {item.format} - {item.stars}</p>
+          }
         )}</div>
          {/* <a
             className="App-link"
@@ -72,7 +94,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   //state.XX, where XX depends on reducer name
-
+  // console.log("mapStateToProps", state)
   return {movies: state.getAll}
 };
 
