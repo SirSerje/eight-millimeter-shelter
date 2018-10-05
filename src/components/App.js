@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as actions from "../actions";
 import './../App.css';
 import {connect} from "react-redux";
+import DEFAULT_MOVIE from "../constants/defaultMovie";
 
 class App extends Component {
 
@@ -24,10 +25,10 @@ class App extends Component {
 
   initHandler() {this.props.init()}
   getAllHandler() {this.props.getAll()}
-  getByIdHandler() {this.props.getAllById(15)}
-  addHandler() {this.props.addNew({foo:'bar'})}
-  deleteHandler() {this.props.movieDelete(13)}
-  updateHandler() {this.props.updateExisting(15, {foo:'rab'})}
+  getByIdHandler() {this.props.getAllById(0)}
+  addHandler() {this.props.addNew(DEFAULT_MOVIE())}
+  deleteHandler() {this.props.movieDelete(2)}
+  updateHandler() {this.props.updateExisting(0, DEFAULT_MOVIE())}
 
   render() {
     return (
@@ -40,6 +41,7 @@ class App extends Component {
           </p>
         <p>
           <b>API methods:</b>
+
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
           <button onClick={this.getByIdHandler}>getAllById</button>
@@ -70,6 +72,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   //state.XX, where XX depends on reducer name
+
   return {movies: state.getAll}
 };
 

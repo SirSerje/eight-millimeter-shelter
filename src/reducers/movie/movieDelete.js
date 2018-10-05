@@ -4,6 +4,8 @@ const initialState = {movies: []}
 
 let movies = (state = initialState, action) => {
   let {type, payload} = action
+
+
   if (type === MOVIE_DELETE) {
     console.log('reducer MOVIE_DELETE:', action)
     const movie = {

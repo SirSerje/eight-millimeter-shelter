@@ -13,6 +13,7 @@ const router = express.Router();
 const admin = require('firebase-admin');
 const firebase = require("firebase");
 const PORT = 4125
+const MAX_ITEMS = 20
 
 let config = {
   apiKey: "AIzaSyBs17-j5048eEmoPJk7WxX8zx47Io6XMwk",
@@ -56,10 +57,11 @@ router.route('/movies').post(function (req, res) {
     if (error) {
       res.json({message: 'ERROR'});
     } else {
-      res.json({message: 'movie created!'});
-      //FIXME #2 add error handling for requests
+      res.json({message: req.body.movie, status:'ok'});
     }
   })
+
+
 //GET ALL
 }).get(function (req, res) {
   database.ref().once('value').then(function (snapshot) {
@@ -71,12 +73,14 @@ router.route('/movies').post(function (req, res) {
 //GET BY ID
 router.route('/movies/:movieId')
   .get(function (req, res) {
-    res.json({message: `${req.params.movieId} get this movie`});
+    database.ref().once('value').then(function(snapshot) {
+      res.json(snapshot.val().movie[req.params.movieId])
+    })
   })
   //UPDATE
   .put(function (req, res) {
     firebase.database().ref('movie/' + req.params.movieId).update(req.body.movie).then(i =>
-      res.json({message: `${req.params.movieId} update this movie`})
+      res.json( { message: req.body.movie, status:'ok' } )
     )
       .catch();  //FIXME #2 add error handling for requests
   })
@@ -84,7 +88,7 @@ router.route('/movies/:movieId')
   .delete(function(req, res) {
     firebase.database().ref('movie/' + req.params.movieId).remove()
       .then(i =>
-        res.json({message: `${req.params.movieId} movie deleted`})
+        res.json({message: req.body.movie, status:'ok'})
       )
       .catch(); //FIXME #2 add error handling for requests
   });
