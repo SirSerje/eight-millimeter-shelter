@@ -39,7 +39,13 @@ class App extends Component {
   getAllHandler() {this.props.getAll()}
   getByIdHandler() {this.props.getAllById(0)}
   addHandler() {this.props.addNew(DEFAULT_MOVIE())}
-  deleteHandler() {this.props.movieDelete(this.state.deleteInput)}
+  deleteHandler(item) {
+    console.log('lets delete', item)
+    if(item) {
+      this.props.movieDelete(item)
+
+    }
+  }
   updateHandler() {this.props.updateExisting(0, DEFAULT_MOVIE())}
 
   render() {
@@ -59,8 +65,8 @@ class App extends Component {
           <button onClick={this.getByIdHandler}>getAllById</button>
           <input type="text" value={this.state.byIdInput} onChange={this.byIdHandler} />
           <button onClick={this.addHandler}>addNew</button>
-          <button onClick={this.deleteHandler}>movieDelete</button>
-          <input type="text" value={this.state.deleteInput} onChange={this.deleteInputHandler} />
+          {/*<button onClick={this.deleteHandler}>movieDelete</button>*/}
+          {/*<input type="text" value={this.state.deleteInput} onChange={this.deleteInputHandler} />*/}
           <button onClick={this.updateHandler}>updateExisting</button>
           <input type="text" value={this.state.updateInput} onChange={this.updateInputHandler} />
 
@@ -68,16 +74,18 @@ class App extends Component {
 
         <span>List:</span>
         {/*FIXME: ID should be set properly, temporary hack*/}
-        {console.log('on render >>>>',this.props.movies.movie)}
-        {this.props.movies.movie  && <MovieDashboardComponent
-          movieData={this.props.movies.movie}
-        />}
+        {console.log('on render >>>>',this.props.movies)}
+        {/*{this.props.movies.movie  && <MovieDashboardComponent*/}
+          {/*movieData={this.props.movies.movie}*/}
+        {/*/>}*/}
         <div>{this.props.movies.movie && this.props.movies.movie.map(item =>{
-          console.log('MAP', item)
           if(item ===null) {return}
-         return <p key={Math.round(Math.random()*20000)}>{item.title} - {item.release} -  {item.format} - {item.stars}</p>
+         return <p key={Math.round(Math.random()*20000)}>{item.id} - {item.title} - {item.release} -  {item.format} - {item.stars}
+             <button onClick={() => this.deleteHandler(item.id)}>remove</button>
+         </p>
           }
-        )}</div>
+        )}
+        </div>
          {/* <a
             className="App-link"
             href="https://reactjs.org"
