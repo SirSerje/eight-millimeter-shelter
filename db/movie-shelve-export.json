@@ -1,8 +1,20 @@
 {
-  "movie" : [ {
-    "format" : "VHS",
-    "release" : 1974,
-    "stars" : [ "Mel Brooks", "Clevon Little", "Harvey Korman", "Gene Wilder", "Slim Pickens", "Madeline Kahn" ],
-    "title" : "Blazing Saddles"
-  } ]
+  "movie" : {
+    "9" : {
+      "format" : "DVD",
+      "release" : 1990,
+      "stars" : [ "Mel Brooks", "Clevon Little", "Harvey Korman", "Gene Wilder", "Slim Pickens", "Madeline Kahn" ],
+      "title" : "Blazing Chicken"
+    },
+    "10" : {
+      "format" : "VHS",
+      "id" : 10,
+      "release" : 1985,
+      "stars" : [ "Arnold Schwaznegger", "Rae Dawn Chong", "Dan Hedaya" ],
+      "title" : "Commando"
+    }
+  },
+  "options" : {
+    "max_id" : 10
+  }
 }
