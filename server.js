@@ -30,8 +30,8 @@ let database = firebase.database();
 //variable, which holds highest ID
 let LAST_ID = -1;
 
-database.ref().once('value').then(function (snapshot) {
-   LAST_ID = Math.max.apply(null, Object.keys(snapshot.val().movie));
+database.ref('options').once('value').then(function (snapshot) {
+   LAST_ID = snapshot.val().max_id;
 });
 
 app.use(bodyParser.json());
@@ -52,12 +52,14 @@ router.get('/', function (req, res) {
 //ADD
 router.route('/movies').post(function (req, res) {
   LAST_ID++;
-  firebase.database().ref('movie/' + LAST_ID).set(
-    req.body.movie, function(error) {
+  let movie = {...req.body.movie, id:LAST_ID}
+    firebase.database().ref('movie/' + LAST_ID).set(
+      movie, function(error) {
     if (error) {
       res.json({message: 'ERROR'});
     } else {
-      res.json({message: req.body.movie, status:'ok'});
+      firebase.database().ref('options').set({max_id:LAST_ID})
+      res.json({ message: movie, status:'ok'});
     }
   })
 
@@ -86,11 +88,16 @@ router.route('/movies/:movieId')
   })
   //DELETE
   .delete(function(req, res) {
-    firebase.database().ref('movie/' + req.params.movieId).remove()
-      .then(i =>
-        res.json({message: req.body.movie, status:'ok'})
-      )
-      .catch(); //FIXME #2 add error handling for requests
+    database.ref().once('value').then(function(snapshot) {
+      if (snapshot.val().movie[req.params.movieId] === undefined)
+      {
+        res.status(426).json({message: 'item not found'})
+      } else {
+        firebase.database().ref('movie/' + req.params.movieId).remove()
+          .then(i => {res.json({message: req.body.movie, status: 'ok'})})
+          .catch(err => res.status(426).json({message: err}));
+      }
+    })
   });
 
 app.use('/api', router);
