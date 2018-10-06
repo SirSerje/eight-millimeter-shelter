@@ -11,8 +11,10 @@ class App extends Component {
   constructor(params) {
     super(params)
     this.state = {
-      deleteInput:-1,
-      updateInput:-1,
+      byNameInput:'',
+      byActorInput:'',
+      // deleteInput:-1,
+      // updateInput:-1,
       byIdInput:-1
     }
 
@@ -23,8 +25,14 @@ class App extends Component {
     this.deleteHandler = this.deleteHandler.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
     this.deleteInputHandler = this.deleteInputHandler.bind(this);
-    this.updateInputHandler = this.updateInputHandler.bind(this);
+    // this.updateInputHandler = this.updateInputHandler.bind(this);
     this.byIdHandler = this.byIdHandler.bind(this);
+
+    this.byNameInputHandler = this.byNameInputHandler.bind(this);
+    this.byActorInputHandler = this.byActorInputHandler.bind(this);
+    this.byNameHandler = this.byNameHandler.bind(this);
+    this.byActorHandler = this.byActorHandler.bind(this);
+
   }
 
   componentDidMount() {
@@ -32,20 +40,32 @@ class App extends Component {
   }
 
   deleteInputHandler(event) { this.setState({deleteInput: event.target.value}); }
-  updateInputHandler(event) { this.setState({updateInput: event.target.value}); }
+  // updateInputHandler(event) { this.setState({updateInput: event.target.value}); }
   byIdHandler(event) { this.setState({byIdInput: event.target.value}); }
+
+  byNameInputHandler(event) { this.setState({byNameInput: event.target.value}); }
+  byActorInputHandler(event) { this.setState({byActorInput: event.target.value}); }
 
   initHandler() {this.props.init()}
   getAllHandler() {this.props.getAll()}
   getByIdHandler() {this.props.getAllById(0)}
   addHandler() {this.props.addNew(DEFAULT_MOVIE())}
+
   deleteHandler(item) {
-    console.log('lets delete', item)
     if(item) {
       this.props.movieDelete(item)
-
     }
   }
+
+  byNameHandler() {
+    //TODO: params should pass
+    this.props.searchByName()
+  }
+  byActorHandler() {
+    //TODO: params should pass
+    this.props.searchByActor()
+  }
+
   updateHandler() {this.props.updateExisting(0, DEFAULT_MOVIE())}
 
   render() {
@@ -65,10 +85,13 @@ class App extends Component {
           <button onClick={this.getByIdHandler}>getAllById</button>
           <input type="text" value={this.state.byIdInput} onChange={this.byIdHandler} />
           <button onClick={this.addHandler}>addNew</button>
-          {/*<button onClick={this.deleteHandler}>movieDelete</button>*/}
-          {/*<input type="text" value={this.state.deleteInput} onChange={this.deleteInputHandler} />*/}
-          <button onClick={this.updateHandler}>updateExisting</button>
-          <input type="text" value={this.state.updateInput} onChange={this.updateInputHandler} />
+
+
+<br/>
+          <button onClick={this.byActorHandler}>searchByActor</button>
+          <input type="text" value={this.state.byActorInput} onChange={this.byActorInputHandler} />
+          <button onClick={this.byNameHandler}>searchByName</button>
+          <input type="text" value={this.state.byNameInput} onChange={this.byNameInputHandler} />
 
         </p>
 
@@ -108,7 +131,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTodo: item => dispatch(actions.addTodo(item)),
+    // addTodo: item => dispatch(actions.addTodo(item)),
 
     init: () => dispatch(actions.init()),
     getAll: () => dispatch(actions.movieGetAll()),
@@ -116,7 +139,10 @@ const mapDispatchToProps = dispatch => {
     addNew: body => dispatch(actions.movieAddNew(body)),
     movieDelete: id => dispatch(actions.movieDelete(id)),
 
-    updateExisting: (id, body) => dispatch(actions.movieUpdateExisting(id, body)),
+    searchByName: name => dispatch(actions.searchByName(name)),
+    searchByActor: name => dispatch(actions.searchByActor(name)),
+
+    // updateExisting: (id, body) => dispatch(actions.movieUpdateExisting(id, body)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

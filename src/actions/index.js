@@ -1,13 +1,44 @@
 import * as actionTypes from "../constants";
 import * as utilRequest from "../utils"
 
-export const addTodo = payload => dispatch => {
-  dispatch({ type: actionTypes.AddTodo, payload});
-}
+// export const addTodo = payload => dispatch => {
+//   dispatch({ type: actionTypes.AddTodo, payload});
+// }
 
 export const init = payload => dispatch => {
   dispatch({ type: actionTypes.APP_INIT, payload});
 }
+
+export const searchByName = () => dispatch => {
+  //TODO: back should be done
+  dispatch({ type: actionTypes.SEARCH_BY_NAME_PENDING});
+
+  utilRequest.getAllRequest().then(result => {
+    dispatch({type: actionTypes.SEARCH_BY_NAME__SUCCESS, movie:result.data})
+  })
+    .catch(error => {
+    dispatch({ type: actionTypes.SEARCH_BY_NAME_ERROR, error})
+    }
+  )
+}
+
+
+export const searchByActor = () => dispatch => {
+  //TODO: back should be done
+
+  dispatch({ type: actionTypes.SEARCH_BY_ACTOR_PENDING});
+
+  utilRequest.getAllRequest().then(result => {
+    dispatch({type: actionTypes.SEARCH_BY_ACTOR_SUCCESS, movie:result.data})
+  })
+    .catch(error => {
+        dispatch({ type: actionTypes.SEARCH_BY_ACTOR_ERROR, error})
+      }
+    )
+}
+
+
+
 export const movieGetAll = () => dispatch => {
   dispatch({ type: actionTypes.MOVIE_GET_ALL_PENDING});
 
@@ -16,11 +47,14 @@ export const movieGetAll = () => dispatch => {
     dispatch({type: actionTypes.MOVIE_GET_ALL_SUCCESS, movie:result.data})
   })
     .catch(error => {
-      console.log('!!!!', error)
-    dispatch({ type: actionTypes.MOVIE_GET_ALL_ERROR, error})
-    }
-  )
+        console.log('!!!!', error)
+        dispatch({ type: actionTypes.MOVIE_GET_ALL_ERROR, error})
+      }
+    )
 }
+
+
+
 export const movieGetById = id => dispatch => {
   dispatch({ type: actionTypes.MOVIE_GET_BY_ID_PENDING, id});
 
@@ -60,7 +94,7 @@ export const movieDelete = id => dispatch => {
     }
   )
 }
-
+/*
 export const movieUpdateExisting = (id, movie) => dispatch => {
   dispatch({ type: actionTypes.MOVIE_UPDATE_EXISTING_PENDING, id, movie});
 
@@ -69,7 +103,7 @@ export const movieUpdateExisting = (id, movie) => dispatch => {
   ).catch(error =>
     dispatch({ type: actionTypes.MOVIE_UPDATE_EXISTING_ERROR, error})
   )
-}
+}*/
 
 //TODO: when API will fine, remove this mock
 const mockGetAllRequest = { movie:

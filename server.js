@@ -72,6 +72,8 @@ router.route('/movies').post(function (req, res) {
   .catch();  //FIXME #2 add error handling for requests
 });
 
+
+
 //GET BY ID
 router.route('/movies/:movieId')
   .get(function (req, res) {

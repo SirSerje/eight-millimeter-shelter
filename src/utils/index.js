@@ -6,3 +6,7 @@ export const getByIdRequest = id => axios.get(`${PATH}${id}`)
 export const addNewRequest = (body = {movie:{}}) => axios.post('/api/movies', {movie:body})
 export const movieDeleteRequest = id => axios.delete(`${PATH}${id}`)
 export const updateExistingRequest = (id, body) => axios.put(`${PATH}${id}`, {movie:body})
+
+//TODO: back should be done
+export const searchByName = id => axios.get(`${PATH}${id}`)
+export const searchByActor = id => axios.get(`${PATH}${id}`)

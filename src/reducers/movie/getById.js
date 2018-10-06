@@ -5,7 +5,7 @@ import {
 } from "../../constants";
 
 const initialState = {movies: []}
-
+//FIXME: non refactored
 let movies = (state = initialState, action) => {
 
   let {type, payload} = action
