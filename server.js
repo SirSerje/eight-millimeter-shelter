@@ -50,7 +50,12 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res) {
   res.json({ message: 'hooray! welcome to our api!' });
 });
-
+router
+  .route('/movies/upload')
+  .post(function(req, res) {
+      res.json({ message: 'ok' });
+    }
+  )
 //ADD
 router
   .route('/movies')

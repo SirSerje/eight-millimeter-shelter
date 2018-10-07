@@ -26,6 +26,7 @@ class App extends Component {
     this.byActorHandler = this.byActorHandler.bind(this);
     this.sortDownHandler = this.sortDownHandler.bind(this);
     this.sortUpHandler = this.sortUpHandler.bind(this);
+    this.uploadHandler = this.uploadHandler.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +79,10 @@ class App extends Component {
     this.props.searchByActor(this.state.byActorInput)
   }
 
+  uploadHandler(item) {
+    this.props.uploadHandler(item)
+  }
+
   render() {
     return (
       <div className="App">
@@ -95,6 +100,8 @@ class App extends Component {
           <br/>
           <button onClick={this.sortDownHandler}>A-Z</button>
           <button onClick={this.sortUpHandler}>Z-A</button>
+          <br/>
+          <button onClick={this.uploadHandler}>upload handler</button>
         </p>
 
         <span>List:</span>
@@ -132,6 +139,8 @@ const mapDispatchToProps = dispatch => {
 
     sortDown: () => dispatch(actions.sortDown()),
     sortUp: () => dispatch(actions.sortUp()),
+
+    uploadHandler: () => dispatch(actions.upload()),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

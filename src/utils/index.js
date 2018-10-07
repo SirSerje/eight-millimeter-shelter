@@ -6,3 +6,4 @@ export const addNewRequest = (body = {movie:{}}) => axios.post('/api/movies', {m
 export const movieDeleteRequest = id => axios.delete(`${PATH}${id}`)
 export const searchByName = name => axios.get(`${PATH}search?title=${name}`)
 export const searchByActor = actor => axios.get(`${PATH}search?actor=${actor}`)
+export const uploadFile = file => axios.get(`${PATH}upload`, file)
