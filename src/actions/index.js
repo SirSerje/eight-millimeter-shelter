@@ -9,29 +9,31 @@ export const init = payload => dispatch => {
   dispatch({ type: actionTypes.APP_INIT, payload});
 }
 
-export const searchByName = () => dispatch => {
+export const searchByName = name => dispatch => {
   //TODO: back should be done
   dispatch({ type: actionTypes.SEARCH_BY_NAME_PENDING});
 
-  utilRequest.getAllRequest().then(result => {
-    dispatch({type: actionTypes.SEARCH_BY_NAME__SUCCESS, movie:result.data})
+  utilRequest.searchByName(name).then(result => {
+    dispatch({type: actionTypes.SEARCH_BY_NAME_SUCCESS, payload:result.data})
   })
     .catch(error => {
-    dispatch({ type: actionTypes.SEARCH_BY_NAME_ERROR, error})
+      console.log('searchByName error', error)
+      dispatch({ type: actionTypes.SEARCH_BY_NAME_ERROR, error})
     }
   )
 }
 
 
-export const searchByActor = () => dispatch => {
+export const searchByActor = actor => dispatch => {
   //TODO: back should be done
 
   dispatch({ type: actionTypes.SEARCH_BY_ACTOR_PENDING});
 
-  utilRequest.getAllRequest().then(result => {
-    dispatch({type: actionTypes.SEARCH_BY_ACTOR_SUCCESS, movie:result.data})
+  utilRequest.searchByActor(actor).then(result => {
+    dispatch({type: actionTypes.SEARCH_BY_ACTOR_SUCCESS, payload:result.data})
   })
     .catch(error => {
+      console.log('searchByActor error', error)
         dispatch({ type: actionTypes.SEARCH_BY_ACTOR_ERROR, error})
       }
     )

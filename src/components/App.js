@@ -11,8 +11,8 @@ class App extends Component {
   constructor(params) {
     super(params)
     this.state = {
-      byNameInput:'',
-      byActorInput:'',
+      byNameInput:'Furious',
+      byActorInput:'Brooks',
       // deleteInput:-1,
       // updateInput:-1,
       byIdInput:-1
@@ -59,11 +59,11 @@ class App extends Component {
 
   byNameHandler() {
     //TODO: params should pass
-    this.props.searchByName()
+    this.props.searchByName(this.state.byNameInput)
   }
   byActorHandler() {
     //TODO: params should pass
-    this.props.searchByActor()
+    this.props.searchByActor(this.state.byActorInput)
   }
 
   updateHandler() {this.props.updateExisting(0, DEFAULT_MOVIE())}

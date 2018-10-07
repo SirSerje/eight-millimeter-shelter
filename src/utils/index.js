@@ -8,5 +8,5 @@ export const movieDeleteRequest = id => axios.delete(`${PATH}${id}`)
 export const updateExistingRequest = (id, body) => axios.put(`${PATH}${id}`, {movie:body})
 
 //TODO: back should be done
-export const searchByName = id => axios.get(`${PATH}${id}`)
-export const searchByActor = id => axios.get(`${PATH}${id}`)
+export const searchByName = name => axios.get(`${PATH}search?title=${name}`)
+export const searchByActor = actor => axios.get(`${PATH}search?actor=${actor}`)
