@@ -11,11 +11,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
 const url = require('url');
-const admin = require('firebase-admin');
-const querystring = require('querystring');
 const firebase = require("firebase");
 const PORT = 4125
-const MAX_ITEMS = 20
 
 let config = {
   apiKey: "AIzaSyBs17-j5048eEmoPJk7WxX8zx47Io6XMwk",

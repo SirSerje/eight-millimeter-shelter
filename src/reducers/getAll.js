@@ -1,8 +1,9 @@
 import * as constants from "../constants/index";
+// import update from "immutability-helper";
 
-const initialState = {movie: []}
+let movies = (state = [], action) => {
+  // if(state.length === undefined){state = []} //FIXME
 
-let movies = (state = initialState, action) => {
   let {type, payload} = action
   let {movie} = action
 

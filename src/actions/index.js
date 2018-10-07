@@ -45,8 +45,8 @@ export const movieAddNew = body => dispatch => {
 
 export const movieDelete = id => dispatch => {
   dispatch({type: actionTypes.MOVIE_DELETE_PENDING, id});
-  utilRequest.movieDeleteRequest(id).then(() => dispatch({
+  utilRequest.movieDeleteRequest(id).then(/*result*/ () => dispatch({
     type: actionTypes.MOVIE_DELETE_SUCCESS,
-    payload: id
+    // payload: result
   })).catch(error => dispatch({type: actionTypes.MOVIE_DELETE_ERROR, payload: error}))
 }
