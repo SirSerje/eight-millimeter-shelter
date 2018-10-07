@@ -10,8 +10,8 @@ class App extends Component {
   constructor(params) {
     super(params)
     this.state = {
-      byNameInput: 'Furious',
-      byActorInput: 'Brooks',
+      byNameInput: 's',
+      byActorInput: 'f',
       byIdInput: -1
     }
 
@@ -19,7 +19,6 @@ class App extends Component {
     this.getAllHandler = this.getAllHandler.bind(this);
     this.addHandler = this.addHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
-    this.updateHandler = this.updateHandler.bind(this);
     this.deleteInputHandler = this.deleteInputHandler.bind(this);
     this.byNameInputHandler = this.byNameInputHandler.bind(this);
     this.byActorInputHandler = this.byActorInputHandler.bind(this);
@@ -27,7 +26,6 @@ class App extends Component {
     this.byActorHandler = this.byActorHandler.bind(this);
     this.sortDownHandler = this.sortDownHandler.bind(this);
     this.sortUpHandler = this.sortUpHandler.bind(this);
-
   }
 
   componentDidMount() {
@@ -44,10 +42,6 @@ class App extends Component {
 
   deleteInputHandler(event) {
     this.setState({deleteInput: event.target.value});
-  }
-
-  byIdHandler(event) {
-    this.setState({byIdInput: event.target.value});
   }
 
   byNameInputHandler(event) {
@@ -82,10 +76,6 @@ class App extends Component {
 
   byActorHandler() {
     this.props.searchByActor(this.state.byActorInput)
-  }
-
-  updateHandler() {
-    this.props.updateExisting(0, DEFAULT_MOVIE())
   }
 
   render() {
@@ -126,8 +116,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  //state.XX, where XX depends on reducer name
-  // console.log("mapStateToProps", state)
   return {movies: state.getAll}
 };
 
