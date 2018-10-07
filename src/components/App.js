@@ -32,12 +32,16 @@ class App extends Component {
     this.byActorInputHandler = this.byActorInputHandler.bind(this);
     this.byNameHandler = this.byNameHandler.bind(this);
     this.byActorHandler = this.byActorHandler.bind(this);
+    this.sortDownHandler = this.sortDownHandler.bind(this);
+    this.sortUpHandler = this.sortUpHandler.bind(this);
 
   }
 
   componentDidMount() {
     this.props.getAll()
   }
+  sortUpHandler() { this.props.sortUp() }
+  sortDownHandler() { this.props.sortDown() }
 
   deleteInputHandler(event) { this.setState({deleteInput: event.target.value}); }
   // updateInputHandler(event) { this.setState({updateInput: event.target.value}); }
@@ -58,11 +62,9 @@ class App extends Component {
   }
 
   byNameHandler() {
-    //TODO: params should pass
     this.props.searchByName(this.state.byNameInput)
   }
   byActorHandler() {
-    //TODO: params should pass
     this.props.searchByActor(this.state.byActorInput)
   }
 
@@ -92,6 +94,11 @@ class App extends Component {
           <input type="text" value={this.state.byActorInput} onChange={this.byActorInputHandler} />
           <button onClick={this.byNameHandler}>searchByName</button>
           <input type="text" value={this.state.byNameInput} onChange={this.byNameInputHandler} />
+
+          <br/>
+
+          <button onClick={this.sortDownHandler}>A-Z</button>
+          <button onClick={this.sortUpHandler}>Z-A</button>
 
         </p>
 
@@ -141,6 +148,9 @@ const mapDispatchToProps = dispatch => {
 
     searchByName: name => dispatch(actions.searchByName(name)),
     searchByActor: name => dispatch(actions.searchByActor(name)),
+
+    sortDown: () => dispatch(actions.sortDown()),
+    sortUp: () => dispatch(actions.sortUp()),
 
     // updateExisting: (id, body) => dispatch(actions.movieUpdateExisting(id, body)),
   }

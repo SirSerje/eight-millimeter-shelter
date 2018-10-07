@@ -10,7 +10,6 @@ export const init = payload => dispatch => {
 }
 
 export const searchByName = name => dispatch => {
-  //TODO: back should be done
   dispatch({ type: actionTypes.SEARCH_BY_NAME_PENDING});
 
   utilRequest.searchByName(name).then(result => {
@@ -25,8 +24,6 @@ export const searchByName = name => dispatch => {
 
 
 export const searchByActor = actor => dispatch => {
-  //TODO: back should be done
-
   dispatch({ type: actionTypes.SEARCH_BY_ACTOR_PENDING});
 
   utilRequest.searchByActor(actor).then(result => {
@@ -39,6 +36,14 @@ export const searchByActor = actor => dispatch => {
     )
 }
 
+export const sortDown = () => dispatch => {
+  dispatch({ type: actionTypes.SORT_TITLE_DOWN})
+}
+
+export const sortUp = () => dispatch => {
+  dispatch({ type: actionTypes.SORT_TITLE_UP})
+
+}
 
 
 export const movieGetAll = () => dispatch => {

@@ -4,7 +4,7 @@ import {
   MOVIE_DELETE_SUCCESS,
   MOVIE_GET_ALL,
   MOVIE_GET_ALL_ERROR,
-  MOVIE_GET_ALL_SUCCESS, SEARCH_BY_ACTOR_SUCCESS, SEARCH_BY_NAME_SUCCESS
+  MOVIE_GET_ALL_SUCCESS, SEARCH_BY_ACTOR_SUCCESS, SEARCH_BY_NAME_SUCCESS, SORT_TITLE_DOWN, SORT_TITLE_UP
 } from "../../constants";
 
 const initialState = {movies: []}
@@ -35,15 +35,26 @@ let movies = (state = initialState, action) => {
     return {...state}
   }
 
-  if (type === SEARCH_BY_ACTOR_SUCCESS ) {
+  if (type === SORT_TITLE_DOWN ) {
+    (state.movie).sort((a,b)=> a.title < b.title)
+    return {...state}
+  }
+
+  if (type === SORT_TITLE_UP ) {
+    (state.movie).sort((a,b)=> a.title > b.title)
+    return {...state}
+  }
+
+  if (type === SEARCH_BY_ACTOR_SUCCESS || type === SEARCH_BY_NAME_SUCCESS ) {
     state.movie = action.payload.message
     return {...state}
   }
 
-  if (type === SEARCH_BY_NAME_SUCCESS) {
-    state.movie = action.payload.message
-    return {...state}
-  }
+  //TODO: remove if everything okay
+  // if (type === SEARCH_BY_NAME_SUCCESS) {
+  //   state.movie = action.payload.message
+  //   return {...state}
+  // }
 
   if (type === MOVIE_GET_ALL_ERROR) {
     return action.error
