@@ -40,11 +40,9 @@ let movies = (state = [], action) => {
     case constants.MOVIE_GET_ALL_SUCCESS:
       let result = Object.values(movie);
       return {...state, movie: result}
-
+    default:
+      return {...state}
   }
-  return {
-    ...state,
-  };
 }
 
 export default movies

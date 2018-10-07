@@ -111,7 +111,7 @@ class App extends Component {
         <div>
           {this.props.movies.movie && this.props.movies.movie.map(item => {
               if (item === null) {
-                return
+                return <b>empty</b>
               }
               return <p
                 key={item.id}>{item.id} - {item.title} - {item.release} - {item.format} - {item.stars}
