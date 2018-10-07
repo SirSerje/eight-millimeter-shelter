@@ -10,7 +10,7 @@
     "build": "react-scripts build",
     "react-test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier":"prettier --write --config .prettierrc ./src/**/*.js ./server.js"
+    "prettier": "prettier --write --config .prettierrc ./src/**/*.js ./server.js"
   },
   "keywords": [
     "node",
@@ -36,6 +36,7 @@
     "nodemon": "^1.18.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-file-reader": "^1.1.4",
     "react-modal": "^3.6.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",

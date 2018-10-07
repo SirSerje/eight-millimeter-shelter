@@ -4,6 +4,8 @@ import './../App.css';
 import {connect} from "react-redux";
 import DEFAULT_MOVIE from "../constants/defaultMovie";
 import 'bootstrap/dist/css/bootstrap.css'
+import ReactFileReader from 'react-file-reader';
+
 
 class App extends Component {
 
@@ -83,6 +85,12 @@ class App extends Component {
     this.props.uploadHandler(item)
   }
 
+  handleFiles = files => {
+    console.log(files)
+  }
+
+
+
   render() {
     return (
       <div className="App">
@@ -103,6 +111,10 @@ class App extends Component {
           <br/>
           <button onClick={this.uploadHandler}>upload handler</button>
         </p>
+
+        <ReactFileReader fileTypes={[".txt",".json"]} handleFiles={this.handleFiles}>
+          <button className='btn'>Upload</button>
+        </ReactFileReader>
 
         <span>List:</span>
         <div>
