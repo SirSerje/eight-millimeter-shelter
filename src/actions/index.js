@@ -35,14 +35,6 @@ export const movieGetAll = () => dispatch => {
     .catch(error => dispatch({type: actionTypes.MOVIE_GET_ALL_ERROR, payload:error}))
 }
 
-export const movieGetById = id => dispatch => {
-  dispatch({type: actionTypes.MOVIE_GET_BY_ID_PENDING, id});
-  utilRequest.getByIdRequest(id).then(result => dispatch({
-    type: actionTypes.MOVIE_GET_BY_ID_SUCCESS,
-    movie: result.data
-  })).catch(error => dispatch({type: actionTypes.MOVIE_GET_BY_ID_ERROR, payload: error}))
-}
-
 export const movieAddNew = body => dispatch => {
   dispatch({type: actionTypes.MOVIE_ADD_NEW_PENDING, body});
   utilRequest.addNewRequest(body).then(result => dispatch({

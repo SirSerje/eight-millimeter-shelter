@@ -13,21 +13,15 @@ class App extends Component {
     this.state = {
       byNameInput:'Furious',
       byActorInput:'Brooks',
-      // deleteInput:-1,
-      // updateInput:-1,
       byIdInput:-1
     }
 
     this.initHandler = this.initHandler.bind(this);
     this.getAllHandler = this.getAllHandler.bind(this);
-    this.getByIdHandler = this.getByIdHandler.bind(this);
     this.addHandler = this.addHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
     this.deleteInputHandler = this.deleteInputHandler.bind(this);
-    // this.updateInputHandler = this.updateInputHandler.bind(this);
-    this.byIdHandler = this.byIdHandler.bind(this);
-
     this.byNameInputHandler = this.byNameInputHandler.bind(this);
     this.byActorInputHandler = this.byActorInputHandler.bind(this);
     this.byNameHandler = this.byNameHandler.bind(this);
@@ -44,7 +38,6 @@ class App extends Component {
   sortDownHandler() { this.props.sortDown() }
 
   deleteInputHandler(event) { this.setState({deleteInput: event.target.value}); }
-  // updateInputHandler(event) { this.setState({updateInput: event.target.value}); }
   byIdHandler(event) { this.setState({byIdInput: event.target.value}); }
 
   byNameInputHandler(event) { this.setState({byNameInput: event.target.value}); }
@@ -52,7 +45,6 @@ class App extends Component {
 
   initHandler() {this.props.init()}
   getAllHandler() {this.props.getAll()}
-  getByIdHandler() {this.props.getAllById(0)}
   addHandler() {this.props.addNew(DEFAULT_MOVIE())}
 
   deleteHandler(item) {
@@ -84,10 +76,7 @@ class App extends Component {
 
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
-          <button onClick={this.getByIdHandler}>getAllById</button>
-          <input type="text" value={this.state.byIdInput} onChange={this.byIdHandler} />
           <button onClick={this.addHandler}>addNew</button>
-
 
           <br/>
           <button onClick={this.byActorHandler}>searchByActor</button>
