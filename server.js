@@ -83,6 +83,7 @@ router.route('/movies/search')
     database.ref().once('value').then(function(snapshot) {
       let currentDb = snapshot.val().movie;
       let temp = Object.keys(a.query)
+      let flag = false;
       if (temp[0] === 'actor') {
         for (let idx in currentDb) {
           let currentItem = currentDb[idx]
@@ -91,10 +92,15 @@ router.route('/movies/search')
           for (let i in stars) {
             let currentStar = stars[i].toLowerCase();
             if ((currentStar).indexOf(some) !== -1) {
-              finalArray.push(currentItem)
+              flag = true;
             }
           }
+          if (flag === true) {
+            finalArray.push(currentItem)
+            flag = false;
+          }
         }
+
       } else if (temp[0] === 'title') {
         for (let idx in currentDb) {
           let currentItem = currentDb[idx]
