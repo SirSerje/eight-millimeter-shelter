@@ -47,6 +47,6 @@ export const movieDelete = id => dispatch => {
   dispatch({type: actionTypes.MOVIE_DELETE_PENDING, id});
   utilRequest.movieDeleteRequest(id).then(/*result*/ () => dispatch({
     type: actionTypes.MOVIE_DELETE_SUCCESS,
-    // payload: result
+    payload: id
   })).catch(error => dispatch({type: actionTypes.MOVIE_DELETE_ERROR, payload: error}))
 }

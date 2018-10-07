@@ -2,47 +2,47 @@ import * as constants from "../constants/index";
 // import update from "immutability-helper";
 
 let movies = (state = [], action) => {
-  // if(state.length === undefined){state = []} //FIXME
-
   let {type, payload} = action
   let {movie} = action
+  let result = []
 
   switch (type) {
     case constants.MOVIE_DELETE_SUCCESS:
-      let arr = state.movie;
-      let b = arr.findIndex(i => Number(i.id) === Number(payload))
-      state.movie.splice(b, 1)
-      return {...state}
-
-    case constants.MOVIE_ADD_NEW_ERROR:
-      return action.error
+      result = state;
+      let b = result.findIndex(i => Number(i.id) === Number(action.payload))
+      result.splice(b, 1)
+      return [...result]
 
     case constants.MOVIE_ADD_NEW_SUCCESS:
-      state.movie.push(payload.message)
-      return {...state}
+      state.push(payload.message)
+      result = state
+      return [...result]
 
     case constants.SORT_TITLE_DOWN:
-      (state.movie).sort((a, b) => a.title < b.title)
-      return {...state}
+      result = (state).sort((first, second) => first.title < second.title)
+      return [...result]
 
     case constants.SORT_TITLE_UP:
-      (state.movie).sort((a, b) => a.title > b.title)
-      return {...state}
+      result = (state).sort((first, second) => first.title > second.title)
+      return [...result]
 
     case constants.SEARCH_BY_ACTOR_SUCCESS:
     case constants.SEARCH_BY_NAME_SUCCESS:
-      state.movie = payload.message
-      return {...state}
-
-    case constants.MOVIE_GET_ALL_ERROR:
-      return action.error
+      result = payload.message
+      return [...result]
 
     case constants.MOVIE_GET_ALL_SUCCESS:
       let result = Object.values(movie);
-      return {...state, movie: result}
+      return [...state, ...result]
+
+    case constants.MOVIE_GET_ALL_ERROR:
+      return [...state, action.error]
+
+    case constants.MOVIE_ADD_NEW_ERROR:
+      return [...state, action.error]
 
     default:
-      return {...state}
+      return [...state]
   }
 }
 

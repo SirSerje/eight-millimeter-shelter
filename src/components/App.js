@@ -99,7 +99,7 @@ class App extends Component {
 
         <span>List:</span>
         <div>
-          {this.props.movies.movie && this.props.movies.movie.map(item => {
+          {this.props.movies.length && this.props.movies.map(item => {
               if (item === null) {
                 return <b>empty</b>
               }
