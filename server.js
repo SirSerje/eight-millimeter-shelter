@@ -10,7 +10,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
+const url = require('url');
 const admin = require('firebase-admin');
+const querystring = require('querystring');
 const firebase = require("firebase");
 const PORT = 4125
 const MAX_ITEMS = 20
@@ -73,6 +75,39 @@ router.route('/movies').post(function (req, res) {
 });
 
 
+//SEARCH
+router.route('/movies/search')
+  .get(function(req, res) {
+    let finalArray = []
+    let a = url.parse(req.url, true);
+    database.ref().once('value').then(function(snapshot) {
+      let currentDb = snapshot.val().movie;
+      let temp = Object.keys(a.query)
+      if (temp[0] === 'actor') {
+        for (let idx in currentDb) {
+          let currentItem = currentDb[idx]
+          let some = a.query.actor.toLowerCase()
+          let stars = currentItem.stars
+          for (let i in stars) {
+            let currentStar = stars[i].toLowerCase();
+            if ((currentStar).indexOf(some) !== -1) {
+              finalArray.push(currentItem)
+            }
+          }
+        }
+      } else if (temp[0] === 'title') {
+        for (let idx in currentDb) {
+          let currentItem = currentDb[idx]
+          let some = a.query.title.toLowerCase()
+          let title = currentItem.title.toLowerCase()
+          if (title.indexOf(some) !== -1) {
+            finalArray.push(currentItem)
+          }
+        }
+      }
+      res.json({message: finalArray})
+    })
+  })
 
 //GET BY ID
 router.route('/movies/:movieId')
