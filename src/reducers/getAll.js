@@ -1,6 +1,6 @@
 import * as constants from "../constants/index";
 
-const initialState = {movies: []}
+const initialState = {movie: []}
 
 let movies = (state = initialState, action) => {
   let {type, payload} = action
@@ -39,13 +39,6 @@ let movies = (state = initialState, action) => {
     case constants.MOVIE_GET_ALL_SUCCESS:
       let result = Object.values(movie);
       return {...state, movie: result}
-
-    case constants.MOVIE_GET_ALL:
-      return {
-        movie: [
-          movie.movie
-        ]
-      };
 
   }
   return {
