@@ -89,7 +89,7 @@ class App extends Component {
           <button onClick={this.addHandler}>addNew</button>
 
 
-<br/>
+          <br/>
           <button onClick={this.byActorHandler}>searchByActor</button>
           <input type="text" value={this.state.byActorInput} onChange={this.byActorInputHandler} />
           <button onClick={this.byNameHandler}>searchByName</button>
@@ -104,13 +104,12 @@ class App extends Component {
 
         <span>List:</span>
         {/*FIXME: ID should be set properly, temporary hack*/}
-        {console.log('on render >>>>',this.props.movies)}
         {/*{this.props.movies.movie  && <MovieDashboardComponent*/}
           {/*movieData={this.props.movies.movie}*/}
         {/*/>}*/}
         <div>{this.props.movies.movie && this.props.movies.movie.map(item =>{
           if(item ===null) {return}
-         return <p key={Math.round(Math.random()*20000)}>{item.id} - {item.title} - {item.release} -  {item.format} - {item.stars}
+         return <p key={item.id}>{item.id} - {item.title} - {item.release} -  {item.format} - {item.stars}
              <button onClick={() => this.deleteHandler(item.id)}>remove</button>
          </p>
           }
