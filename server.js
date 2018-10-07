@@ -53,8 +53,17 @@ router.get('/', function(req, res) {
 router
   .route('/movies/upload')
   .post(function(req, res) {
-      res.json({ message: 'ok' });
-    }
+      for (let i in req.body.movie) {
+        let current = req.body.movie[i]
+        LAST_ID++
+        let movie = { ...current, id: LAST_ID }
+        firebase
+          .database()
+          .ref('movie/' + LAST_ID)
+          .set(movie)
+      }
+      res.json({ message: 'ok' })
+    },
   )
 //ADD
 router

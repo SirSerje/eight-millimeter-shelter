@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ee83113b-7d57-4d30-8c17-a481053ec8e0",
+		"_postman_id": "3a95b000-27f1-4ca2-b1ef-13ed42fcb80a",
 		"name": "movie-shelve-api",
 		"description": "Набор запросов для работы с movie-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -39,43 +39,6 @@
 					]
 				},
 				"description": "получить все фильмы"
-			},
-			"response": []
-		},
-		{
-			"name": "get movie by id",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"disabled": true
-					},
-					{
-						"key": "Cache-Control",
-						"value": "no-cache",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:4125/api/movies/0",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4125",
-					"path": [
-						"api",
-						"movies",
-						"15"
-					]
-				},
-				"description": "получить фильм по его id"
 			},
 			"response": []
 		},
@@ -169,7 +132,79 @@
 			"response": []
 		},
 		{
-			"name": "update",
+			"name": "upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n \t\"movie\": [{\n\t\t\"title\":\"Commando\",\n\t\t\"release\":1985,\n\t\t\"format\":\"VHS\",\n\t\t\"stars\":[\"Arnold Schwaznegger\", \"Rae Dawn Chong\", \"Dan Hedaya\"]\n\t},\n\t{\n\t\t\"title\":\"Commando\",\n\t\t\"release\":1985,\n\t\t\"format\":\"VHS\",\n\t\t\"stars\":[\"Arnold Schwaznegger\", \"Rae Dawn Chong\", \"Dan Hedaya\"]\n\t}\n\t]\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"upload"
+					]
+				},
+				"description": "выгрузить на сервер текстовый файл с фильмами"
+			},
+			"response": []
+		},
+		{
+			"name": "@deprecated: get movie by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"15"
+					]
+				},
+				"description": "получить фильм по его id"
+			},
+			"response": []
+		},
+		{
+			"name": "@deprecated: update",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -212,74 +247,6 @@
 					]
 				},
 				"description": "Отредактировать конкретный фильм"
-			},
-			"response": []
-		},
-		{
-			"name": "[NOT IMPLEMENTED] download file with all movies",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					},
-					{
-						"key": "Cache-Control",
-						"value": "no-cache"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:4125/api/download",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4125",
-					"path": [
-						"api",
-						"download"
-					]
-				},
-				"description": "загрузить текстовый файл со всеми фильмами"
-			},
-			"response": []
-		},
-		{
-			"name": "[NOT IMPLEMENTED] upload file with movies",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					},
-					{
-						"key": "Cache-Control",
-						"value": "no-cache"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:4125/api/download",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4125",
-					"path": [
-						"api",
-						"download"
-					]
-				},
-				"description": "выгрузить на сервер текстовый файл с фильмами"
 			},
 			"response": []
 		}
