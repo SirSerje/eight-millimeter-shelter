@@ -86,8 +86,16 @@ class App extends Component {
   }
 
   handleFiles = files => {
-    console.log(files)
-  }
+    // FileReader.readAsText
+    console.log(files[0]);
+    var reader = new FileReader();
+    reader.onload = (function(theFile) {
+      let data = theFile.srcElement.result;
+      let temp = data.split('\n');
+      // console.log(temp);
+    });
+    reader.readAsText(files[0]);
+  };
 
 
 
@@ -112,7 +120,11 @@ class App extends Component {
           <button onClick={this.uploadHandler}>upload handler</button>
         </p>
 
-        <ReactFileReader fileTypes={[".txt",".json"]} handleFiles={this.handleFiles}>
+        <ReactFileReader
+          fileTypes={[".txt",".json"]}
+          handleFiles={this.handleFiles}
+          multipleFiles={false}
+        >
           <button className='btn'>Upload</button>
         </ReactFileReader>
 
