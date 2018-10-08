@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import * as actions from "../actions";
+import React, { Component } from 'react';
+import * as actions from '../actions';
 import './../App.css';
-import {connect} from "react-redux";
-import DEFAULT_MOVIE from "../constants/defaultMovie";
-import 'bootstrap/dist/css/bootstrap.css'
+import { connect } from 'react-redux';
+import DEFAULT_MOVIE from '../constants/defaultMovie';
+import 'bootstrap/dist/css/bootstrap.css';
 import ReactFileReader from 'react-file-reader';
 
 
@@ -116,6 +116,9 @@ class App extends Component {
           <button className='btn'>Upload</button>
         </ReactFileReader>
 
+        <span>Errors:</span>
+        <div> {this.props.errors && this.props.errors.map(err => <p key={Math.round(Math.random()*20000)}>{err.message}</p>)}</div>
+
         <span>List:</span>
         <div>
           {this.props.movies.length && this.props.movies.map(item => {
@@ -135,7 +138,10 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return {movies: state.getAll}
+  return {
+    movies: state.getAll,
+    errors: state.errors,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
