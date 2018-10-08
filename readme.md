@@ -1,14 +1,26 @@
-# Currently project under develop
+# 8mm shelter 📹
 
-# !IMPORTANT
-db currently run without any auth in dev mode, so, make changes carefully.
+This project is small example of full-stack job.
 
-___________________________________
+## Start & develop:
 
-server will stat from `npm run start` or `npm run server-start`
+If you're not familiar with modern front-end develop, ensure, you have 
+[homebrew](https://brew.sh/) (if you're on Mac) > [node](https://nodejs.org/uk/download/package-manager/) > [npm](https://www.npmjs.com/get-npm)
 
-server supports:
+You can choose any package manager you want npm or [yarn](https://yarnpkg.com/lang/en/docs/install/)
 
-get all, get by id, remove, add, update
+1. `git clone https://github.com/SirSerje/eight-millimeter-shelter.git`
+2. `cd eight-millimeter-shelter`
+3. Install [nvm](https://github.com/creationix/nvm) and set default version to stable ^8.0
+4. `npm install` or `yarn` to install all dependencies
+5. `npm start` or `yarn start` to start backend
+6. `npm react-start` or `yarn react-start` to start frontend
 
-postman collection included
+There is `build-webpack` and `start-webpack` to run frontend project without create-react-app script
+
+## Known issues:
+
+If you're brave enough, just add bug or create PR, this will be great ☺️:
+
+- test created, but not properly starts from package.json
+- server hasn't all error response handling
