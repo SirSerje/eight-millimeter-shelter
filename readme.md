@@ -2,6 +2,8 @@
 
 This project is small example of full-stack job.
 
+Technical documentation provided in [link](https://github.com/SirSerje/eight-millimeter-shelter/wiki/index)
+
 ## Start & develop:
 
 If you're not familiar with modern front-end develop, ensure, you have 
