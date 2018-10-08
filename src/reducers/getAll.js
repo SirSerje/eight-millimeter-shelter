@@ -1,7 +1,7 @@
 import * as constants from '../constants/index';
 // import update from "immutability-helper";
 
-let movies = (state = [], action) => {
+let movies = (state = [{foo:'bar'}], action) => {
   let { type, payload } = action;
   let { movie } = action;
   let result;
@@ -33,14 +33,9 @@ let movies = (state = [], action) => {
 
     case constants.MOVIE_GET_ALL_SUCCESS:
       let result = Object.values(movie);
-
       return [...result];
 
-    case constants.MOVIE_GET_ALL_ERROR:
-      return [...state, action.error];
 
-    case constants.MOVIE_ADD_NEW_ERROR:
-      return [...state, action.error];
 
     default:
       return [...state];

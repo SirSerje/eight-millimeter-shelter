@@ -11,7 +11,7 @@ export const searchByName = name => dispatch => {
     type: actionTypes.SEARCH_BY_NAME_SUCCESS,
     payload: result.data
   }))
-    .catch(error => dispatch({type: actionTypes.SEARCH_BY_NAME_ERROR, error}))
+    .catch(error => dispatch({type: actionTypes.SEARCH_BY_NAME_ERROR, payload: error}))
 }
 
 export const searchByActor = actor => dispatch => {
@@ -20,7 +20,7 @@ export const searchByActor = actor => dispatch => {
     type: actionTypes.SEARCH_BY_ACTOR_SUCCESS,
     payload: result.data
   }))
-    .catch(error => dispatch({type: actionTypes.SEARCH_BY_ACTOR_ERROR, error}))
+    .catch(error => dispatch({type: actionTypes.SEARCH_BY_ACTOR_ERROR, payload: error}))
 }
 
 export const sortDown = () => dispatch => dispatch({type: actionTypes.SORT_TITLE_DOWN})
@@ -32,7 +32,7 @@ export const movieGetAll = () => dispatch => {
     type: actionTypes.MOVIE_GET_ALL_SUCCESS,
     movie: result.data
   }))
-    .catch(error => dispatch({type: actionTypes.MOVIE_GET_ALL_ERROR, payload:error}))
+    .catch(error => dispatch({type: actionTypes.MOVIE_GET_ALL_ERROR, payload: error}))
 }
 
 export const movieAddNew = body => dispatch => {

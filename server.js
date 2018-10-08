@@ -28,12 +28,14 @@ let database = firebase.database();
 
 //variable, which holds highest ID
 let LAST_ID = -1;
+let isInit = false;
 
 database
   .ref('options')
   .once('value')
   .then(function(snapshot) {
     LAST_ID = snapshot.val().max_id;
+    isInit = true;
   });
 
 app.use(bodyParser.json());
@@ -41,6 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
+  if(!isInit) res.status(503).json({message:'server not connected to DB, please wait for a while'})
   // do logging
   //console.log('Something is happening.');
   next();

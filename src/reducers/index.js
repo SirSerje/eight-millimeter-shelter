@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
-// import appInitReducer from "./initReducer";
 import getAll from "./getAll";
-
+import errors from "./errors";
 
 const reducers = combineReducers({
-  // appInitReducer,
   getAll,
+  errors
 });
+
 export default reducers;
