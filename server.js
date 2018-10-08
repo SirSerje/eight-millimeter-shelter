@@ -43,7 +43,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
-  if(!isInit) res.status(503).json({message:'server not connected to DB, please wait for a while'})
+  if (!isInit)
+    res.status(503).json({ message: 'server not connected to DB, please wait for a while' });
   // do logging
   //console.log('Something is happening.');
   next();
@@ -53,21 +54,18 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res) {
   res.json({ message: 'hooray! welcome to our api!' });
 });
-router
-  .route('/movies/upload')
-  .post(function(req, res) {
-      for (let i in req.body.movie) {
-        let current = req.body.movie[i]
-        LAST_ID++
-        let movie = { ...current, id: LAST_ID }
-        firebase
-          .database()
-          .ref('movie/' + LAST_ID)
-          .set(movie)
-      }
-      res.json({ message: 'ok' })
-    },
-  )
+router.route('/movies/upload').post(function(req, res) {
+  for (let i in req.body.movie) {
+    let current = req.body.movie[i];
+    LAST_ID++;
+    let movie = { ...current, id: LAST_ID };
+    firebase
+      .database()
+      .ref('movie/' + LAST_ID)
+      .set(movie);
+  }
+  res.json({ message: 'ok' });
+});
 //ADD
 router
   .route('/movies')
@@ -159,7 +157,7 @@ router
       .database()
       .ref('movie/' + req.params.movieId)
       .update(req.body.movie)
-      .then(i => res.json({ message: req.body.movie, status: 'ok' }))
+      .then((i) => res.json({ message: req.body.movie, status: 'ok' }))
       .catch(); //FIXME #2 add error handling for requests
   })
   //DELETE
@@ -175,10 +173,10 @@ router
             .database()
             .ref('movie/' + req.params.movieId)
             .remove()
-            .then(i => {
+            .then((i) => {
               res.json({ message: req.body.movie, status: 'ok' });
             })
-            .catch(err => res.status(426).json({ message: err }));
+            .catch((err) => res.status(426).json({ message: err }));
         }
       });
   });
