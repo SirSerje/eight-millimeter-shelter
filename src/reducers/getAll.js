@@ -1,10 +1,9 @@
 import * as constants from '../constants/index';
 // import update from "immutability-helper";
 
-let movies = (state = [{foo:'bar'}], action) => {
+let movies = (state = [], action) => {
   let { type, payload } = action;
-  let { movie } = action;
-  let result;
+  let result = [];
 
   switch (type) {
     case constants.MOVIE_DELETE_SUCCESS:
@@ -32,10 +31,8 @@ let movies = (state = [{foo:'bar'}], action) => {
       return [...result];
 
     case constants.MOVIE_GET_ALL_SUCCESS:
-      let result = Object.values(movie);
+      result = Object.values(payload);
       return [...result];
-
-
 
     default:
       return [...state];

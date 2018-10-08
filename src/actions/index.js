@@ -30,7 +30,7 @@ export const movieGetAll = () => dispatch => {
   dispatch({type: actionTypes.MOVIE_GET_ALL_PENDING});
   utilRequest.getAllRequest().then(result => dispatch({
     type: actionTypes.MOVIE_GET_ALL_SUCCESS,
-    movie: result.data
+    payload: result.data
   }))
     .catch(error => dispatch({type: actionTypes.MOVIE_GET_ALL_ERROR, payload: error}))
 }

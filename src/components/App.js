@@ -86,13 +86,11 @@ class App extends Component {
   }
 
   handleFiles = files => {
-    // FileReader.readAsText
     console.log(files[0]);
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = (function(theFile) {
-      let data = theFile.srcElement.result;
-      let temp = data.split('\n');
-      // console.log(temp);
+      // let data = theFile.srcElement.result;
+      // let temp = data.split('\n');
     });
     reader.readAsText(files[0]);
   };
