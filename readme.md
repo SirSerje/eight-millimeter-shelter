@@ -22,5 +22,5 @@ There is `build-webpack` and `start-webpack` to run frontend project without cre
 
 If you're brave enough, just add bug or create PR, this will be great ☺️:
 
-- test created, but not properly starts from package.json
+- Webstorm's run script doesn't work properly. Use console instead. I've choose yarn, works ok.
 - server hasn't all error response handling
