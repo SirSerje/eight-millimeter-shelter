@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import isEmpty from 'lodash.isempty';
 
 const SEMI_SEPARATOR = ': ';
 const COMMA_SEPARATOR = ', ';
@@ -23,7 +23,7 @@ const parseTextFile = file => {
         current[key] = separator[1];
       }
     } else {
-      if (_.isEmpty(current)) {
+      if (isEmpty(current)) {
         //do nothing
       } else {
         combinedArray.push(current);
