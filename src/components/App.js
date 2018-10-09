@@ -151,12 +151,8 @@ class App extends Component {
           <button onClick={this.sortUpHandler}>↓</button>
         </p>
 
-        <ReactFileReader
-          fileTypes={['.txt']}
-          handleFiles={this.handleFiles}
-          multipleFiles={false}
-        >
-          <button style={{background:'gray'}}>Upload</button>
+        <ReactFileReader fileTypes={['.txt']} handleFiles={this.handleFiles} multipleFiles={false}>
+          <button style={{ background: 'gray' }}>Upload</button>
         </ReactFileReader>
 
         <span>Errors:</span>
