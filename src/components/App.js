@@ -10,12 +10,13 @@ class App extends Component {
   constructor(params) {
     super(params);
     this.state = {
-      byNameInput: 's',
-      byActorInput: 'f',
+      byNameInput: '',
+      byActorInput: '',
       byIdInput: -1,
     };
 
     this.initHandler = this.initHandler.bind(this);
+    this.handleFiles = this.handleFiles.bind(this);
     this.getAllHandler = this.getAllHandler.bind(this);
     this.addHandler = this.addHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
@@ -84,12 +85,48 @@ class App extends Component {
   }
 
   handleFiles(files) {
-    console.log(files[0]);
-    let reader = new FileReader();
+    //FIXME write this code better
+    const reader = new FileReader();
     reader.onload = function(theFile) {
-      // let data = theFile.srcElement.result;
-      // let temp = data.split('\n');
-    };
+      let data = theFile.srcElement.result.split('\n');
+      let index = 0;
+      let arrayOfFilms = [[]];
+
+      data.forEach(item => {
+        if (item !== '') {
+          if (arrayOfFilms[index] === undefined) {
+            arrayOfFilms[index] = [];
+          }
+          arrayOfFilms[index].push(item);
+        } else {
+          index++;
+        }
+      });
+
+      arrayOfFilms.forEach(item => {
+        if (item.length === 0) return;
+        item[0] = item[0].substring(7);
+        item[1] = item[1].substring(14);
+        item[2] = item[2].substring(8);
+        item[3] = item[3].substring(7).split(', ');
+        item.push('https://semantic-ui.com/images/wireframe/image.png');
+      });
+
+      let importedFilms = [];
+
+      arrayOfFilms.forEach(item => {
+        let obj = {};
+        obj.title = item[0];
+        obj.release = item[1];
+        obj.format = item[2];
+        obj.stars = item[3];
+        obj.img = item[4];
+        importedFilms.push(obj);
+      });
+
+      const A = { movie: importedFilms };
+      this.props.uploadHandler(A);
+    }.bind(this);
     reader.readAsText(files[0]);
   }
 
@@ -110,25 +147,23 @@ class App extends Component {
           <button onClick={this.byNameHandler}>searchByName</button>
           <input type="text" value={this.state.byNameInput} onChange={this.byNameInputHandler} />
           <br />
-          <button onClick={this.sortDownHandler}>A-Z</button>
-          <button onClick={this.sortUpHandler}>Z-A</button>
-          <br />
-          <button onClick={this.uploadHandler}>upload handler</button>
+          <button onClick={this.sortDownHandler}>↑</button>
+          <button onClick={this.sortUpHandler}>↓</button>
         </p>
 
         <ReactFileReader
-          fileTypes={['.txt', '.json']}
+          fileTypes={['.txt']}
           handleFiles={this.handleFiles}
           multipleFiles={false}
         >
-          <button className="btn">Upload</button>
+          <button style={{background:'gray'}}>Upload</button>
         </ReactFileReader>
 
         <span>Errors:</span>
         <div>
           {' '}
           {this.props.errors &&
-            this.props.errors.map((err) => (
+            this.props.errors.map(err => (
               <p key={Math.round(Math.random() * 20000)}>{err.message}</p>
             ))}
         </div>
@@ -136,7 +171,7 @@ class App extends Component {
         <span>List:</span>
         <div>
           {this.props.movies.length &&
-            this.props.movies.map((item) => {
+            this.props.movies.map(item => {
               if (item === null) {
                 return <b>empty</b>;
               }
@@ -153,28 +188,28 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     movies: state.getAll,
     errors: state.errors,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     init: () => dispatch(actions.init()),
 
     getAll: () => dispatch(actions.movieGetAll()),
-    addNew: (body) => dispatch(actions.movieAddNew(body)),
-    movieDelete: (id) => dispatch(actions.movieDelete(id)),
+    addNew: body => dispatch(actions.movieAddNew(body)),
+    movieDelete: id => dispatch(actions.movieDelete(id)),
 
-    searchByName: (name) => dispatch(actions.searchByName(name)),
-    searchByActor: (name) => dispatch(actions.searchByActor(name)),
+    searchByName: name => dispatch(actions.searchByName(name)),
+    searchByActor: name => dispatch(actions.searchByActor(name)),
 
     sortDown: () => dispatch(actions.sortDown()),
     sortUp: () => dispatch(actions.sortUp()),
 
-    uploadHandler: () => dispatch(actions.upload()),
+    uploadHandler: data => dispatch(actions.upload(data)),
   };
 };
 

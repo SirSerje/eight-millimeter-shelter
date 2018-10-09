@@ -8,7 +8,7 @@ let movies = (state = [], action) => {
   switch (type) {
     case constants.MOVIE_DELETE_SUCCESS:
       result = state;
-      let b = result.findIndex((i) => Number(i.id) === Number(action.payload));
+      let b = result.findIndex(i => Number(i.id) === Number(action.payload));
       result.splice(b, 1);
       return [...result];
 
@@ -18,11 +18,27 @@ let movies = (state = [], action) => {
       return [...result];
 
     case constants.SORT_TITLE_DOWN:
-      result = state.sort((first, second) => first.title < second.title); //FIXME non-strict
+      result = state.sort(function(a, b) {
+        let nameA = a.title.toLowerCase(),
+          nameB = b.title.toLowerCase();
+        if (nameA < nameB)
+          //sort string ascending
+          return 1;
+        if (nameA > nameB) return -1;
+        return 0;
+      });
       return [...result];
 
     case constants.SORT_TITLE_UP:
-      result = state.sort((first, second) => first.title > second.title); //FIXME non-strict
+      result = state.sort(function(a, b) {
+        let nameA = a.title.toLowerCase(),
+          nameB = b.title.toLowerCase();
+        if (nameA < nameB)
+          //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
       return [...result];
 
     case constants.SEARCH_BY_ACTOR_SUCCESS:
@@ -32,6 +48,7 @@ let movies = (state = [], action) => {
 
     case constants.MOVIE_GET_ALL_SUCCESS:
       result = Object.values(payload);
+      result = result.filter(i => i !== null);
       return [...result];
 
     default:

@@ -157,7 +157,7 @@ router
       .database()
       .ref('movie/' + req.params.movieId)
       .update(req.body.movie)
-      .then((i) => res.json({ message: req.body.movie, status: 'ok' }))
+      .then(i => res.json({ message: req.body.movie, status: 'ok' }))
       .catch(); //FIXME #2 add error handling for requests
   })
   //DELETE
@@ -173,10 +173,10 @@ router
             .database()
             .ref('movie/' + req.params.movieId)
             .remove()
-            .then((i) => {
+            .then(i => {
               res.json({ message: req.body.movie, status: 'ok' });
             })
-            .catch((err) => res.status(426).json({ message: err }));
+            .catch(err => res.status(426).json({ message: err }));
         }
       });
   });
