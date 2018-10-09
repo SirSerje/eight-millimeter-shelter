@@ -1,10 +1,10 @@
-import {combineReducers} from "redux";
-import getAll from "./getAll";
-import errors from "./errors";
+import { combineReducers } from 'redux';
+import getAll from './getAll';
+import errors from './errors';
 
 const reducers = combineReducers({
   getAll,
-  errors
+  errors,
 });
 
 export default reducers;

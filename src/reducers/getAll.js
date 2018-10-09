@@ -8,7 +8,7 @@ let movies = (state = [], action) => {
   switch (type) {
     case constants.MOVIE_DELETE_SUCCESS:
       result = state;
-      let b = result.findIndex(i => Number(i.id) === Number(action.payload));
+      let b = result.findIndex((i) => Number(i.id) === Number(action.payload));
       result.splice(b, 1);
       return [...result];
 

@@ -1,2 +1,2 @@
-const PATH = '/api/movies/'
-export default PATH
+const PATH = '/api/movies/';
+export default PATH;
