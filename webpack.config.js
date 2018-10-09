@@ -7,7 +7,10 @@ module.exports = {
     filename: "app.js",
     path: path.resolve(__dirname, "dist"),
   },
-
+  watchOptions: {
+    ignored: ['public', 'node_modules', 'server.js', 'postman', 'db']
+  },
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -41,6 +44,7 @@ module.exports = {
     }),
   ],
   devServer: {
+    port: 3867,
     proxy: {
       '/api': 'http://localhost:4125'
     },

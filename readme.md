@@ -22,6 +22,8 @@ There is `build-webpack` and `start-webpack` to run frontend project without cre
 
 Project have pre-commit hook to avoid breaking tests and code style. Check `lint` and `test` in package.json
 
+Source map for front-end also included (check console > source > open > choose App.js?XXXXXX for example)
+
 ## Known issues:
 
 If you're brave enough, just add bug or create PR, this will be great ☺️:
