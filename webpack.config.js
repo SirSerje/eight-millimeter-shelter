@@ -2,9 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  //start point
   entry: "./src/index.js",
-  //where result should be placed
   output: {
     filename: "app.js",
     path: path.resolve(__dirname, "dist"),
@@ -38,12 +36,14 @@ module.exports = {
     ]
   },
   plugins: [
-    // ['@babel/plugin-proposal-class-properties', { 'loose': true }],
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
   ],
   devServer: {
+    proxy: {
+      '/api': 'http://localhost:4125'
+    },
     contentBase: "dist",
     stats: "errors-only",
     open: true
