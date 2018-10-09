@@ -20,9 +20,14 @@ You can choose any package manager you want npm or [yarn](https://yarnpkg.com/la
 
 There is `build-webpack` and `start-webpack` to run frontend project without create-react-app script
 
+Project have pre-commit hook to avoid breaking tests and code style. Check `lint` and `test` in package.json
+
 ## Known issues:
 
 If you're brave enough, just add bug or create PR, this will be great ☺️:
 
 - Webstorm's run script doesn't work properly. Use console instead. I've choose yarn, works ok.
 - server hasn't all error response handling
+- sometimes npm or yarn crashed without any reason. In this case you should try cleanup project (remove node_modules directory and delete all .lock files)
+- Ensure, you're not install `eslint` globally (this case describe on [Github
+](https://github.com/eslint/eslint/issues/6732))
