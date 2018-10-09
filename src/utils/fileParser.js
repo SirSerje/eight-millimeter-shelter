@@ -5,6 +5,15 @@ const COMMA_SEPARATOR = ', ';
 const WHAT_REPLACE = ' ';
 const TO_REPLACE = '_';
 
+/**
+ * Method which parses .txt file into object
+ * Schema of text file should be presented like:
+ * 'Some key : values (values will comma separated into individual array)'
+ * Objects separated by new empty line
+ * Use space after comma and semicolon to correct separation (or create issue into project)
+ * @param {file} file - FileReader object, which contain text data
+ * @return {array} - array of movie objects
+ */
 const parseTextFile = file => {
   let fileData = file.srcElement.result.split('\n');
   let combinedArray = [];
