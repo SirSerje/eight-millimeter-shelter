@@ -24,6 +24,14 @@ Project have pre-commit hook to avoid breaking tests and code style. Check `lint
 
 Source map for front-end also included (check console > source > open > choose App.js?XXXXXX for example)
 
+## How to develop:
+
+All you need to know is how to properly name branch for PR:
+
+`[ci/bugfix/feature]/#[task index]-task-name-kebab-case`
+
+Where ci - code improvement. All other definitely clear.
+
 ## Known issues:
 
 If you're brave enough, just add bug or create PR, this will be great ☺️:
