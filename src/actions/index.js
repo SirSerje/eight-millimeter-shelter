@@ -48,7 +48,7 @@ export const movieGetAll = () => dispatch => {
 };
 
 export const movieAddNew = body => dispatch => {
-  dispatch({ type: actionTypes.MOVIE_ADD_NEW_PENDING });
+  dispatch({ type: actionTypes.MOVIE_ADD_NEW_PENDING , payload:{block:1}});
   utilRequest
     .addNewRequest(body)
     .then(result =>
@@ -57,7 +57,7 @@ export const movieAddNew = body => dispatch => {
         payload: result.data,
       })
     )
-    .catch(error => dispatch({ type: actionTypes.MOVIE_ADD_NEW_ERROR, payload: error }));
+    .catch(error => dispatch({ type: actionTypes.MOVIE_ADD_NEW_ERROR, payload: {error, block:0} }));
 };
 
 export const movieDelete = id => dispatch => {
