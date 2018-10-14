@@ -60,7 +60,7 @@ class App extends Component {
   }
 
   getAllHandler() {
-    this.props.getAll();
+    // this.props.getAll();
   }
 
   addHandler() {
@@ -103,7 +103,8 @@ class App extends Component {
           <b>API methods:</b>
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
-          <button onClick={this.addHandler}>addNew</button>
+          {console.log('!', this.props.block)}
+          {this.props.block === 1 ? <button onClick={this.addHandler} disabled>addNew</button> : <button onClick={this.addHandler} >addNew</button>}
           <br />
           <button onClick={this.byActorHandler}>searchByActor</button>
           <input type="text" value={this.state.byActorInput} onChange={this.byActorInputHandler} />
@@ -150,6 +151,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     movies: state.getAll,
+    block: state.blockAddNew,
     errors: state.errors,
   };
 };

@@ -7,3 +7,8 @@ export const movieDeleteRequest = id => axios.delete(`${PATH}${id}`);
 export const searchByName = name => axios.get(`${PATH}search?title=${name}`);
 export const searchByActor = actor => axios.get(`${PATH}search?actor=${actor}`);
 export const uploadFile = file => axios.post(`${PATH}upload`, file);
+
+//Promise based timeout
+// export const addNewRequest = (body = { movie: {} }) => new Promise(function(resolve) {
+//   setTimeout(resolve.bind(null), 2000);
+// });
