@@ -14,6 +14,12 @@ class App extends Component {
       byNameInput: '',
       byActorInput: '',
       byIdInput: -1,
+      newMovie: {
+        title:'',
+        year:'',
+        type:'',
+        stars:''
+      }
     };
 
     this.initHandler = this.initHandler.bind(this);
@@ -29,6 +35,16 @@ class App extends Component {
     this.sortDownHandler = this.sortDownHandler.bind(this);
     this.sortUpHandler = this.sortUpHandler.bind(this);
     this.uploadHandler = this.uploadHandler.bind(this);
+    //add new inputs:
+    this.addNewHandler = this.addNewHandler.bind(this);
+
+  }
+
+  addNewHandler(event) {
+    //temp implementation
+    // let a = event.target.name
+    // read this: https://stackoverflow.com/questions/29537299/react-how-do-i-update-state-item1-on-setstate-with-jsfiddle
+    // this.setState({newMovie: event.target.value});
   }
 
   componentDidMount() {
@@ -103,8 +119,12 @@ class App extends Component {
           <b>API methods:</b>
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
-          {console.log('!', this.props.block)}
+          <br/>
           {this.props.block === 1 ? <button onClick={this.addHandler} disabled>addNew</button> : <button onClick={this.addHandler} >addNew</button>}
+          <input name="title" type="text" value={this.state.newMovie.title} onChange={this.addNewHandler} />
+          <input name="year" type="text" value={this.state.newMovie.year} onChange={this.addNewHandler} />
+          <input name="type" type="text" value={this.state.newMovie.type} onChange={this.addNewHandler} />
+          <input name="star" type="text" value={this.state.newMovie.stars} onChange={this.addNewHandler} />
           <br />
           <button onClick={this.byActorHandler}>searchByActor</button>
           <input type="text" value={this.state.byActorInput} onChange={this.byActorInputHandler} />
