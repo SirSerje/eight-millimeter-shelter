@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as actions from '../actions';
 import './../App.css';
 import { connect } from 'react-redux';
-import DEFAULT_MOVIE from '../constants/defaultMovie';
 import 'bootstrap/dist/css/bootstrap.css';
 import ReactFileReader from 'react-file-reader';
 import parseTextFile from '../utils/fileParser';
@@ -14,12 +13,12 @@ class App extends Component {
       byNameInput: '',
       byActorInput: '',
       byIdInput: -1,
-      newMovie: {
-        title:'',
-        year:'',
-        type:'',
-        stars:''
-      }
+      addItem: {
+        title: '',
+        release: '',
+        format: '',
+        stars: '',
+      },
     };
 
     this.initHandler = this.initHandler.bind(this);
@@ -37,14 +36,14 @@ class App extends Component {
     this.uploadHandler = this.uploadHandler.bind(this);
     //add new inputs:
     this.addNewHandler = this.addNewHandler.bind(this);
-
   }
 
   addNewHandler(event) {
-    //temp implementation
-    // let a = event.target.name
-    // read this: https://stackoverflow.com/questions/29537299/react-how-do-i-update-state-item1-on-setstate-with-jsfiddle
-    // this.setState({newMovie: event.target.value});
+    let fieldType = event.target.name;
+    let temp = this.state.addItem;
+
+    temp[fieldType] = event.target.value;
+    this.setState({ addItem: temp });
   }
 
   componentDidMount() {
@@ -76,11 +75,20 @@ class App extends Component {
   }
 
   getAllHandler() {
-    // this.props.getAll();
+    this.props.getAll();
   }
 
   addHandler() {
-    this.props.addNew(DEFAULT_MOVIE());
+    let item = this.state.addItem;
+    item.stars = !Array.isArray(item.stars) ? item.stars.split(', ') : item.stars;
+    let isAllowed =
+      item.title !== '' && item.release >= 0 && item.stars.length > 0 && item.format !== '';
+
+    if (isAllowed) {
+      this.props.addNew(item);
+    } else {
+      console.warn('check input fields and than try again');
+    }
   }
 
   deleteHandler(item) {
@@ -119,12 +127,38 @@ class App extends Component {
           <b>API methods:</b>
           <button onClick={this.initHandler}>init</button>
           <button onClick={this.getAllHandler}>getAll</button>
-          <br/>
-          {this.props.block === 1 ? <button onClick={this.addHandler} disabled>addNew</button> : <button onClick={this.addHandler} >addNew</button>}
-          <input name="title" type="text" value={this.state.newMovie.title} onChange={this.addNewHandler} />
-          <input name="year" type="text" value={this.state.newMovie.year} onChange={this.addNewHandler} />
-          <input name="type" type="text" value={this.state.newMovie.type} onChange={this.addNewHandler} />
-          <input name="star" type="text" value={this.state.newMovie.stars} onChange={this.addNewHandler} />
+          <br />
+          {this.props.block === 1 ? (
+            <button onClick={this.addHandler} disabled>
+              addNew
+            </button>
+          ) : (
+            <button onClick={this.addHandler}>addNew</button>
+          )}
+          <input
+            name="title"
+            type="text"
+            value={this.state.addItem.title}
+            onChange={this.addNewHandler}
+          />
+          <input
+            name="release"
+            type="number"
+            value={this.state.addItem.release}
+            onChange={this.addNewHandler}
+          />
+          <input
+            name="format"
+            type="text"
+            value={this.state.addItem.format}
+            onChange={this.addNewHandler}
+          />
+          <input
+            name="stars"
+            type="text"
+            value={this.state.addItem.stars}
+            onChange={this.addNewHandler}
+          />
           <br />
           <button onClick={this.byActorHandler}>searchByActor</button>
           <input type="text" value={this.state.byActorInput} onChange={this.byActorInputHandler} />
