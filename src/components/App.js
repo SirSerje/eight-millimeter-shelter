@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import * as actions from '../actions';
-import './../App.css';
 import { connect } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.css';
+import '../styles/index.scss';
 import ReactFileReader from 'react-file-reader';
 import parseTextFile from '../utils/fileParser';
 
