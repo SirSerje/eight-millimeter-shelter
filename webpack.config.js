@@ -44,6 +44,7 @@ module.exports = {
     }),
   ],
   devServer: {
+    historyApiFallback: true,
     port: 3867,
     proxy: {
       '/api': 'http://localhost:4125'
