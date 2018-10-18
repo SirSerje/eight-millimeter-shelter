@@ -8,7 +8,8 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   watchOptions: {
-    ignored: ['public', 'node_modules', 'server.js', 'postman', 'db']
+    poll: 5000,
+    ignored: ['public', 'server.js', 'postman', 'db']
   },
   devtool: 'eval-source-map',
   module: {

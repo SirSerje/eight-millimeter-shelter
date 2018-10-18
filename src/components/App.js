@@ -4,6 +4,43 @@ import { connect } from 'react-redux';
 import '../styles/index.scss';
 import ReactFileReader from 'react-file-reader';
 import parseTextFile from '../utils/fileParser';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+// import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import CameraIcon from '@material-ui/icons/PhotoCamera';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+
+const styles = theme => ({
+  appBar: {
+    position: 'relative',
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  dense: {
+    marginTop: 19,
+  },
+  menu: {
+    width: 200,
+  },
+});
 
 class App extends Component {
   constructor(params) {
@@ -117,56 +154,119 @@ class App extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div className="App">
-        <p>
-          Edit <code>src/App.js</code> and save to reload. 8mm📽
-        </p>
-        <p>
+      <div className="app-main">
+        <AppBar position="static" className={classes.appBar}>
+          <Toolbar>
+            <CameraIcon className={classes.icon} />
+            <Typography variant="h6" color="inherit" noWrap>
+              Edit <code>src/App.js</code> and save to reload. 8mm📽
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        <div>
           <b>API methods:</b>
-          <button onClick={this.initHandler}>init</button>
-          <button onClick={this.getAllHandler}>getAll</button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            className={classes.button}
+            onClick={this.initHandler}
+          >
+            init
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            className={classes.button}
+            onClick={this.getAllHandler}
+          >
+            getAll
+          </Button>
           <br />
           {this.props.block === 1 ? (
-            <button onClick={this.addHandler} disabled>
+            <Button
+              variant="outlined"
+              color="secondary"
+              className={classes.button}
+              onClick={this.addHandler}
+              disabled
+            >
               addNew
-            </button>
+            </Button>
           ) : (
-            <button onClick={this.addHandler}>addNew</button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              className={classes.button}
+              onClick={this.addHandler}
+            >
+              addNew
+            </Button>
           )}
-          <input
+          <TextField
+            id="standard-name"
+            label="name"
             name="title"
             type="text"
             value={this.state.addItem.title}
             onChange={this.addNewHandler}
           />
-          <input
+          <TextField
+            id="standard-name"
+            label="release date"
             name="release"
             type="number"
             value={this.state.addItem.release}
             onChange={this.addNewHandler}
           />
-          <input
+          <TextField
+            id="standard-name"
+            label="format"
             name="format"
             type="text"
             value={this.state.addItem.format}
             onChange={this.addNewHandler}
           />
-          <input
+          <TextField
+            id="standard-name"
+            label="stars"
             name="stars"
             type="text"
             value={this.state.addItem.stars}
             onChange={this.addNewHandler}
           />
           <br />
-          <button onClick={this.byActorHandler}>searchByActor</button>
-          <input type="text" value={this.state.byActorInput} onChange={this.byActorInputHandler} />
-          <button onClick={this.byNameHandler}>searchByName</button>
-          <input type="text" value={this.state.byNameInput} onChange={this.byNameInputHandler} />
+          <Button variant="outlined" color="primary" onClick={this.byActorHandler}>
+            searchByActor
+          </Button>
+          <TextField
+            id="standard-name"
+            label="actor's name"
+            type="text"
+            value={this.state.byActorInput}
+            onChange={this.byActorInputHandler}
+          />
+          <Button variant="outlined" color="primary" onClick={this.byNameHandler}>
+            searchByName
+          </Button>
+          <TextField
+            id="standard-name"
+            label="film's name"
+            type="text"
+            value={this.state.byNameInput}
+            onChange={this.byNameInputHandler}
+          />
           <br />
-          <button onClick={this.sortDownHandler}>↑</button>
-          <button onClick={this.sortUpHandler}>↓</button>
-        </p>
+          <Button variant="outlined" color="secondary" onClick={this.sortDownHandler}>
+            ↑
+          </Button>
+          <Button variant="outlined" color="secondary" onClick={this.sortUpHandler}>
+            ↓
+          </Button>
+        </div>
 
         <ReactFileReader fileTypes={['.txt']} handleFiles={this.handleFiles} multipleFiles={false}>
           <button style={{ background: 'gray' }}>Upload</button>
@@ -227,7 +327,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+const combinedApp = connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+export default withStyles(styles)(combinedApp);
