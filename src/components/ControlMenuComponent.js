@@ -132,7 +132,6 @@ class ControlMenuComponent extends Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.details}>
             <div className={classes.column}>
-              <b>API methods:</b>
               <Button
                 variant="outlined"
                 color="secondary"
@@ -169,6 +168,7 @@ class ControlMenuComponent extends Component {
                   addNew
                 </Button>
               )}
+              <br />
               <TextField
                 id="standard-name"
                 label="name"
