@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 import '../styles/index.scss';
-import ReactFileReader from 'react-file-reader';
 import parseTextFile from '../utils/fileParser';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-// import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
+import ControlMenuComponent from './ControlMenuComponent';
 
 const styles = theme => ({
   appBar: {
@@ -45,41 +42,17 @@ const styles = theme => ({
 class App extends Component {
   constructor(params) {
     super(params);
-    this.state = {
-      byNameInput: '',
-      byActorInput: '',
-      byIdInput: -1,
-      addItem: {
-        title: '',
-        release: '',
-        format: '',
-        stars: '',
-      },
-    };
-
     this.initHandler = this.initHandler.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
     this.getAllHandler = this.getAllHandler.bind(this);
     this.addHandler = this.addHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.deleteInputHandler = this.deleteInputHandler.bind(this);
-    this.byNameInputHandler = this.byNameInputHandler.bind(this);
-    this.byActorInputHandler = this.byActorInputHandler.bind(this);
     this.byNameHandler = this.byNameHandler.bind(this);
     this.byActorHandler = this.byActorHandler.bind(this);
     this.sortDownHandler = this.sortDownHandler.bind(this);
     this.sortUpHandler = this.sortUpHandler.bind(this);
     this.uploadHandler = this.uploadHandler.bind(this);
-    //add new inputs:
-    this.addNewHandler = this.addNewHandler.bind(this);
-  }
-
-  addNewHandler(event) {
-    let fieldType = event.target.name;
-    let temp = this.state.addItem;
-
-    temp[fieldType] = event.target.value;
-    this.setState({ addItem: temp });
   }
 
   componentDidMount() {
@@ -98,14 +71,6 @@ class App extends Component {
     this.setState({ deleteInput: event.target.value });
   }
 
-  byNameInputHandler(event) {
-    this.setState({ byNameInput: event.target.value });
-  }
-
-  byActorInputHandler(event) {
-    this.setState({ byActorInput: event.target.value });
-  }
-
   initHandler() {
     this.props.init();
   }
@@ -114,8 +79,8 @@ class App extends Component {
     this.props.getAll();
   }
 
-  addHandler() {
-    let item = this.state.addItem;
+  addHandler(value) {
+    let item = value;
     item.stars = !Array.isArray(item.stars) ? item.stars.split(', ') : item.stars;
     let isAllowed =
       item.title !== '' && item.release >= 0 && item.stars.length > 0 && item.format !== '';
@@ -133,12 +98,12 @@ class App extends Component {
     }
   }
 
-  byNameHandler() {
-    this.props.searchByName(this.state.byNameInput);
+  byNameHandler(value) {
+    this.props.searchByName(value);
   }
 
-  byActorHandler() {
-    this.props.searchByActor(this.state.byActorInput);
+  byActorHandler(value) {
+    this.props.searchByActor(value);
   }
 
   uploadHandler(item) {
@@ -155,7 +120,6 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <div className="app-main">
         <AppBar position="static" className={classes.appBar}>
@@ -166,111 +130,16 @@ class App extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-
-        <div>
-          <b>API methods:</b>
-          <Button
-            variant="outlined"
-            color="secondary"
-            className={classes.button}
-            onClick={this.initHandler}
-          >
-            init
-          </Button>
-          <Button
-            variant="outlined"
-            color="secondary"
-            className={classes.button}
-            onClick={this.getAllHandler}
-          >
-            getAll
-          </Button>
-          <br />
-          {this.props.block === 1 ? (
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-              onClick={this.addHandler}
-              disabled
-            >
-              addNew
-            </Button>
-          ) : (
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-              onClick={this.addHandler}
-            >
-              addNew
-            </Button>
-          )}
-          <TextField
-            id="standard-name"
-            label="name"
-            name="title"
-            type="text"
-            value={this.state.addItem.title}
-            onChange={this.addNewHandler}
-          />
-          <TextField
-            id="standard-name"
-            label="release date"
-            name="release"
-            type="number"
-            value={this.state.addItem.release}
-            onChange={this.addNewHandler}
-          />
-          <TextField
-            id="standard-name"
-            label="format"
-            name="format"
-            type="text"
-            value={this.state.addItem.format}
-            onChange={this.addNewHandler}
-          />
-          <TextField
-            id="standard-name"
-            label="stars"
-            name="stars"
-            type="text"
-            value={this.state.addItem.stars}
-            onChange={this.addNewHandler}
-          />
-          <br />
-          <Button variant="outlined" color="primary" onClick={this.byActorHandler}>
-            searchByActor
-          </Button>
-          <TextField
-            id="standard-name"
-            label="actor's name"
-            type="text"
-            value={this.state.byActorInput}
-            onChange={this.byActorInputHandler}
-          />
-          <Button variant="outlined" color="primary" onClick={this.byNameHandler}>
-            searchByName
-          </Button>
-          <TextField
-            id="standard-name"
-            label="film's name"
-            type="text"
-            value={this.state.byNameInput}
-            onChange={this.byNameInputHandler}
-          />
-          <br />
-          <Button variant="outlined" color="secondary" onClick={this.sortDownHandler}>
-            ↑
-          </Button>
-          <Button variant="outlined" color="secondary" onClick={this.sortUpHandler}>
-            ↓
-          </Button>
-        </div>
-
-        <ReactFileReader fileTypes={['.txt']} handleFiles={this.handleFiles} multipleFiles={false}>
-          <button style={{ background: 'gray' }}>Upload</button>
-        </ReactFileReader>
+        <ControlMenuComponent
+          initHandler={this.initHandler}
+          getAllHandler={this.getAllHandler}
+          addHandler={this.addHandler}
+          byNameHandler={this.byNameHandler}
+          sortDownHandler={this.sortDownHandler}
+          sortUpHandler={this.sortUpHandler}
+          handleFiles={this.handleFiles}
+          byActorHandler={this.byActorHandler}
+        />
 
         <span>Errors:</span>
         <div>
