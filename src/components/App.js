@@ -1,3 +1,4 @@
+import Grid from '@material-ui/core/Grid';
 import React, { Component } from 'react';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
@@ -37,7 +38,9 @@ const styles = theme => ({
   input: {
     display: 'none',
   },
-
+  root: {
+    flexGrow: 1,
+  },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -157,8 +160,7 @@ class App extends Component {
             ))}
         </div>
 
-        <span>List:</span>
-        <div>
+        <Grid container className={classes.root}>
           {this.props.movies.length &&
             this.props.movies.map(item => {
               if (item === null) {
@@ -175,7 +177,7 @@ class App extends Component {
                 />
               );
             })}
-        </div>
+        </Grid>
       </div>
     );
   }

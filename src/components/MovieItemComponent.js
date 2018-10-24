@@ -8,13 +8,18 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/es/styles/withStyles';
 
-const styles = {
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
+const styles = theme => {
+  console.log('THEME', theme.spacing.unit);
+  return {
+    card: {
+      maxWidth: 345,
+      margin: theme.spacing.unit * 2,
+      color: 'blue',
+    },
+    media: {
+      height: 140,
+    },
+  };
 };
 
 const MovieItemComponent = props => {
