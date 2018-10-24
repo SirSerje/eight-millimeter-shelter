@@ -11,6 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import ControlMenuComponent from './ControlMenuComponent';
 import autobind from 'class-autobind';
+import NavLink from 'react-router-dom/es/NavLink';
 
 const styles = theme => ({
   appBar: {
@@ -142,6 +143,7 @@ class App extends Component {
         </div>
 
         <span>List:</span>
+        <NavLink to={'/final-app'}>test</NavLink>
         <div>
           {this.props.movies.length &&
             this.props.movies.map(item => {
