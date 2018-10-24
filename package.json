@@ -79,7 +79,8 @@
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "prop-types": "latest"
   },
   "eslintConfig": {
     "extends": "react-app"
