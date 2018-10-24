@@ -243,7 +243,9 @@ class ControlMenuComponent extends Component {
             </div>{' '}
             <div className={classes.column}>
               <ReactFileReader fileTypes={['.txt']} handleFiles={handleFiles} multipleFiles={false}>
-                <button style={{ background: 'gray' }}>Upload</button>
+                <Button variant="outlined" color="secondary">
+                  Upload
+                </Button>
               </ReactFileReader>
             </div>
           </ExpansionPanelDetails>

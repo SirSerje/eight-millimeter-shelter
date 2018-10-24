@@ -11,6 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import ControlMenuComponent from './ControlMenuComponent';
 import autobind from 'class-autobind';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   appBar: {
@@ -151,7 +152,13 @@ class App extends Component {
               return (
                 <p key={item.id}>
                   {item.id} - {item.title} - {item.release} - {item.format} - {item.stars}
-                  <button onClick={() => this.deleteHandler(item.id)}>remove</button>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => this.deleteHandler(item.id)}
+                  >
+                    remove
+                  </Button>
                 </p>
               );
             })}
