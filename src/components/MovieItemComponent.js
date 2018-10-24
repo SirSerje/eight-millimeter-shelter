@@ -17,10 +17,6 @@ const styles = {
   },
 };
 
-{
-  /*<p key={item.id}>*/
-}
-// {item.id} - {item.title} - {item.release} - {item.format} - {item.stars}
 const MovieItemComponent = props => {
   const { classes, id, title, release, format, stars } = props;
   return (

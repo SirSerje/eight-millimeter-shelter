@@ -166,6 +166,7 @@ class App extends Component {
               }
               return (
                 <MovieItemComponent
+                  key={item.id}
                   id={item.id}
                   title={item.title}
                   release={item.release}
