@@ -8,21 +8,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/es/styles/withStyles';
 
-const styles = theme => {
-  console.log('THEME', theme.spacing.unit);
-  return {
-    card: {
-      maxWidth: 345,
-      margin: theme.spacing.unit * 2,
-      color: 'blue',
-    },
-    media: {
-      height: 140,
-    },
-  };
-};
 
-const MovieItemComponent = props => {
+
+const Index = props => {
   const { classes, id, title, release, format, stars } = props;
   return (
     <Card key={id} className={classes.card}>
@@ -51,4 +39,4 @@ const MovieItemComponent = props => {
   );
 };
 
-export default withStyles(styles)(MovieItemComponent);
+export default withStyles(styles)(Index);

@@ -1,66 +1,23 @@
 import Grid from '@material-ui/core/Grid';
 import React, { Component } from 'react';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import { connect } from 'react-redux';
-import '../styles/index.scss';
-import parseTextFile from '../utils/fileParser';
+import '../../styles/index.scss';
+import parseTextFile from '../../utils/fileParser';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
-import ControlMenuComponent from './ControlMenuComponent';
+import ControlMenuComponent from '../ControlMenuComponent';
 import autobind from 'class-autobind';
-import MovieItemComponent from './MovieItemComponent';
+import MovieItemComponent from '../MovieItemComponent';
 import uuidv4 from 'uuid/v4';
-import ErrorComponent from './ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
+import styles from './styles';
 
-const styles = theme => ({
-  card: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  appBar: {
-    position: 'relative',
-  },
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-  root: {
-    flexGrow: 1,
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
-  },
-});
-
-class App extends Component {
+class Index extends Component {
   constructor(params) {
     super(params);
     autobind(this);
@@ -207,12 +164,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-App.propTypes = {
+Index.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 const combinedApp = connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(Index);
 export default withStyles(styles)(combinedApp);
