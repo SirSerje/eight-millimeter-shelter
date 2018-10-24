@@ -121,7 +121,7 @@ class ControlMenuComponent extends Component {
     } = this.props;
     return (
       <div>
-        <ExpansionPanel defaultExpanded>
+        <ExpansionPanel expanded={false}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.column}>
               <Typography className={classes.heading}>Expand</Typography>
