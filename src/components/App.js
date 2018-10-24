@@ -11,9 +11,23 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import ControlMenuComponent from './ControlMenuComponent';
 import autobind from 'class-autobind';
-import Button from '@material-ui/core/Button';
+import MovieItemComponent from './MovieItemComponent';
 
 const styles = theme => ({
+  card: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
   appBar: {
     position: 'relative',
   },
@@ -112,6 +126,7 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
+    const bull = <span className={classes.bullet}>•</span>;
     return (
       <div className="app-main">
         <AppBar position="static" className={classes.appBar}>
@@ -150,16 +165,13 @@ class App extends Component {
                 return <b>empty</b>;
               }
               return (
-                <p key={item.id}>
-                  {item.id} - {item.title} - {item.release} - {item.format} - {item.stars}
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => this.deleteHandler(item.id)}
-                  >
-                    remove
-                  </Button>
-                </p>
+                <MovieItemComponent
+                  id={item.id}
+                  title={item.title}
+                  release={item.release}
+                  format={item.format}
+                  stars={item.stars}
+                />
               );
             })}
         </div>
