@@ -13,6 +13,8 @@ import AppBar from '@material-ui/core/AppBar';
 import ControlMenuComponent from './ControlMenuComponent';
 import autobind from 'class-autobind';
 import MovieItemComponent from './MovieItemComponent';
+import uuidv4 from 'uuid/v4';
+import ErrorComponent from './ErrorComponent';
 
 const styles = theme => ({
   card: {
@@ -151,13 +153,9 @@ class App extends Component {
           byActorHandler={this.byActorHandler}
         />
 
-        <span>Errors:</span>
         <div>
-          {' '}
           {this.props.errors &&
-            this.props.errors.map(err => (
-              <p key={Math.round(Math.random() * 20000)}>{err.message}</p>
-            ))}
+            this.props.errors.map(err => <ErrorComponent key={uuidv4()} message={err.message} />)}
         </div>
 
         <Grid container className={classes.root}>
