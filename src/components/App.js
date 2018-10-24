@@ -10,6 +10,7 @@ import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import ControlMenuComponent from './ControlMenuComponent';
+import autobind from 'class-autobind';
 
 const styles = theme => ({
   appBar: {
@@ -42,17 +43,7 @@ const styles = theme => ({
 class App extends Component {
   constructor(params) {
     super(params);
-    this.initHandler = this.initHandler.bind(this);
-    this.handleFiles = this.handleFiles.bind(this);
-    this.getAllHandler = this.getAllHandler.bind(this);
-    this.addHandler = this.addHandler.bind(this);
-    this.deleteHandler = this.deleteHandler.bind(this);
-    this.deleteInputHandler = this.deleteInputHandler.bind(this);
-    this.byNameHandler = this.byNameHandler.bind(this);
-    this.byActorHandler = this.byActorHandler.bind(this);
-    this.sortDownHandler = this.sortDownHandler.bind(this);
-    this.sortUpHandler = this.sortUpHandler.bind(this);
-    this.uploadHandler = this.uploadHandler.bind(this);
+    autobind(this);
   }
 
   componentDidMount() {
