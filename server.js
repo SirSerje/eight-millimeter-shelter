@@ -12,6 +12,7 @@ const app = express();
 const router = express.Router();
 const url = require('url');
 const firebase = require('firebase');
+const getAll = require('./src/server').getAll;
 const PORT = 4125;
 
 let config = {
@@ -90,13 +91,9 @@ router
     //GET ALL
   })
   .get(function(req, res) {
-    database
-      .ref()
-      .once('value')
-      .then(function(snapshot) {
-        res.json(snapshot.val().movie);
-      })
-      .catch(); //FIXME #2 add error handling for requests
+    getAll(function(snapshot) {
+      res.json(snapshot.val().movie);
+    }, database);
   });
 
 //SEARCH
