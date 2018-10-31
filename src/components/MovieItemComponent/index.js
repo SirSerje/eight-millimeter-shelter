@@ -7,11 +7,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/es/styles/withStyles';
-
+import styles from './styles';
 
 
 const Index = props => {
-  const { classes, id, title, release, format, stars } = props;
+  const { classes, id, title, release, format, stars, deleteHandler } = props;
   return (
     <Card key={id} className={classes.card}>
       <CardActionArea>
@@ -31,7 +31,7 @@ const Index = props => {
         <Button size="small" color="primary" disabled>
           {format}
         </Button>
-        <Button variant="outlined" color="secondary" onClick={() => this.deleteHandler(item.id)}>
+        <Button variant="outlined" color="secondary" onClick={() => deleteHandler(id)}>
           remove
         </Button>
       </CardActions>

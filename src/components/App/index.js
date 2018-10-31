@@ -129,6 +129,7 @@ class Index extends Component {
                   release={item.release}
                   format={item.format}
                   stars={item.stars}
+                  deleteHandler={this.deleteHandler}
                 />
               );
             })}
