@@ -1,11 +1,4 @@
-//Namespaces to avoid warnings:
-/** @namespace req.params.movieId */
-/** @namespace router.use */
-/** @namespace router.get */
-/** @namespace router.route */
-
 //inspired with: https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -16,25 +9,19 @@ const getAll = require('./src/server').getAll;
 const add = require('./src/server').add;
 const removeItem = require('./src/server').removeItem;
 const updateItem = require('./src/server').updateItem;
+const config = require('./src/server/config');
 
+//config
 const PORT = 4125;
 
-let config = {
-  apiKey: 'AIzaSyBs17-j5048eEmoPJk7WxX8zx47Io6XMwk',
-  authDomain: 'movie-shelve.firebaseapp.com',
-  databaseURL: 'https://movie-shelve.firebaseio.com',
-  projectId: 'movie-shelve',
-  storageBucket: 'movie-shelve.appspot.com',
-  messagingSenderId: '168547079024',
-};
-
+//init
 firebase.initializeApp(config);
-let database = firebase.database();
 
-//variable, which holds highest ID
+let database = firebase.database();
 let LAST_ID = -1;
 let isInit = false;
 
+//get last id from database
 database
   .ref('options')
   .once('value')
@@ -87,6 +74,7 @@ router
   });
 
 //SEARCH
+//FIXME move search to server method, add postman scheme for search
 router.route('/movies/search').get(function(req, res) {
   let finalArray = [];
   let a = url.parse(req.url, true);
