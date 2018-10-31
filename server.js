@@ -13,6 +13,7 @@ const router = express.Router();
 const url = require('url');
 const firebase = require('firebase');
 const getAll = require('./src/server').getAll;
+const add = require('./src/server').add;
 const PORT = 4125;
 
 let config = {
@@ -60,12 +61,9 @@ router.route('/movies/upload').post(function(req, res) {
     let current = req.body.movie[i];
     LAST_ID++;
     let movie = { ...current, id: LAST_ID };
-    firebase
-      .database()
-      .ref('movie/' + LAST_ID)
-      .set(movie);
+    add(()=>{}, firebase, movie, LAST_ID);
   }
-  res.json({ message: 'ok' });
+  res.json({ message: 'ok' }); //FIXME: server sends 'that correct' but its not truth
 });
 //ADD
 router
@@ -73,21 +71,10 @@ router
   .post(function(req, res) {
     LAST_ID++;
     let movie = { ...req.body.movie, id: LAST_ID };
-    firebase
-      .database()
-      .ref('movie/' + LAST_ID)
-      .set(movie, function(error) {
-        if (error) {
-          res.json({ message: 'ERROR' });
-        } else {
-          firebase
-            .database()
-            .ref('options')
-            .set({ max_id: LAST_ID });
-          res.json({ message: movie, status: 'ok' });
-        }
-      });
-
+    let success = function() {
+      res.json({ message: movie, status: 'ok' });
+    };
+    add(success, firebase, movie, LAST_ID);
     //GET ALL
   })
   .get(function(req, res) {
