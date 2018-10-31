@@ -14,6 +14,7 @@ const url = require('url');
 const firebase = require('firebase');
 const getAll = require('./src/server').getAll;
 const add = require('./src/server').add;
+const removeItem = require('./src/server').removeItem;
 const PORT = 4125;
 
 let config = {
@@ -61,7 +62,7 @@ router.route('/movies/upload').post(function(req, res) {
     let current = req.body.movie[i];
     LAST_ID++;
     let movie = { ...current, id: LAST_ID };
-    add(()=>{}, firebase, movie, LAST_ID);
+    add(() => {}, database, movie, LAST_ID);
   }
   res.json({ message: 'ok' }); //FIXME: server sends 'that correct' but its not truth
 });
@@ -74,7 +75,7 @@ router
     let success = function() {
       res.json({ message: movie, status: 'ok' });
     };
-    add(success, firebase, movie, LAST_ID);
+    add(success, database, movie, LAST_ID);
     //GET ALL
   })
   .get(function(req, res) {
@@ -137,8 +138,7 @@ router
   })
   //UPDATE
   .put(function(req, res) {
-    firebase
-      .database()
+    database
       .ref('movie/' + req.params.movieId)
       .update(req.body.movie)
       .then(i => res.json({ message: req.body.movie, status: 'ok' }))
@@ -146,23 +146,19 @@ router
   })
   //DELETE
   .delete(function(req, res) {
-    database
-      .ref()
-      .once('value')
-      .then(function(snapshot) {
-        if (snapshot.val().movie[req.params.movieId] === undefined) {
-          res.status(426).json({ message: 'item not found' });
-        } else {
-          firebase
-            .database()
-            .ref('movie/' + req.params.movieId)
-            .remove()
-            .then(i => {
-              res.json({ message: req.body.movie, status: 'ok' });
-            })
-            .catch(err => res.status(426).json({ message: err }));
-        }
-      });
+    let id = req.params.movieId;
+    let success = function(i) {
+      res.json({ message: req.body.movie, status: 'ok' });
+    };
+    let fail = function(err) {
+      res.status(426).json({ message: err });
+    };
+    let notFound = function() {
+      console.log('not found called');
+      res.status(426).json({ message: 'item not found' });
+    };
+
+    removeItem(success, notFound, fail, database, id);
   });
 
 app.use('/api', router);
