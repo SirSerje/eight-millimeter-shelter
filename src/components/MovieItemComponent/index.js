@@ -24,7 +24,12 @@ const Index = props => {
           <Typography gutterBottom variant="h5" component="h2">
             {title} - {release}
           </Typography>
-          <Typography component="p">{stars}</Typography>
+          <Dotdotdot clamp={2}>
+            <Typography component="p">
+              <span>{stars.map((item, idx, total) => <a key={uuid()}
+                href={"http://nolinkyet.com"}>{item}{idx !== (total.length - 1) && ", "}</a>)} </span>
+            </Typography>
+          </Dotdotdot>
         </CardContent>
       </CardActionArea>
       <CardActions>
