@@ -40,6 +40,15 @@ function removeItem(successCallback, notFound, failCallback, database, id) {
     });
 }
 
+function updateItem(successHandler, database, id, movie) {
+  database
+    .ref('movie/' + id)
+    .update(movie)
+    .then(i => successHandler())
+    .catch(); //FIXME #2 add error handling for requests
+}
+
 module.exports.getAll = getAll;
 module.exports.removeItem = removeItem;
 module.exports.add = add;
+module.exports.updateItem = updateItem;

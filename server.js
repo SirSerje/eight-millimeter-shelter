@@ -15,6 +15,8 @@ const firebase = require('firebase');
 const getAll = require('./src/server').getAll;
 const add = require('./src/server').add;
 const removeItem = require('./src/server').removeItem;
+const updateItem = require('./src/server').updateItem;
+
 const PORT = 4125;
 
 let config = {
@@ -133,16 +135,17 @@ router
       .ref()
       .once('value')
       .then(function(snapshot) {
-        res.json(snapshot.val().movie[req.params.movieId]);
+        res.json(snapshot.val().movie[req.params.movieId]); //FIXME unimplemented
       });
   })
   //UPDATE
   .put(function(req, res) {
-    database
-      .ref('movie/' + req.params.movieId)
-      .update(req.body.movie)
-      .then(i => res.json({ message: req.body.movie, status: 'ok' }))
-      .catch(); //FIXME #2 add error handling for requests
+    let id = req.params.movieId;
+    let movie = req.body.movie;
+    let success = function() {
+      res.json({ message: req.body.movie, status: 'ok' });
+    };
+    updateItem(success, database, id, movie);
   })
   //DELETE
   .delete(function(req, res) {
