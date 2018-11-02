@@ -1,11 +1,4 @@
-//Namespaces to avoid warnings:
-/** @namespace req.params.movieId */
-/** @namespace router.use */
-/** @namespace router.get */
-/** @namespace router.route */
-
 //inspired with: https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -13,24 +6,22 @@ const router = express.Router();
 const url = require('url');
 const firebase = require('firebase');
 const getAll = require('./src/server').getAll;
+const add = require('./src/server').add;
+const removeItem = require('./src/server').removeItem;
+const updateItem = require('./src/server').updateItem;
+const config = require('./src/server/config');
+
+//config
 const PORT = 4125;
 
-let config = {
-  apiKey: 'AIzaSyBs17-j5048eEmoPJk7WxX8zx47Io6XMwk',
-  authDomain: 'movie-shelve.firebaseapp.com',
-  databaseURL: 'https://movie-shelve.firebaseio.com',
-  projectId: 'movie-shelve',
-  storageBucket: 'movie-shelve.appspot.com',
-  messagingSenderId: '168547079024',
-};
-
+//init
 firebase.initializeApp(config);
-let database = firebase.database();
 
-//variable, which holds highest ID
+let database = firebase.database();
 let LAST_ID = -1;
 let isInit = false;
 
+//get last id from database
 database
   .ref('options')
   .once('value')
@@ -60,12 +51,9 @@ router.route('/movies/upload').post(function(req, res) {
     let current = req.body.movie[i];
     LAST_ID++;
     let movie = { ...current, id: LAST_ID };
-    firebase
-      .database()
-      .ref('movie/' + LAST_ID)
-      .set(movie);
+    add(() => {}, database, movie, LAST_ID);
   }
-  res.json({ message: 'ok' });
+  res.json({ message: 'ok' }); //FIXME: server sends 'that correct' but its not truth
 });
 //ADD
 router
@@ -73,21 +61,10 @@ router
   .post(function(req, res) {
     LAST_ID++;
     let movie = { ...req.body.movie, id: LAST_ID };
-    firebase
-      .database()
-      .ref('movie/' + LAST_ID)
-      .set(movie, function(error) {
-        if (error) {
-          res.json({ message: 'ERROR' });
-        } else {
-          firebase
-            .database()
-            .ref('options')
-            .set({ max_id: LAST_ID });
-          res.json({ message: movie, status: 'ok' });
-        }
-      });
-
+    let success = function() {
+      res.json({ message: movie, status: 'ok' });
+    };
+    add(success, database, movie, LAST_ID);
     //GET ALL
   })
   .get(function(req, res) {
@@ -97,6 +74,7 @@ router
   });
 
 //SEARCH
+//FIXME move search to server method, add postman scheme for search
 router.route('/movies/search').get(function(req, res) {
   let finalArray = [];
   let a = url.parse(req.url, true);
@@ -145,37 +123,33 @@ router
       .ref()
       .once('value')
       .then(function(snapshot) {
-        res.json(snapshot.val().movie[req.params.movieId]);
+        res.json(snapshot.val().movie[req.params.movieId]); //FIXME unimplemented
       });
   })
   //UPDATE
   .put(function(req, res) {
-    firebase
-      .database()
-      .ref('movie/' + req.params.movieId)
-      .update(req.body.movie)
-      .then(i => res.json({ message: req.body.movie, status: 'ok' }))
-      .catch(); //FIXME #2 add error handling for requests
+    let id = req.params.movieId;
+    let movie = req.body.movie;
+    let success = function() {
+      res.json({ message: req.body.movie, status: 'ok' });
+    };
+    updateItem(success, database, id, movie);
   })
   //DELETE
   .delete(function(req, res) {
-    database
-      .ref()
-      .once('value')
-      .then(function(snapshot) {
-        if (snapshot.val().movie[req.params.movieId] === undefined) {
-          res.status(426).json({ message: 'item not found' });
-        } else {
-          firebase
-            .database()
-            .ref('movie/' + req.params.movieId)
-            .remove()
-            .then(i => {
-              res.json({ message: req.body.movie, status: 'ok' });
-            })
-            .catch(err => res.status(426).json({ message: err }));
-        }
-      });
+    let id = req.params.movieId;
+    let success = function(i) {
+      res.json({ message: req.body.movie, status: 'ok' });
+    };
+    let fail = function(err) {
+      res.status(426).json({ message: err });
+    };
+    let notFound = function() {
+      console.log('not found called');
+      res.status(426).json({ message: 'item not found' });
+    };
+
+    removeItem(success, notFound, fail, database, id);
   });
 
 app.use('/api', router);
