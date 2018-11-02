@@ -8,6 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/es/styles/withStyles';
 import styles from './styles';
+import Dotdotdot from 'react-dotdotdot';
+import uuid from 'uuid';
 
 
 const Index = props => {
@@ -17,7 +19,7 @@ const Index = props => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image="/static/images/cards/default.jpg"
           title="Contemplative Reptile"
         />
         <CardContent>
