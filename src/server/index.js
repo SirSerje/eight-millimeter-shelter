@@ -88,8 +88,24 @@ function searchItem(successHandler, database, reqUrl) {
       successHandler(finalArray);
     });
 }
+
+function getById(successHandler, database, id, failHandler) {
+  database
+    .ref()
+    .once('value')
+    .then(function(snapshot) {
+      let result = snapshot.val().movie[id];
+      console.log(result);
+      if(result) {
+        successHandler(result);
+      } else {
+        failHandler();
+      }
+    });
+}
 module.exports.getAll = getAll;
 module.exports.removeItem = removeItem;
 module.exports.add = add;
 module.exports.updateItem = updateItem;
 module.exports.searchItem = searchItem;
+module.exports.getById = getById;

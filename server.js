@@ -10,6 +10,7 @@ const add = require('./src/server').add;
 const removeItem = require('./src/server').removeItem;
 const updateItem = require('./src/server').updateItem;
 const searchItem = require('./src/server').searchItem;
+const getById = require('./src/server').getById;
 const config = require('./src/server/config');
 
 //config
@@ -88,19 +89,13 @@ router
   .route('/movies/:movieId')
   .get(function(req, res) {
     let id = req.params.movieId;
-    database
-      .ref()
-      .once('value')
-      .then(function(snapshot) {
-        console.log('!', );
-        let result = snapshot.val().movie[id];
-        console.log(result);
-        if(result) {
-          res.json({message:result});
-        } else {
-          res.status(426).json({ message: 'item not found' });
-        }
-      });
+    let successHandler = function(i) {
+      res.json({message:i});
+    };
+    let failHandler = function () {
+      res.status(426).json({ message: 'item not found' });
+    };
+    getById(successHandler, database, id, failHandler);
   })
   //UPDATE
   .put(function(req, res) {
