@@ -9,6 +9,7 @@ const getAll = require('./src/server').getAll;
 const add = require('./src/server').add;
 const removeItem = require('./src/server').removeItem;
 const updateItem = require('./src/server').updateItem;
+const searchItem = require('./src/server').searchItem;
 const config = require('./src/server/config');
 
 //config
@@ -76,43 +77,10 @@ router
 //SEARCH
 //FIXME move search to server method, add postman scheme for search
 router.route('/movies/search').get(function(req, res) {
-  let finalArray = [];
-  let a = url.parse(req.url, true);
-  database
-    .ref()
-    .once('value')
-    .then(function(snapshot) {
-      let currentDb = snapshot.val().movie;
-      let temp = Object.keys(a.query);
-      let flag = false;
-      if (temp[0] === 'actor') {
-        for (let idx in currentDb) {
-          let currentItem = currentDb[idx];
-          let some = a.query.actor.toLowerCase();
-          let stars = currentItem.stars;
-          for (let i in stars) {
-            let currentStar = stars[i].toLowerCase();
-            if (currentStar.indexOf(some) !== -1) {
-              flag = true;
-            }
-          }
-          if (flag === true) {
-            finalArray.push(currentItem);
-            flag = false;
-          }
-        }
-      } else if (temp[0] === 'title') {
-        for (let idx in currentDb) {
-          let currentItem = currentDb[idx];
-          let some = a.query.title.toLowerCase();
-          let title = currentItem.title.toLowerCase();
-          if (title.indexOf(some) !== -1) {
-            finalArray.push(currentItem);
-          }
-        }
-      }
-      res.json({ message: finalArray });
-    });
+  let success = function(i) {
+    res.json({ message: i, status: 'ok' });
+  };
+  searchItem(success, database, req.url);
 });
 
 //GET BY ID
