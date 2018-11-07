@@ -87,11 +87,19 @@ router.route('/movies/search').get(function(req, res) {
 router
   .route('/movies/:movieId')
   .get(function(req, res) {
+    let id = req.params.movieId;
     database
       .ref()
       .once('value')
       .then(function(snapshot) {
-        res.json(snapshot.val().movie[req.params.movieId]); //FIXME unimplemented
+        console.log('!', );
+        let result = snapshot.val().movie[id];
+        console.log(result);
+        if(result) {
+          res.json({message:result});
+        } else {
+          res.status(426).json({ message: 'item not found' });
+        }
       });
   })
   //UPDATE
