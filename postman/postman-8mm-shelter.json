@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3a95b000-27f1-4ca2-b1ef-13ed42fcb80a",
+		"_postman_id": "23456d39-607c-4762-9d1a-b50fc2179142",
 		"name": "movie-shelve-api",
 		"description": "Набор запросов для работы с movie-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -39,6 +39,92 @@
 					]
 				},
 				"description": "получить все фильмы"
+			},
+			"response": []
+		},
+		{
+			"name": "search by title",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/search?title=тест",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "тест"
+						}
+					]
+				},
+				"description": "find film by it title\n!ensure that film is present in database before creating issue"
+			},
+			"response": []
+		},
+		{
+			"name": "search by actor",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/search?actor=matt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "actor",
+							"value": "matt"
+						}
+					]
+				},
+				"description": "search by related actor\n!ensure that actor is present id database"
 			},
 			"response": []
 		},
