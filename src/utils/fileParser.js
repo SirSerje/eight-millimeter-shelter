@@ -15,11 +15,10 @@ const TO_REPLACE = '_';
  * @return {array} - array of movie objects
  */
 const parseTextFile = file => {
-  let fileData = file.srcElement.result.split('\n');
   let combinedArray = [];
   let current = {};
 
-  fileData.forEach(item => {
+  file.forEach(item => {
     if (item !== '') {
       let separator = item.split(SEMI_SEPARATOR);
       let key;

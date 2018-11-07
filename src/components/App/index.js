@@ -81,14 +81,15 @@ class Index extends Component {
   handleFiles(files) {
     const reader = new FileReader();
     reader.onload = function(file) {
-      this.props.uploadHandler({ movie: parseTextFile(file) });
+      let splitted = file.srcElement.result.split('\n');
+      this.props.uploadHandler({ movie: parseTextFile(splitted) });
     }.bind(this);
     reader.readAsText(files[0]);
   }
 
   render() {
     const { classes } = this.props;
-    const bull = <span className={classes.bullet}>•</span>;
+    // const bull = <span className={classes.bullet}>•</span>;
     return (
       <div className="app-main">
         <AppBar position="static" className={classes.appBar}>
