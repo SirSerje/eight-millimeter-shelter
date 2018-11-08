@@ -10,6 +10,7 @@ import withStyles from '@material-ui/core/es/styles/withStyles';
 import styles from './styles';
 import Dotdotdot from 'react-dotdotdot';
 import uuid from 'uuid';
+import defaultImage from '../../../images/default.png'; //FIXME: weak
 
 
 const Index = props => {
@@ -19,7 +20,7 @@ const Index = props => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/default.jpg"
+          image={defaultImage}
           title="Contemplative Reptile"
         />
         <CardContent>
