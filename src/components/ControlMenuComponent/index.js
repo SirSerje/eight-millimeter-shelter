@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../../styles/index.scss';
 import ReactFileReader from 'react-file-reader';
 import Button from '@material-ui/core/Button';
@@ -12,34 +12,13 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styles from './styles';
 
-function Index (props) {
-  const [byNameInput, setbyNameInput] = useState('');
-  const [byActorInput, setbyActorInput] = useState('');
-  // const [byIdInput, setbyIdInput] = useState(-1);
-
-  const [addItem, setAddItem] = useState({
-    title: '',
-    release: '',
-    format: '',
-    stars: '',
-  });
-
-  const addNewHandler = event => {
-    let fieldType = event.target.name;
-    let temp = addItem;
-
-    temp[fieldType] = event.target.value;
-
-    setAddItem({addItem: temp});
-  };
-
-  const byNameInputHandler = event => {
-    setbyNameInput(event.target.value);
-  };
-
-  const byActorInputHandler = event => {
-    setbyActorInput(event.target.value);
-  };
+const Index = props => {
+  const [byNameInput, setByNameInput] = useState('');
+  const [byActorInput, setByActorInput] = useState('');
+  const [title, setTitle] = useState('');
+  const [release, setRelease] = useState('');
+  const [format, setFormat] = useState('');
+  const [stars, setStars] = useState('');
 
   const {
     classes,
@@ -60,9 +39,6 @@ function Index (props) {
           <div className={classes.column}>
             <Typography className={classes.heading}>Expand</Typography>
           </div>
-          {/*<div className={classes.column}>
-              <Typography className={classes.secondaryHeading}>Use controls to operate with API stuff</Typography>
-            </div>*/}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
           <div className={classes.column}>
@@ -87,7 +63,7 @@ function Index (props) {
                 variant="outlined"
                 color="secondary"
                 className={classes.button}
-                onClick={() => addHandler(addItem)}
+                onClick={() => addHandler({title, release, format, stars})}
                 disabled
               >
                   addNew
@@ -97,7 +73,7 @@ function Index (props) {
                 variant="outlined"
                 color="secondary"
                 className={classes.button}
-                onClick={() => addHandler(addItem)}
+                onClick={() => addHandler({title, release, format, stars})}
               >
                   addNew
               </Button>
@@ -108,16 +84,14 @@ function Index (props) {
               label="name"
               name="title"
               type="text"
-              value={addItem.title}
-              onChange={addNewHandler}
+              onChange={e => setTitle(e.target.value)}
             />
             <TextField
               id="standard-name"
               label="release date"
               name="release"
               type="number"
-              value={addItem.release}
-              onChange={addNewHandler}
+              onChange={e => setRelease(e.target.value)}
             />{' '}
             <br />
             <TextField
@@ -125,16 +99,14 @@ function Index (props) {
               label="format"
               name="format"
               type="text"
-              value={addItem.format}
-              onChange={addNewHandler}
+              onChange={e => setFormat(e.target.value)}
             />
             <TextField
               id="standard-name"
               label="stars"
               name="stars"
               type="text"
-              value={addItem.stars}
-              onChange={addNewHandler}
+              onChange={e => setStars(e.target.value)}
             />
           </div>{' '}
           <div className={classes.column}>
@@ -149,8 +121,7 @@ function Index (props) {
               id="standard-name"
               label="actor's name"
               type="text"
-              value={byActorInput}
-              onChange={byActorInputHandler}
+              onChange={e => setByActorInput(e.target.value)}
             />{' '}
             <br />
             <Button
@@ -164,8 +135,7 @@ function Index (props) {
               id="standard-name"
               label="film's name"
               type="text"
-              value={byNameInput}
-              onChange={byNameInputHandler}
+              onChange={ e => setByNameInput(e.target.value) }
             />
             <br />
             <Button variant="outlined" color="secondary" onClick={sortDownHandler}>
@@ -183,13 +153,6 @@ function Index (props) {
             </ReactFileReader>
           </div>
         </ExpansionPanelDetails>
-        {/* <Divider />
-          <ExpansionPanelActions>
-            <Button size="small">Cancel</Button>
-            <Button size="small" color="primary">
-              Save
-            </Button>
-          </ExpansionPanelActions>*/}
       </ExpansionPanel>
     </div>
   );
