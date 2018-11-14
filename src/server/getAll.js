@@ -2,7 +2,7 @@ const express = require('express');
 const database = require('./database');
 const router = express.Router();
 
-router.route('/').get(function(req, res) {
+router.get('/movies', function(req, res) {
   database
     .ref()
     .once('value')
