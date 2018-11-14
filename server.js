@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const router = express.Router();
-const getAll = require('./src/server').getAll;
 const add = require('./src/server').add;
 const removeItem = require('./src/server').removeItem;
 const updateItem = require('./src/server').updateItem;
@@ -16,7 +15,6 @@ const PORT = 4125;
 
 //init
 let LAST_ID = -1;
-let isInit = false;
 
 //get last id from database
 database
@@ -24,7 +22,6 @@ database
   .once('value')
   .then(function(snapshot) {
     LAST_ID = snapshot.val().max_id;
-    isInit = true;
   });
 
 app.use(bodyParser.json());
@@ -32,8 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
-  if (!isInit)
+  if (LAST_ID < 0) {
     res.status(503).json({ message: 'server not connected to DB, please wait for a while' });
+  }
   // do logging
   //console.log('Something is happening.');
   next();
@@ -62,12 +60,6 @@ router
       res.json({ message: movie, status: 'ok' });
     };
     add(success, database, movie, LAST_ID);
-    //GET ALL
-  })
-  .get(function(req, res) {
-    getAll(function(snapshot) {
-      res.json(snapshot.val().movie);
-    }, database);
   });
 
 //SEARCH
@@ -118,6 +110,7 @@ router
     removeItem(success, notFound, fail, database, id);
   });
 
+app.use('/movies', require('./src/server/getAll'));
 app.use('/api', router);
 
 const server = app.listen(PORT, function() {
