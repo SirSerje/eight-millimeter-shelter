@@ -3,23 +3,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const router = express.Router();
-const url = require('url');
-const firebase = require('firebase');
 const getAll = require('./src/server').getAll;
 const add = require('./src/server').add;
 const removeItem = require('./src/server').removeItem;
 const updateItem = require('./src/server').updateItem;
 const searchItem = require('./src/server').searchItem;
 const getById = require('./src/server').getById;
-const config = require('./src/server/config');
+const database = require('./src/server/database');
 
 //config
 const PORT = 4125;
 
 //init
-firebase.initializeApp(config);
-
-let database = firebase.database();
 let LAST_ID = -1;
 let isInit = false;
 
