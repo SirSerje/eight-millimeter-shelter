@@ -110,7 +110,7 @@ router
     removeItem(success, notFound, fail, database, id);
   });
 
-app.use('/movies', require('./src/server/getAll'));
+app.use('/api', require('./src/server/getAll'));
 app.use('/api', router);
 
 const server = app.listen(PORT, function() {
