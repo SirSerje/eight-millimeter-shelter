@@ -9,7 +9,7 @@ function add(successCallBack, database, movie, id) {
       res.json({ message: 'ERROR' }); //FIXME: CRASH HERE!!!
       console.warn('Oops, something happened', error);
     } else {
-      database.ref('options').set({ max_id: id });
+      idController.writeDatabaseID(database, id);
       successCallBack();
     }
   });

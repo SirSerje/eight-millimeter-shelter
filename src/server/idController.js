@@ -24,8 +24,8 @@ class IdController {
     this.LAST_ID = value;
   }
 
-  writeDatabaseID() {
-    //TODO: setting new value of LAST_ID to database should be separated method
+  writeDatabaseID(database, id) {
+    database.ref('options').set({ max_id: id });
   }
 }
 
