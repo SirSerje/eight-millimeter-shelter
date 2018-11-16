@@ -4,9 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const router = express.Router();
 const database = require('./src/server/database');
-
-//FIXME: remove this
-const add = require('./src/server').add;
+const add = require('./src/server/routes/addItem').add;
 
 //config
 const PORT = 4125;
@@ -41,23 +39,18 @@ router.get('/', function(req, res) {
 });
 
 //UPLOAD
-router.route('/movies/upload').post(function(req, res) {
-  for (let i in req.body.movie) {
-    let current = req.body.movie[i];
-    LAST_ID++;
-    let movie = { ...current, id: LAST_ID };
-    add(() => {}, database, movie, LAST_ID);
-  }
-  res.json({ message: 'ok' }); //FIXME: server sends 'that correct' but its not truth
-});
 
-app.use('/api', require('./src/server/getAll'));
-app.use('/api', require('./src/server/searchItem'));
-app.use('/api', require('./src/server/addItem'));
 
-app.use('/api', require('./src/server/getById'));
-app.use('/api', require('./src/server/updateItem'));
-app.use('/api', require('./src/server/deleteItem'));
+//routing
+app.use('/api', require('./src/server/routes/getAll'));
+app.use('/api', require('./src/server/routes/searchItem'));
+
+app.use('/api', require('./src/server/routes/addItem'));
+app.use('/api', require('./src/server/routes/upload'));
+
+app.use('/api', require('./src/server/routes/getById'));
+app.use('/api', require('./src/server/routes/updateItem'));
+app.use('/api', require('./src/server/routes/deleteItem'));
 
 app.use('/api', router);
 

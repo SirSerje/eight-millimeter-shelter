@@ -1,8 +1,6 @@
 const express = require('express');
-const database = require('./database');
+const database = require('../database');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const app = express();
 
 function getById(successHandler, database, id, failHandler) {
   database
@@ -10,7 +8,6 @@ function getById(successHandler, database, id, failHandler) {
     .once('value')
     .then(function(snapshot) {
       let result = snapshot.val().movie[id];
-      console.log(result);
       if (result) {
         successHandler(result);
       } else {

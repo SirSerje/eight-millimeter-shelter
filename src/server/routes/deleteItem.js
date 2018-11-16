@@ -1,8 +1,6 @@
 const express = require('express');
-const database = require('./database');
+const database = require('../database');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const app = express();
 
 function removeItem(successCallback, notFound, failCallback, database, id) {
   database
@@ -32,7 +30,6 @@ router.delete('/movies/:movieId', function(req, res) {
     res.status(426).json({ message: err });
   };
   let notFound = function() {
-    console.log('not found called');
     res.status(426).json({ message: 'item not found' });
   };
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const database = require('./database');
+const database = require('../database');
 const router = express.Router();
 
 router.get('/movies', function(req, res) {

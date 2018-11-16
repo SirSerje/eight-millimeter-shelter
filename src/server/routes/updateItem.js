@@ -1,8 +1,6 @@
 const express = require('express');
-const database = require('./database');
+const database = require('../database');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const app = express();
 
 function updateItem(successHandler, database, id, movie) {
   database

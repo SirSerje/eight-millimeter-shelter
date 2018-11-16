@@ -1,8 +1,7 @@
 const express = require('express');
-const database = require('./database');
+const database = require('../database');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const app = express();
+const url = require('url');
 
 function searchItem(successHandler, database, reqUrl) {
   let finalArray = [];
@@ -33,9 +32,10 @@ function searchItem(successHandler, database, reqUrl) {
       } else if (temp[0] === 'title') {
         for (let idx in currentDb) {
           let currentItem = currentDb[idx];
-          let some = a.query.title.toLowerCase();
-          let title = currentItem.title.toLowerCase();
-          if (title.indexOf(some) !== -1) {
+          //verification can affect result of search, be ready
+          let some = a.query.title && a.query.title.toLowerCase();
+          let title = currentItem && currentItem.title && currentItem.title.toLowerCase();
+          if (title && (title.indexOf(some) !== -1)) {
             finalArray.push(currentItem);
           }
         }
