@@ -1,5 +1,5 @@
 const express = require('express');
-const database = require('./database');
+const database = require('../database');
 const router = express.Router();
 
 router.get('/movies', function(req, res) {
@@ -9,7 +9,7 @@ router.get('/movies', function(req, res) {
     .then(function(snapshot) {
       res.json(snapshot.val().movie);
     })
-  //FIXME #2 add error handling for requests
+    //FIXME #2 add error handling for requests
     .catch();
 });
 

@@ -1,54 +1,59 @@
-import parseTextFile from "./fileParser";
+import parseTextFile from './fileParser';
 
 const rawFile =
-  "" +
-  "Title: Тест1\n" +
-  "Release Year: 6666\n" +
-  "Format: VHS\n" +
-  "Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n" +
-  "\n" +
-  "Title: Тест2\n" +
-  "Release Year: 6666\n" +
-  "Format: VHS\n" +
-  "Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n" +
-  "\n" +
-  "Title: Тест1\n" +
-  "Release Year: 6666\n" +
-  "Format: VHS\n" +
-  "Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n" +
-  "\n" +
-  "Title: Тест2\n" +
-  "Release Year: 6666\n" +
-  "Format: VHS\n" +
-  "Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n" +
-  "\n" +
-  "\n";
+  '' +
+  'Title: Тест1\n' +
+  'Release Year: 6666\n' +
+  'Format: VHS\n' +
+  'Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n' +
+  '\n' +
+  'Title: Тест2\n' +
+  'Release Year: 6666\n' +
+  'Format: VHS\n' +
+  'Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n' +
+  '\n' +
+  'Title: Тест1\n' +
+  'Release Year: 6666\n' +
+  'Format: VHS\n' +
+  'Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n' +
+  '\n' +
+  'Title: Тест2\n' +
+  'Release Year: 6666\n' +
+  'Format: VHS\n' +
+  'Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n' +
+  '\n' +
+  '\n';
 
-const result = [{
-  "format": "VHS",
-  "stars": ["Gene Hackman", "Barbara Hershey", "Dennis Hopper"],
-  "title": "Тест1",
-  "year": "6666"
-}, {
-  "format": "VHS",
-  "stars": ["Matthew Broderick", "Ally Sheedy", "Dabney Coleman", "John Wood", "Barry Corbin"],
-  "title": "Тест2",
-  "year": "6666"
-}, {
-  "format": "VHS",
-  "stars": ["Gene Hackman", "Barbara Hershey", "Dennis Hopper"],
-  "title": "Тест1",
-  "year": "6666"
-}, {
-  "format": "VHS",
-  "stars": ["Matthew Broderick", "Ally Sheedy", "Dabney Coleman", "John Wood", "Barry Corbin"],
-  "title": "Тест2",
-  "year": "6666"
-}];
+const result = [
+  {
+    format: 'VHS',
+    stars: ['Gene Hackman', 'Barbara Hershey', 'Dennis Hopper'],
+    title: 'Тест1',
+    year: '6666',
+  },
+  {
+    format: 'VHS',
+    stars: ['Matthew Broderick', 'Ally Sheedy', 'Dabney Coleman', 'John Wood', 'Barry Corbin'],
+    title: 'Тест2',
+    year: '6666',
+  },
+  {
+    format: 'VHS',
+    stars: ['Gene Hackman', 'Barbara Hershey', 'Dennis Hopper'],
+    title: 'Тест1',
+    year: '6666',
+  },
+  {
+    format: 'VHS',
+    stars: ['Matthew Broderick', 'Ally Sheedy', 'Dabney Coleman', 'John Wood', 'Barry Corbin'],
+    title: 'Тест2',
+    year: '6666',
+  },
+];
 
-it("check correct file parse with mocked FileReader", () => {
+it('check correct file parse with mocked FileReader', () => {
   let reader = new FileReader();
-  reader.readAsText = jest.fn(() => rawFile.split("\n"));
+  reader.readAsText = jest.fn(() => rawFile.split('\n'));
 
   let mockedData = reader.readAsText(undefined);
   let parsedData = parseTextFile(mockedData);
