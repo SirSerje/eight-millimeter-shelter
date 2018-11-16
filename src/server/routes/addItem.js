@@ -3,7 +3,7 @@ const database = require('../database');
 const router = express.Router();
 
 //FIXME: very ugly
-let LAST_ID = require('../../../server').LAST_ID;
+let LAST_ID = require('../').LAST_ID;
 
 
 function add(successCallBack, database, movie, id) {

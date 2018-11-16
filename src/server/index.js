@@ -3,8 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const router = express.Router();
-const database = require('./src/server/database');
-const add = require('./src/server/routes/addItem').add;
+const database = require('./database');
 
 //config
 const PORT = 4125;
@@ -38,24 +37,22 @@ router.get('/', function(req, res) {
   res.json({ message: 'hooray! welcome to our api!' });
 });
 
-//UPLOAD
-
 
 //routing
-app.use('/api', require('./src/server/routes/getAll'));
-app.use('/api', require('./src/server/routes/searchItem'));
+app.use('/api', require('./routes/getAll'));
+app.use('/api', require('./routes/searchItem'));
 
-app.use('/api', require('./src/server/routes/addItem'));
-app.use('/api', require('./src/server/routes/upload'));
+app.use('/api', require('./routes/addItem'));
+app.use('/api', require('./routes/upload'));
 
-app.use('/api', require('./src/server/routes/getById'));
-app.use('/api', require('./src/server/routes/updateItem'));
-app.use('/api', require('./src/server/routes/deleteItem'));
+app.use('/api', require('./routes/getById'));
+app.use('/api', require('./routes/updateItem'));
+app.use('/api', require('./routes/deleteItem'));
 
 app.use('/api', router);
 
-const server = app.listen(PORT, function() {
-  console.log('app running on port.', server.address().port);
+const index = app.listen(PORT, function() {
+  console.log('app running on port.', index.address().port);
 });
 
 //FIXME: VERY UGLY

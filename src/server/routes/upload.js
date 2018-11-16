@@ -3,7 +3,7 @@ const database = require('../database');
 const router = express.Router();
 const add = require('./addItem').add;
 //FIXME: very ugly
-let LAST_ID = require('../../../server').LAST_ID;
+let LAST_ID = require('../').LAST_ID;
 
 
 router.post('/movies/upload', function(req, res) {
