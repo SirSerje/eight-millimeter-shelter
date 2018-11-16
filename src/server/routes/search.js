@@ -3,7 +3,7 @@ const database = require('../database');
 const router = express.Router();
 const url = require('url');
 
-function searchItem(successHandler, database, reqUrl) {
+function search(successHandler, database, reqUrl) {
   let finalArray = [];
   let a = url.parse(reqUrl, true);
   database
@@ -50,7 +50,7 @@ router.get('/movies/search', function(req, res) {
     res.json({ message: i, status: 'ok' });
   };
 
-  searchItem(success, database, req.url);
+  search(success, database, req.url);
 });
 
 module.exports = router;

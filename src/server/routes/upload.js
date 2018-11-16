@@ -1,7 +1,7 @@
 const express = require('express');
 const database = require('../database');
 const router = express.Router();
-const add = require('./addItem').add;
+const add = require('./add').add;
 //FIXME: very ugly
 let LAST_ID = require('../').LAST_ID;
 

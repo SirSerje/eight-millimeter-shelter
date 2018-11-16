@@ -2,7 +2,7 @@ const express = require('express');
 const database = require('../database');
 const router = express.Router();
 
-function updateItem(successHandler, database, id, movie) {
+function update(successHandler, database, id, movie) {
   database
     .ref('movie/' + id)
     .update(movie)
@@ -17,7 +17,7 @@ router.put('/movies/:movieId', function(req, res) {
   let success = function() {
     res.json({ message: req.body.movie, status: 'ok' });
   };
-  updateItem(success, database, id, movie);
+  update(success, database, id, movie);
 });
 
 module.exports = router;

@@ -39,15 +39,15 @@ router.get('/', function(req, res) {
 
 
 //routing
-app.use('/api', require('./routes/getAll'));
-app.use('/api', require('./routes/searchItem'));
+app.use('/api', require('./routes/all'));
+app.use('/api', require('./routes/search'));
 
-app.use('/api', require('./routes/addItem'));
+app.use('/api', require('./routes/add'));
 app.use('/api', require('./routes/upload'));
 
-app.use('/api', require('./routes/getById'));
-app.use('/api', require('./routes/updateItem'));
-app.use('/api', require('./routes/deleteItem'));
+app.use('/api', require('./routes/byid'));
+app.use('/api', require('./routes/update'));
+app.use('/api', require('./routes/delete'));
 
 app.use('/api', router);
 

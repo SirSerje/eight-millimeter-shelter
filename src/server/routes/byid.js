@@ -2,7 +2,7 @@ const express = require('express');
 const database = require('../database');
 const router = express.Router();
 
-function getById(successHandler, database, id, failHandler) {
+function byid(successHandler, database, id, failHandler) {
   database
     .ref()
     .once('value')
@@ -25,7 +25,7 @@ router.get('/movies/:movieId', function(req, res) {
   let failHandler = function() {
     res.status(426).json({ message: 'item not found' });
   };
-  getById(successHandler, database, id, failHandler);
+  byid(successHandler, database, id, failHandler);
 });
 
 module.exports = router;
