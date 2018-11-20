@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "server": "nodemon server",
+    "server": "nodemon ./src/server",
     "build": "webpack --mode production --progress",
     "start": "webpack-dev-server --open --mode development --progress",
     "prettier": "prettier --write --config .prettierrc ./src/**/*.js ./server.js",
