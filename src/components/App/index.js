@@ -16,6 +16,7 @@ import MovieItemComponent from '../MovieItemComponent';
 import uuidv4 from 'uuid/v4';
 import ErrorComponent from '../ErrorComponent';
 import styles from './styles';
+import App from "./App";
 
 class Index extends Component {
   constructor(params) {
@@ -135,6 +136,7 @@ class Index extends Component {
               );
             })}
         </Grid>
+        <App/>
       </div>
     );
   }
