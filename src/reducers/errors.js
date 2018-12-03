@@ -1,8 +1,7 @@
+import { List } from 'immutable';
 import * as constants from '../constants';
 
-const MAX_ERROR_QUANTITY = 4;
-
-let errors = (state = [], action) => {
+let errors = (state = List(), action) => {
   let { type, payload } = action;
   switch (type) {
     case constants.UPLOAD_ERROR:
@@ -10,14 +9,12 @@ let errors = (state = [], action) => {
     case constants.MOVIE_DELETE_ERROR:
     case constants.MOVIE_ADD_NEW_ERROR:
     case constants.MOVIE_GET_ALL_ERROR:
-      let arr = state;
-      if (arr.length > MAX_ERROR_QUANTITY) {
-        arr.splice(0, 1);
-      }
-      return [...arr, payload];
+      return state.size > constants.MAX_ERROR_QUANTITY
+        ? state.shift().push(payload)
+        : state.push(payload);
 
     default:
-      return [...state];
+      return state;
   }
 };
 

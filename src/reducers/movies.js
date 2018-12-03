@@ -1,5 +1,5 @@
+import { List, Map } from 'immutable';
 import * as constants from '../constants/index';
-// import update from "immutability-helper";
 
 let movies = (state = [], action) => {
   let { type, payload } = action;
@@ -7,17 +7,20 @@ let movies = (state = [], action) => {
 
   switch (type) {
     case constants.MOVIE_DELETE_SUCCESS:
+      // FIXME
       result = state;
       let b = result.findIndex(i => Number(i.id) === Number(action.payload));
       result.splice(b, 1);
-      return [...result];
+      return List(result);
 
     case constants.MOVIE_ADD_NEW_SUCCESS:
+      //FIXME
       state.push(payload.message);
       result = state;
-      return [...result];
+      return List(result);
 
     case constants.SORT_TITLE_DOWN:
+      //FIXME
       result = state.sort(function(a, b) {
         let nameA = a.title.toLowerCase(),
           nameB = b.title.toLowerCase();
@@ -27,9 +30,10 @@ let movies = (state = [], action) => {
         if (nameA > nameB) return -1;
         return 0;
       });
-      return [...result];
+      return List(result);
 
     case constants.SORT_TITLE_UP:
+      //FIXME
       result = state.sort(function(a, b) {
         let nameA = a.title.toLowerCase(),
           nameB = b.title.toLowerCase();
@@ -39,20 +43,22 @@ let movies = (state = [], action) => {
         if (nameA > nameB) return 1;
         return 0;
       });
-      return [...result];
+      return List(result);
 
     case constants.SEARCH_BY_ACTOR_SUCCESS:
     case constants.SEARCH_BY_NAME_SUCCESS:
-      result = payload.message;
-      return [...result];
+      //FIXME
+      return payload && payload.message && List(payload.message);
 
     case constants.MOVIE_GET_ALL_SUCCESS:
-      result = Object.values(payload);
-      result = result.filter(i => i !== null);
-      return [...result];
+      //DONE
+      const items = Object.values(payload);
+      return List(items).filter(i => i !== null);
 
     default:
-      return [...state];
+      // return [...state];
+      //FIXME
+      return Map(...state);
   }
 };
 

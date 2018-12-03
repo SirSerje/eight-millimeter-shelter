@@ -17,6 +17,7 @@ import uuidv4 from 'uuid/v4';
 import ErrorComponent from '../ErrorComponent';
 import styles from './styles';
 import App from "./App";
+import { List } from 'immutable';
 
 class Index extends Component {
   constructor(params) {
@@ -89,7 +90,7 @@ class Index extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, movies, errors } = this.props;
     // const bull = <span className={classes.bullet}>•</span>;
     return (
       <div className="app-main">
@@ -113,13 +114,12 @@ class Index extends Component {
         />
 
         <div>
-          {this.props.errors &&
-            this.props.errors.map(err => <ErrorComponent key={uuidv4()} message={err.message} />)}
+          {errors && errors.map(err => <ErrorComponent key={uuidv4()} message={err.message} />)}
         </div>
 
         <Grid container className={classes.root}>
-          {this.props.movies.length &&
-            this.props.movies.map(item => {
+          {movies.size &&
+            movies.map(item => {
               if (item === null) {
                 return <b>empty</b>;
               }
@@ -144,8 +144,7 @@ class Index extends Component {
 
 const mapStateToProps = state => {
   return {
-    movies: state.getAll,
-    block: state.blockAddNew,
+    movies: state.movies,
     errors: state.errors,
   };
 };
