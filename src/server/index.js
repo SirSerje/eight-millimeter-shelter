@@ -9,6 +9,8 @@ const PORT = 4125;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//NB: возможен кейс если база засетапилась не с тем LAST_ID возможно некоторые айтемы нельзя будет удалить
+
 // middleware
 // router.use(function(req, res, next) {
 //   if (idController.ID < 0) {

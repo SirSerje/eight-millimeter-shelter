@@ -1,5 +1,6 @@
 import { MOVIE_ADD_NEW_SUCCESS, MOVIE_DELETE_SUCCESS, MOVIE_GET_ALL_SUCCESS } from '../constants';
-import movies from './getAll';
+import movies from './movies';
+import { List } from 'immutable';
 
 //run test only from CLI (or create-react-app scripts should be configured)
 const getAllMock = {
@@ -22,30 +23,33 @@ const getAllMock = {
 };
 
 describe('success reducers should return valid new state', () => {
-  it('MOVIE_GET_ALL_SUCCESS', () => {
-    const action = { type: MOVIE_GET_ALL_SUCCESS, payload: getAllMock };
-    const result = [
-      {
-        '25': {
-          format: 'VHS',
-          id: 25,
-          release: 1990,
-          stars: [
-            'Mel Brooks',
-            'Clevon Little',
-            'Harvey Korman',
-            'Gene Wilder',
-            'Slim Pickens',
-            'Madeline Kahn',
-          ],
-          title: 'Blazing Robocop',
-        },
-      },
-    ];
-    expect(movies([], action)).toEqual(result);
+  it('should get fine empty state', () => {
+    const action = { type: MOVIE_GET_ALL_SUCCESS };
+    expect(movies([], action)).toEqual(List());
   });
 
-  it('MOVIE_ADD_NEW_SUCCESS', () => {
+  it('should receive correct item list', () => {
+    const action = { type: MOVIE_GET_ALL_SUCCESS, payload: getAllMock };
+    const result = {
+      '25': {
+        format: 'VHS',
+        id: 25,
+        release: 1990,
+        stars: [
+          'Mel Brooks',
+          'Clevon Little',
+          'Harvey Korman',
+          'Gene Wilder',
+          'Slim Pickens',
+          'Madeline Kahn',
+        ],
+        title: 'Blazing Robocop',
+      },
+    };
+    expect(movies([], action)).toEqual(List([result]));
+  });
+
+  it('should add new item properly', () => {
     const action = {
       type: MOVIE_ADD_NEW_SUCCESS,
       payload: {
@@ -61,37 +65,17 @@ describe('success reducers should return valid new state', () => {
     let result = [
       {
         format: 'VHS',
-        id: 155,
-        release: 1991,
-        stars: ['Blake Henry'],
-        title: 'Furious Robocop',
-      },
-      {
-        format: 'VHS',
-        id: 29,
         release: 1990,
         stars: ['Blake Henry'],
         title: 'Blazing Robocop',
+        id: 29,
       },
     ];
 
-    expect(
-      movies(
-        [
-          {
-            format: 'VHS',
-            id: 155,
-            release: 1991,
-            stars: ['Blake Henry'],
-            title: 'Furious Robocop',
-          },
-        ],
-        action
-      )
-    ).toEqual(result);
+    expect(movies([], action)).toEqual(List(result));
   });
 
-  it('MOVIE_DELETE_SUCCESS', () => {
+  it('should delete item', () => {
     const action = { type: MOVIE_DELETE_SUCCESS, payload: 155 };
     let state = [
       {
@@ -120,6 +104,6 @@ describe('success reducers should return valid new state', () => {
       },
     ];
 
-    expect(movies(state, action)).toEqual(result);
+    expect(movies(state, action)).toEqual(List(result));
   });
 });
