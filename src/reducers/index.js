@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
-import getAll from './getAll';
+import movies from './movies';
 import errors from './errors';
-import blockAddNew from './blockAddNew';
 
 const reducers = combineReducers({
-  getAll,
+  movies,
   errors,
-  blockAddNew,
 });
 
 export default reducers;
