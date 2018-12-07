@@ -1,18 +1,20 @@
 const express = require('express');
 const database = require('../database');
 const router = express.Router();
+const DATABASE_MOVIES_SELECTOR = require('../constants').DATABASE_MOVIES_SELECTOR;
+
 
 function removeItem(successCallback, notFound, failCallback, database, id) {
   database
-    .ref()
+    .ref(`${DATABASE_MOVIES_SELECTOR}`)
     .once('value')
     .then(function(snapshot) {
-      if (snapshot.val().movie[id] === undefined) {
+      if (snapshot.val()[id] === undefined) {
         notFound();
         return null;
       } else {
         database
-          .ref('movie/' + id)
+          .ref(`${DATABASE_MOVIES_SELECTOR}/` + id)
           .remove()
           .then(i => successCallback(i))
           .catch(err => failCallback(err));

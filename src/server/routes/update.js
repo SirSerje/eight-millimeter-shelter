@@ -1,10 +1,11 @@
 const express = require('express');
 const database = require('../database');
 const router = express.Router();
+const DATABASE_MOVIES_SELECTOR = require('../constants').DATABASE_MOVIES_SELECTOR;
 
 function update(successHandler, database, id, movie) {
   database
-    .ref('movie/' + id)
+    .ref(`${DATABASE_MOVIES_SELECTOR}/` + id)
     .update(movie)
     .then(i => successHandler())
     .catch(); //FIXME #2 add error handling for requests

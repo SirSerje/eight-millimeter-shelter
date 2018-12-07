@@ -1,13 +1,14 @@
 const express = require('express');
 const database = require('../database');
+const DATABASE_MOVIES_SELECTOR = require('../constants').DATABASE_MOVIES_SELECTOR;
 const router = express.Router();
 
 function byid(successHandler, database, id, failHandler) {
   database
-    .ref()
+    .ref(`/${DATABASE_MOVIES_SELECTOR}`)
     .once('value')
     .then(function(snapshot) {
-      let result = snapshot.val().movie[id];
+      let result = snapshot.val()[id];
       if (result) {
         successHandler(result);
       } else {

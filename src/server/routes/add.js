@@ -1,10 +1,11 @@
 const express = require('express');
 const database = require('../database');
 const router = express.Router();
+const DATABASE_MOVIES_SELECTOR = require('../constants').DATABASE_MOVIES_SELECTOR;
 let idController = require('../idController');
 
 function add(successCallBack, database, movie, id) {
-  database.ref('movie/' + id).set(movie, function(error) {
+  database.ref(`${DATABASE_MOVIES_SELECTOR}/` + id).set(movie, function(error) {
     if (error) {
       res.json({ message: 'ERROR' }); //FIXME: CRASH HERE!!!
       console.warn('Oops, something happened', error);
