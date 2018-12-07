@@ -1,16 +1,19 @@
 const express = require('express');
 const database = require('../database');
 const router = express.Router();
+const DATABASE_MOVIES_SELECTOR = require('../constants').DATABASE_MOVIES_SELECTOR;
+const DATABASE_OPTIONS_SELECTOR = require('../constants').DATABASE_OPTIONS_SELECTOR;
+
 let idController = require('../idController');
 
 //TODO: duplication of add.js > add()
 function add(successCallBack, database, movie, id) {
-  database.ref('movie/' + id).set(movie, function(error) {
+  database.ref(`${DATABASE_MOVIES_SELECTOR}/` + id).set(movie, function(error) {
     if (error) {
       res.json({ message: 'ERROR' }); //FIXME: CRASH HERE!!!
       console.warn('Oops, something happened', error);
     } else {
-      database.ref('options').set({ max_id: id });
+      database.ref(`${DATABASE_OPTIONS_SELECTOR}`).set({ max_id: id });
       successCallBack();
     }
   });

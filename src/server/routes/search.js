@@ -2,15 +2,17 @@ const express = require('express');
 const database = require('../database');
 const router = express.Router();
 const url = require('url');
+const DATABASE_MOVIES_SELECTOR = require('../constants').DATABASE_MOVIES_SELECTOR;
+
 
 function search(successHandler, database, reqUrl) {
   let finalArray = [];
   let a = url.parse(reqUrl, true);
   database
-    .ref()
+    .ref(`${DATABASE_MOVIES_SELECTOR}`)
     .once('value')
     .then(function(snapshot) {
-      let currentDb = snapshot.val().movie;
+      let currentDb = snapshot.val();
       let temp = Object.keys(a.query);
       let flag = false;
       if (temp[0] === 'actor') {

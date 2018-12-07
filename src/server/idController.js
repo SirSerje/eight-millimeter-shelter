@@ -1,4 +1,5 @@
 const database = require('./database');
+const DATABASE_OPTIONS_SELECTOR = require('./constants').DATABASE_OPTIONS_SELECTOR;
 
 class IdController {
   constructor() {
@@ -8,7 +9,7 @@ class IdController {
 
   getLastIdFromDatabase() {
     database
-      .ref('options')
+      .ref(`${DATABASE_OPTIONS_SELECTOR}`)
       .once('value')
       .then(snapshot => {
         this.LAST_ID = snapshot.val().max_id;
@@ -25,7 +26,7 @@ class IdController {
   }
 
   writeDatabaseID(database, id) {
-    database.ref('options').set({ max_id: id });
+    database.ref(`${DATABASE_OPTIONS_SELECTOR}`).set({ max_id: id });
   }
 }
 
