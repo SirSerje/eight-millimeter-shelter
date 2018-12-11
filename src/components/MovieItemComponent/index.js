@@ -11,6 +11,7 @@ import styles from './styles';
 import Dotdotdot from 'react-dotdotdot';
 import uuid from 'uuid';
 import defaultImage from '../../../images/default.png'; //FIXME: weak
+import {Link} from "react-router-dom";
 
 
 const Index = props => {
@@ -29,8 +30,8 @@ const Index = props => {
           </Typography>
           <Dotdotdot clamp={2}>
             <Typography component="p">
-              <span>{stars.map((item, idx, total) => <a key={uuid()}
-                href={"http://nolinkyet.com"}>{item}{idx !== (total.length - 1) && ", "}</a>)} </span>
+              <span>{stars.map((item, idx, total) => <Link key={uuid()}
+                to={`movie/${id}`}>{item}{idx !== (total.length - 1) && ", "}</Link>)} </span>
             </Typography>
           </Dotdotdot>
         </CardContent>
