@@ -31,7 +31,7 @@ const Index = props => {
           <Dotdotdot clamp={2}>
             <Typography component="p">
               <span>{stars.map((item, idx, total) => <Link key={uuid()}
-                to={`movie/${id}`}>{item}{idx !== (total.length - 1) && ", "}</Link>)} </span>
+                to={`react-movie/${id}`}>{item}{idx !== (total.length - 1) && ", "}</Link>)} </span>
             </Typography>
           </Dotdotdot>
         </CardContent>
