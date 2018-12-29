@@ -4,3 +4,5 @@ notifications:
     recipients:
       - sir.serje@gmail.com
     on_success: always # default: change
+install:
+    - npm install -g yarn
