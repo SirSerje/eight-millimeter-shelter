@@ -4,5 +4,3 @@ notifications:
     recipients:
       - sir.serje@gmail.com
     on_success: always # default: change
-cache:
-  yarn: true
