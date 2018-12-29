@@ -85,6 +85,9 @@
     "webpack-dev-server": "^3.1.9",
     "winston": "^3.1.0"
   },
+  "resolutions": {
+    "**/event-stream": "^4.0.1"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
