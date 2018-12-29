@@ -1,4 +1,4 @@
-# 8mm shelter 📹
+# 8mm shelter 📹 [![Build Status](https://travis-ci.com/SirSerje/eight-millimeter-shelter.svg?branch=master)](https://travis-ci.com/SirSerje/eight-millimeter-shelter)
 
 This project is small example of full-stack job.
 
