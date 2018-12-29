@@ -4,3 +4,6 @@ notifications:
     recipients:
       - sir.serje@gmail.com
     on_success: always # default: change
+before_install:
+    - rm -rf package-lock.json
+    - "npm install -g yarn"
