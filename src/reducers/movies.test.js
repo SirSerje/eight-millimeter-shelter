@@ -22,7 +22,7 @@ const getAllMock = {
   },
 };
 
-describe('success reducers should return valid new state', () => {
+describe('movies reducer', () => {
   it('should get fine empty state', () => {
     const action = { type: MOVIE_GET_ALL_SUCCESS };
     expect(movies([], action)).toEqual(List());
