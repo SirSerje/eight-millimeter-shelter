@@ -9,9 +9,8 @@ let errors = (state = List(), action) => {
     case constants.MOVIE_DELETE_ERROR:
     case constants.MOVIE_ADD_NEW_ERROR:
     case constants.MOVIE_GET_ALL_ERROR:
-      return state.size > constants.MAX_ERROR_QUANTITY
-        ? state.shift().push(payload)
-        : state.push(payload);
+      state.size > constants.MAX_ERROR_QUANTITY ? state.shift().push(payload) : state.push(payload);
+      return state;
 
     default:
       return state;
