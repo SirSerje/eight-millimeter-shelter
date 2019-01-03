@@ -4,7 +4,7 @@
   "description": "RESTful API for test assigment 'eight-millimeter-shelter'",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "server": "nodemon ./src/server",
     "build": "webpack --mode production --progress",
     "start": "webpack-dev-server --open --mode development --progress",
