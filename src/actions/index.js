@@ -81,7 +81,7 @@ export const upload = item => dispatch => {
   utilRequest
     .uploadFile(item)
     .then(() => {
-      dispatch(movieGetAll()); //FIXME: this is temporary hack
+      // dispatch(movieGetAll()); //FIXME: should update data after success
       dispatch({
         type: actionTypes.UPLOAD_SUCCESS,
         //TODO: maybe add payload
