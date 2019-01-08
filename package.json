@@ -9,7 +9,9 @@
     "build": "webpack --mode production --progress",
     "start": "webpack-dev-server --open --mode development --progress",
     "prettier": "prettier --write --config .prettierrc ./src/**/*.js ./server.js",
-    "lint": "eslint ./src/**/*.js"
+    "lint": "eslint ./src/**/*.js",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "keywords": [
     "node",
@@ -72,6 +74,7 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-styleguidist": "^8.0.6",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
