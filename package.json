@@ -65,6 +65,7 @@
     "multer": "^1.4.0",
     "node-sass": "^4.9.4",
     "nodemon": "^1.18.4",
+    "present": "^1.0.0",
     "prop-types": "latest",
     "react": "16.7.0-alpha.0 - next",
     "react-dom": "16.7.0-alpha.0 - next",

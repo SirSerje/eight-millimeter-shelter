@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   }
 //   next();
 // });
+app.use('/api', require('./routes/auth'));
 
 app.use('/', require('./routes/default'));
 
