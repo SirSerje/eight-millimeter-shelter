@@ -7,6 +7,276 @@
 	},
 	"item": [
 		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "testName",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!pwd123",
+									"description": "userpass. Should be salted, hash, etc ...",
+									"type": "text"
+								},
+								{
+									"key": "secret",
+									"value": "84984C1885C93064352F6C2A59C92656",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "testName",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!pwd123",
+									"description": "userpass. Should be salted, hash, etc ...",
+									"type": "text"
+								},
+								{
+									"key": "secret",
+									"value": "84984C1885C93064352F6C2A59C92656",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth/read",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "login",
+								"value": "testName",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "!pwd123",
+								"description": "userpass. Should be salted, hash, etc ...",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "84984C1885C93064352F6C2A59C92656",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "testName",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!pwd123",
+									"description": "userpass. Should be salted, hash, etc ...",
+									"type": "text"
+								},
+								{
+									"key": "secret",
+									"value": "84984C1885C93064352F6C2A59C92656",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "testName",
+									"description": "name",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!pwd123",
+									"description": "userpass. Should be salted, hash, etc ...",
+									"type": "text"
+								},
+								{
+									"key": "secret",
+									"value": "84984C1885C93064352F6C2A59C92656",
+									"description": "now this will be static",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "testName",
+									"description": "name",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!pwd123",
+									"description": "userpass. Should be salted, hash, etc ...",
+									"type": "text"
+								},
+								{
+									"key": "secret",
+									"value": "84984C1885C93064352F6C2A59C92656",
+									"description": "now this will be static",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "healthcheck",
 			"request": {
 				"method": "GET",
@@ -325,7 +595,7 @@
 			"response": []
 		},
 		{
-			"name": "@deprecated: update",
+			"name": "update",
 			"event": [
 				{
 					"listen": "prerequest",
