@@ -1,38 +1,71 @@
-//PoC for mongoDB connection
-const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
-const client = new MongoClient(require('../config').mongoPath, { useNewUrlParser: true });
-const router = express.Router();
-const present = require('present');
+const auth = express.Router();
+const User = require('../models/user');
 
-//TODO: should be POST
-router.get('/auth', function(req, res) {
-  let time = present();
+//POST route for updating data
+auth.post('/auth', function (req, res, next) {
+  // confirm that user typed same password twice
 
-  client.connect(function(err, client) {
-    if (err) {
-      console.log('Error occurred while connecting to MongoDB Atlas...\n', err);
-    }
+  if (req.body.password !== req.body.passwordConf) {
+    const err = new Error('Passwords do not match.');
+    err.status = 400;
+    res.send("passwords do not match");
+    return next(err);
+  }
 
-    /*
-    CREATE
-    const collection = client.db('users').collection('users');
-    collection.insertOne({ "msg" : "My First Document" }).then(i => {
-      console.log(`Data has been successfully sent. Время выполнения = ${Math.round(present()-time)} мс`);
-      res.send({msg:'ok'});
+  if (req.body.email &&
+    req.body.username &&
+    req.body.password &&
+    req.body.passwordConf) {
+
+    const userData = {
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password,
+      passwordConf: req.body.passwordConf,
+    };
+
+    User.create(userData, function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        req.session.userId = user._id;
+        return res.send({success: 'registered'});
+        // return res.redirect('/profile');
+      }
     });
-    */
 
-    /*
-    READ
-    collection.findOne({ _id: '1' }, function(err, result) {
-      if (err) throw err;
-      console.log('result: ', result);
-      console.log(`Время выполнения = ${Math.round(present()-time)} мс`);
+  } else if (req.body.logemail && req.body.logpassword) {
+    User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
+      if (error || !user) {
+        const err = new Error('Wrong email or password.');
+        err.status = 401;
+        return next(err);
+      } else {
+        req.session.userId = user._id;
+        return res.send({auth: 'login'});
+        // return res.redirect('/profile');
+      }
     });
-    */
-    client.close();
-  });
+  } else {
+    const err = new Error('All fields required.');
+    err.status = 400;
+    return next(err);
+  }
 });
 
-module.exports = router;
+auth.get('/auth/logout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.send({auth:'logout'});
+        // return res.redirect('/');
+      }
+    });
+  }
+});
+
+module.exports = auth;
