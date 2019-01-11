@@ -5,6 +5,7 @@ let config = {
   projectId: 'movie-shelve',
   storageBucket: 'movie-shelve.appspot.com',
   messagingSenderId: '168547079024',
+  mongoPath: 'mongodb+srv://q:q@cluster0-cpecu.gcp.mongodb.net/test'
 };
 
 module.exports = config;

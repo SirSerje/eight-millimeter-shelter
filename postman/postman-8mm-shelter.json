@@ -1,45 +1,143 @@
 {
 	"info": {
-		"_postman_id": "23456d39-607c-4762-9d1a-b50fc2179142",
+		"_postman_id": "3a95b000-27f1-4ca2-b1ef-13ed42fcb80a",
 		"name": "movie-shelve-api",
 		"description": "Набор запросов для работы с movie-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "healthcheck",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"disabled": true
-					},
-					{
-						"key": "Cache-Control",
-						"value": "no-cache",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:4125/",
-					"protocol": "http",
-					"host": [
-						"localhost"
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8449d33a-9779-4fee-8822-cfefd7f2a934",
+								"exec": [
+									"{movie}"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"port": "4125",
-					"path": [
-						""
-					]
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n \n\t\t\"email\":\"_mail_\",\n\t\t\"username\":\"_name_\",\n\t\t\"password\":\"_pass_\",\n\t\t\"passwordConf\":\"_pass_\",\n\t\t\"logemail\":\"_m1ail_\",\n\t\t\"logpassword\":\"$2b$10$/H4RfV1WeOmBegXQ0m.l7ek3jpURsVmR9gPvgriSjM6sqGjpAklY6\"\n\t\n\t\t\n\t\t\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
 				},
-				"description": "получить все фильмы"
-			},
-			"response": []
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8449d33a-9779-4fee-8822-cfefd7f2a934",
+								"exec": [
+									"{movie}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n \n\t\t\"email\":\"_mail_\",\n\t\t\"username\":\"_name_\",\n\t\t\"password\":\"_pass_\",\n\t\t\"passwordConf\":\"_pass_\",\n\t\t\"logemail\":\"_m1ail_\",\n\t\t\"logpassword\":\"$2b$10$/H4RfV1WeOmBegXQ0m.l7ek3jpURsVmR9gPvgriSjM6sqGjpAklY6\"\n\t\n\t\t\n\t\t\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"auth"
+							]
+						},
+						"description": "добавить новый фильм. для корректного запроса выбрать body > raw"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:4125/api/movies/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4125",
+							"path": [
+								"api",
+								"movies",
+								"15"
+							]
+						},
+						"description": "получить фильм по его id"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "get all movies",
@@ -74,129 +172,6 @@
 					]
 				},
 				"description": "получить все фильмы"
-			},
-			"response": []
-		},
-		{
-			"name": "get movie by id",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"disabled": true
-					},
-					{
-						"key": "Cache-Control",
-						"value": "no-cache",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:4125/api/movies/71",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4125",
-					"path": [
-						"api",
-						"movies",
-						"71"
-					]
-				},
-				"description": "получить фильм по его id"
-			},
-			"response": []
-		},
-		{
-			"name": "search by title",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"disabled": true
-					},
-					{
-						"key": "Cache-Control",
-						"value": "no-cache",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:4125/api/movies/search?title=тест",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4125",
-					"path": [
-						"api",
-						"movies",
-						"search"
-					],
-					"query": [
-						{
-							"key": "title",
-							"value": "тест"
-						}
-					]
-				},
-				"description": "find film by it title\n!ensure that film is present in database before creating issue"
-			},
-			"response": []
-		},
-		{
-			"name": "search by actor",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"disabled": true
-					},
-					{
-						"key": "Cache-Control",
-						"value": "no-cache",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:4125/api/movies/search?actor=matt",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4125",
-					"path": [
-						"api",
-						"movies",
-						"search"
-					],
-					"query": [
-						{
-							"key": "actor",
-							"value": "matt"
-						}
-					]
-				},
-				"description": "search by related actor\n!ensure that actor is present id database"
 			},
 			"response": []
 		},
@@ -325,16 +300,53 @@
 			"response": []
 		},
 		{
+			"name": "@deprecated: get movie by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4125/api/movies/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4125",
+					"path": [
+						"api",
+						"movies",
+						"15"
+					]
+				},
+				"description": "получить фильм по его id"
+			},
+			"response": []
+		},
+		{
 			"name": "@deprecated: update",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
 						"id": "c646db00-ed2a-4473-9007-9a70c6e31f12",
-						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"type": "text/javascript"
 					}
 				}
 			],
