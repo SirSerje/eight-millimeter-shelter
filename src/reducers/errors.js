@@ -1,8 +1,8 @@
 import { List } from 'immutable';
 import * as constants from '../constants';
 
-let errors = (state = List(), action) => {
-  let { type, payload } = action;
+const errors = (state = List(), action) => {
+  const { type, payload } = action;
   switch (type) {
     case constants.UPLOAD_ERROR:
     case constants.SEARCH_BY_ACTOR_ERROR:

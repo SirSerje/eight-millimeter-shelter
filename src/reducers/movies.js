@@ -1,8 +1,8 @@
 import { List } from 'immutable';
 import * as constants from '../constants/index';
 
-let movies = (state = List(), action) => {
-  let { type, payload } = action;
+const movies = (state = List(), action) => {
+  const { type, payload } = action;
   if (!List.isList(state)) state = List(state);
 
   switch (type) {
@@ -14,8 +14,8 @@ let movies = (state = List(), action) => {
 
     case constants.SORT_TITLE_DOWN:
       return state.sort((a, b) => {
-        let nameA = a.title.toLowerCase();
-        let nameB = b.title.toLowerCase();
+        const nameA = a.title.toLowerCase();
+        const nameB = b.title.toLowerCase();
         if (nameA < nameB) return 1;
         if (nameA > nameB) return -1;
         return 0;
@@ -23,8 +23,8 @@ let movies = (state = List(), action) => {
 
     case constants.SORT_TITLE_UP:
       return state.sort((a, b) => {
-        let nameA = a.title.toLowerCase();
-        let nameB = b.title.toLowerCase();
+        const nameA = a.title.toLowerCase();
+        const nameB = b.title.toLowerCase();
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;
         return 0;
@@ -36,7 +36,7 @@ let movies = (state = List(), action) => {
 
     case constants.MOVIE_GET_ALL_SUCCESS:
       const items = payload && Object.values(payload);
-      return List(items || []); /*.filter(i => i.id >= 0); //TODO: update test for this case */
+      return List(items || []); /* .filter(i => i.id >= 0); //TODO: update test for this case */
 
     default:
       return state;

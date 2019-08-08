@@ -11,7 +11,7 @@ const Root = ({ store }) => (
       <React.Fragment>
         <Route exact path="/" component={App} store={store} />
         <Route path="/final-app" component={() => <div>test route</div>} />
-        {/*FIXME: if path with movie will change to host/some/:id it will crash, because app.js is looked in host/some*/}
+        {/* FIXME: if path with movie will change to host/some/:id it will crash, because app.js is looked in host/some */}
         <Route path="/:id" component={RenderPropApproach} something="foo" />
       </React.Fragment>
     </Provider>

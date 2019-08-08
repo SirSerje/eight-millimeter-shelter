@@ -12,19 +12,17 @@ class MovieDashboardComponent extends Component {
     console.log(data);
     return (
       <div className="movie-dashboard">
-        {data.length >= 1 &&
-          data.map((item, idx) => {
-            return (
-              <MovieCardComponent
-                key={idx}
-                idx={idx}
-                format={item.format}
-                release={item.release}
-                stars={item.stars}
-                title={item.title}
-              />
-            );
-          })}
+        {data.length >= 1
+          && data.map((item, idx) => (
+            <MovieCardComponent
+              key={idx}
+              idx={idx}
+              format={item.format}
+              release={item.release}
+              stars={item.stars}
+              title={item.title}
+            />
+          ))}
       </div>
     );
   }

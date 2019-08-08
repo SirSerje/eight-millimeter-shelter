@@ -1,28 +1,27 @@
 import parseTextFile from './fileParser';
 
-const rawFile =
-  '' +
-  'Title: Тест1\n' +
-  'Release Year: 6666\n' +
-  'Format: VHS\n' +
-  'Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n' +
-  '\n' +
-  'Title: Тест2\n' +
-  'Release Year: 6666\n' +
-  'Format: VHS\n' +
-  'Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n' +
-  '\n' +
-  'Title: Тест1\n' +
-  'Release Year: 6666\n' +
-  'Format: VHS\n' +
-  'Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n' +
-  '\n' +
-  'Title: Тест2\n' +
-  'Release Year: 6666\n' +
-  'Format: VHS\n' +
-  'Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n' +
-  '\n' +
-  '\n';
+const rawFile = ''
+  + 'Title: Тест1\n'
+  + 'Release Year: 6666\n'
+  + 'Format: VHS\n'
+  + 'Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n'
+  + '\n'
+  + 'Title: Тест2\n'
+  + 'Release Year: 6666\n'
+  + 'Format: VHS\n'
+  + 'Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n'
+  + '\n'
+  + 'Title: Тест1\n'
+  + 'Release Year: 6666\n'
+  + 'Format: VHS\n'
+  + 'Stars: Gene Hackman, Barbara Hershey, Dennis Hopper\n'
+  + '\n'
+  + 'Title: Тест2\n'
+  + 'Release Year: 6666\n'
+  + 'Format: VHS\n'
+  + 'Stars: Matthew Broderick, Ally Sheedy, Dabney Coleman, John Wood, Barry Corbin\n'
+  + '\n'
+  + '\n';
 
 const result = [
   {
@@ -52,10 +51,10 @@ const result = [
 ];
 
 it('check correct file parse with mocked FileReader', () => {
-  let reader = new FileReader();
+  const reader = new FileReader();
   reader.readAsText = jest.fn(() => rawFile.split('\n'));
 
-  let mockedData = reader.readAsText(undefined);
-  let parsedData = parseTextFile(mockedData);
+  const mockedData = reader.readAsText(undefined);
+  const parsedData = parseTextFile(mockedData);
   expect(parsedData).toEqual(result);
 });

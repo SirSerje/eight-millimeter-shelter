@@ -1,6 +1,6 @@
 const DEFAULT_MOVIE = () => {
-  let randomOneFrom = (arr = []) => {
-    let num = Math.round(Math.random(arr.length));
+  const randomOneFrom = (arr = []) => {
+    const num = Math.round(Math.random(arr.length));
     return arr[num];
   };
 

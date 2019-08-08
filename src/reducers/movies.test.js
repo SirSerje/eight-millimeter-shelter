@@ -1,8 +1,8 @@
+import { List } from 'immutable';
 import { MOVIE_ADD_NEW_SUCCESS, MOVIE_DELETE_SUCCESS, MOVIE_GET_ALL_SUCCESS } from '../constants';
 import movies from './movies';
-import { List } from 'immutable';
 
-//run test only from CLI (or create-react-app scripts should be configured)
+// run test only from CLI (or create-react-app scripts should be configured)
 const getAllMock = {
   movie: {
     25: {
@@ -31,7 +31,7 @@ describe('movies reducer', () => {
   it('should receive correct item list', () => {
     const action = { type: MOVIE_GET_ALL_SUCCESS, payload: getAllMock };
     const result = {
-      '25': {
+      25: {
         format: 'VHS',
         id: 25,
         release: 1990,
@@ -62,7 +62,7 @@ describe('movies reducer', () => {
         },
       },
     };
-    let result = [
+    const result = [
       {
         format: 'VHS',
         release: 1990,
@@ -77,7 +77,7 @@ describe('movies reducer', () => {
 
   it('should delete item', () => {
     const action = { type: MOVIE_DELETE_SUCCESS, payload: 155 };
-    let state = [
+    const state = [
       {
         format: 'VHS',
         id: 29,

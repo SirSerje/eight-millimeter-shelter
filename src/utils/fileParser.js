@@ -15,28 +15,26 @@ const TO_REPLACE = '_';
  * @return {array} - array of movie objects
  */
 const parseTextFile = file => {
-  let combinedArray = [];
+  const combinedArray = [];
   let current = {};
 
   file.forEach(item => {
     if (item !== '') {
-      let separator = item.split(SEMI_SEPARATOR);
+      const separator = item.split(SEMI_SEPARATOR);
       let key;
       if (separator[1].includes(COMMA_SEPARATOR)) {
         key = separator[0].toLowerCase();
         current[key] = separator[1].split(COMMA_SEPARATOR);
       } else {
         key = separator[0].toLowerCase().replace(WHAT_REPLACE, TO_REPLACE);
-        if (separator[0] === 'Release Year') key = 'year'; //TODO: update back to remove this issue
+        if (separator[0] === 'Release Year') key = 'year'; // TODO: update back to remove this issue
         current[key] = separator[1];
       }
+    } else if (isEmpty(current)) {
+      // do nothing
     } else {
-      if (isEmpty(current)) {
-        //do nothing
-      } else {
-        combinedArray.push(current);
-        current = {};
-      }
+      combinedArray.push(current);
+      current = {};
     }
   });
   return combinedArray;
