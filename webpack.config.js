@@ -12,14 +12,15 @@ module.exports = {
     ignored: ['public', 'server.js', 'postman', 'db']
   },
   devtool: 'eval-source-map',
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        use: ['babel-loader']
       },
       {
         test: [/\.css$/, /\.scss$/],
