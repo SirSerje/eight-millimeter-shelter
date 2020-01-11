@@ -22,6 +22,9 @@ module.exports = {
     'import',
   ],
   'rules': {
+    'react/require-default-props':0,
+    'react/jsx-one-expression-per-line':0,
+    'react/sort-comp':0,
     'indent': ['error', 2, { 'SwitchCase': 1 }],
     'arrow-parens': ['error', 'as-needed'],
     'no-extra-semi': "error",

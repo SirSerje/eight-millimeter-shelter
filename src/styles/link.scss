@@ -1,0 +1,45 @@
+//local variables:
+$time: .15s;
+
+  .link-common a {
+    position:relative;
+    text-decoration: none;
+    color: gray;
+    transition:color .15s ease-in-out;
+  }
+
+  .link-common a:hover {
+    background-size: 100% 100%;
+    cursor: pointer;
+  }
+
+  .link-common a:after {
+    display:block;
+    content:"";
+    position: absolute;
+    right:0;
+    left:0;
+    width:100%;
+    height:1px;
+    opacity:0;
+    transform:translateY(-150%);
+    transition:transform $time ease-in-out, opacity $time ease-in-out;
+    background-color: red;
+  }
+
+  .link-common a.is-active,
+  .link-common a:active,
+  .link-common a:focus,
+  .link-common a:hover {
+    color: red;
+  }
+
+  .link-common a.is-active:after,
+  .link-common a:active:after,
+  .link-common a:focus:after,
+  .link-common a:hover:after {
+    transform:translateY(0);
+    opacity:1;
+  }
+
+

@@ -29,9 +29,6 @@ class Index extends Component {
     this.props.sortDown();
   }
 
-  deleteInputHandler(event) {
-    this.setState({ deleteInput: event.target.value });
-  }
 
   initHandler() {
     this.props.init();
@@ -148,7 +145,27 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Index.propTypes = {
+  init: PropTypes.func,
+  getAll: PropTypes.func,
+  addNew: PropTypes.func,
+  movieDelete: PropTypes.func,
+  searchByName: PropTypes.func,
+  searchByActor: PropTypes.func,
+  sortDown: PropTypes.func,
+  sortUp: PropTypes.func,
+  uploadHandler: PropTypes.func,
+  // TODO: fix this:
+
+  // movies: PropTypes.arrayOf(PropTypes.shape({
+  //   format: PropTypes.string,
+  //   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  //   release: PropTypes.number,
+  //   title: PropTypes.string,
+  //   stars: PropTypes.arrayOf(PropTypes.string),
+  // })),
+  // errors: PropTypes.any,
 };
+
 
 export default connect(
   mapStateToProps,
