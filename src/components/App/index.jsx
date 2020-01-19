@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import uuidv4 from 'uuid/v4';
 import * as actions from '../../actions';
 import '../../styles/index.scss';
 import parseTextFile from '../../utils/fileParser';
@@ -7,8 +8,7 @@ import PropTypes from 'prop-types';
 import ControlMenuComponent from '../ControlMenuComponent';
 import autobind from 'class-autobind';
 import MovieItemComponent from '../MovieItemComponent';
-import uuidv4 from 'uuid/v4';
-import ErrorComponent from '../ErrorComponent';
+import ErrorComponent from '../Error';
 
 
 class Index extends Component {
@@ -18,23 +18,6 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    this.props.getAll();
-  }
-
-  sortUpHandler() {
-    this.props.sortUp();
-  }
-
-  sortDownHandler() {
-    this.props.sortDown();
-  }
-
-
-  initHandler() {
-    this.props.init();
-  }
-
-  getAllHandler() {
     this.props.getAll();
   }
 
@@ -53,24 +36,6 @@ class Index extends Component {
     }
   }
 
-  deleteHandler(item) {
-    if (item) {
-      this.props.movieDelete(item);
-    }
-  }
-
-  byNameHandler(value) {
-    this.props.searchByName(value);
-  }
-
-  byActorHandler(value) {
-    this.props.searchByActor(value);
-  }
-
-  uploadHandler(item) {
-    this.props.uploadHandler(item);
-  }
-
   handleFiles(files) {
     const reader = new FileReader();
     reader.onload = function (file) {
@@ -80,44 +45,58 @@ class Index extends Component {
     reader.readAsText(files[0]);
   }
 
+  moviesRenderer = param => {
+    const movies = Object.values(param);
+    console.log('___', param);
+    return movies && movies.length > 0 && movies.map((item, idx) => {
+      if (!item || !item.id) {
+        return <b>empty</b>;
+      }
+      return (
+        <MovieItemComponent
+          idx={idx}
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          release={item.release}
+          format={item.format}
+          stars={item.stars}
+          deleteHandler={this.props.movieDelete}
+        />
+      );
+    });
+  };
+
+  // In this app we can get only 1 error per moment
+  errorsRenderer = errors => (
+    <>
+      {errors && errors.error && <ErrorComponent message={errors.error} />}
+    </>
+  );
+
   render() {
-    const { movies, errors } = this.props;
+    const {
+      movies, errors, getAll, init, sortDown, sortUp, searchByActor, searchByName,
+    } = this.props;
     return (
       <div className="app-main">
         <ControlMenuComponent
-          initHandler={this.initHandler}
-          getAllHandler={this.getAllHandler}
+          initHandler={init}
+          getAllHandler={getAll}
           addHandler={this.addHandler}
-          byNameHandler={this.byNameHandler}
-          sortDownHandler={this.sortDownHandler}
-          sortUpHandler={this.sortUpHandler}
+          byNameHandler={searchByName}
+          sortDownHandler={sortDown}
+          sortUpHandler={sortUp}
           handleFiles={this.handleFiles}
-          byActorHandler={this.byActorHandler}
+          byActorHandler={searchByActor}
         />
 
-        <div>
-          {errors && errors.map(
-            err => <ErrorComponent key={uuidv4()} message={err.message} />,
-          )}
+        <div className="errors-container">
+          {this.errorsRenderer(errors)}
         </div>
-
-        {movies.size
-        && movies.map(item => {
-          if (item === null) {
-            return <b>empty</b>;
-          }
-          return (
-            <MovieItemComponent
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              release={item.release}
-              format={item.format}
-              stars={item.stars}
-              deleteHandler={this.deleteHandler}
-            />
-          );
-        })}
+        <div className="movies-container">
+          {this.moviesRenderer(movies)}
+        </div>
       </div>
     );
   }
@@ -148,14 +127,17 @@ Index.propTypes = {
   init: PropTypes.func,
   getAll: PropTypes.func,
   addNew: PropTypes.func,
-  movieDelete: PropTypes.func,
   searchByName: PropTypes.func,
   searchByActor: PropTypes.func,
+  movieDelete: PropTypes.func,
   sortDown: PropTypes.func,
   sortUp: PropTypes.func,
   uploadHandler: PropTypes.func,
   // TODO: fix this:
-
+  // eslint-disable-next-line react/forbid-prop-types
+  movies: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  errors: PropTypes.any,
   // movies: PropTypes.arrayOf(PropTypes.shape({
   //   format: PropTypes.string,
   //   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

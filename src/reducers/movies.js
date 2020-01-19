@@ -1,42 +1,30 @@
-import { List } from 'immutable';
 import * as constants from '../constants/index';
 
-const movies = (state = List(), action) => {
+const movies = (state = {}, action) => {
   const { type, payload } = action;
-  if (!List.isList(state)) state = List(state);
 
   switch (type) {
     case constants.MOVIE_DELETE_SUCCESS:
-      return state.filter(i => i.id !== payload);
+      const { [payload]: remove, ...rest } = state;
+      return { ...rest };
 
     case constants.MOVIE_ADD_NEW_SUCCESS:
-      return state.push(payload.message);
+      return { ...state, ...{ [payload.message.id]: payload.message } };
 
+    // TODO: sorting displaying data should handle only by view component
     case constants.SORT_TITLE_DOWN:
-      return state.sort((a, b) => {
-        const nameA = a.title.toLowerCase();
-        const nameB = b.title.toLowerCase();
-        if (nameA < nameB) return 1;
-        if (nameA > nameB) return -1;
-        return 0;
-      });
-
     case constants.SORT_TITLE_UP:
-      return state.sort((a, b) => {
-        const nameA = a.title.toLowerCase();
-        const nameB = b.title.toLowerCase();
-        if (nameA < nameB) return -1;
-        if (nameA > nameB) return 1;
-        return 0;
-      });
+      return { ...state };
 
     case constants.SEARCH_BY_ACTOR_SUCCESS:
     case constants.SEARCH_BY_NAME_SUCCESS:
-      return payload && payload.message && List(payload.message);
+      return payload.message.reduce((acc, item) => {
+        const some = { [item.id]: item };
+        return { ...acc, ...some };
+      }, {});
 
     case constants.MOVIE_GET_ALL_SUCCESS:
-      const items = payload && Object.values(payload);
-      return List(items || []); /* .filter(i => i.id >= 0); //TODO: update test for this case */
+      return { ...state, ...payload };
 
     default:
       return state;

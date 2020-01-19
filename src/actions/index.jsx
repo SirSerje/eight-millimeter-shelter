@@ -49,7 +49,9 @@ export const movieAddNew = body => dispatch => {
       type: actionTypes.MOVIE_ADD_NEW_SUCCESS,
       payload: result.data,
     }))
-    .catch(error => dispatch({ type: actionTypes.MOVIE_ADD_NEW_ERROR, payload: { error, block: 0 } }));
+    .catch(error => dispatch(
+      { type: actionTypes.MOVIE_ADD_NEW_ERROR, payload: { error, block: 0 } },
+    ));
 };
 
 export const movieDelete = id => dispatch => {

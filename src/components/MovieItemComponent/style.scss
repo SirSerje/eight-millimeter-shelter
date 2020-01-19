@@ -1,8 +1,10 @@
 @import "../../styles/constants";
 @import "../../styles/buttons";
 @import "../../styles/link";
+@import "../../styles/animations";
 
 .movie-entity {
+  @include animation-appear-quick;
   margin-bottom: 16px;
   background: rgba(241, 230, 255, 0.44);
   display: flex;
@@ -40,3 +42,4 @@
     }
   }
 }
+

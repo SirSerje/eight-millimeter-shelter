@@ -1,0 +1,17 @@
+$ANIM_TIME: .4s;
+
+@keyframes anim-opacity-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin animation-appear-quick {
+  animation-name: anim-opacity-in;
+  animation-duration: $ANIM_TIME;
+  animation-fill-mode: backwards;
+}

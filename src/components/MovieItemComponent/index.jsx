@@ -8,12 +8,15 @@ import Badge from '../Badge';
 
 const Index = props => {
   const {
-    id, title, release, format, stars, deleteHandler,
+    id, title, release, format, stars, deleteHandler, idx,
   } = props;
 
   return (
-    <div className="movie-entity" id={id}>
-
+    <div
+      className="movie-entity"
+      id={id}
+      style={{ animationDelay: `.${idx}s` }}
+    >
 
       <div className="movie-entity__preview">
         <img className="movie-entity__preview-image" src={DefaultImage} alt={title} />
@@ -44,9 +47,11 @@ const Index = props => {
 };
 
 Index.propTypes = {
+  idx: PropTypes.number,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string,
-  release: PropTypes.number,
+  // TODO: fix later
+  release: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   format: PropTypes.string,
   stars: PropTypes.arrayOf(PropTypes.string),
   deleteHandler: PropTypes.func,

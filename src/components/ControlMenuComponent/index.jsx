@@ -1,8 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../../styles/index.scss';
 import ReactFileReader from 'react-file-reader';
-
+import PropTypes from 'prop-types';
 
 const Index = props => {
   const [byNameInput, setByNameInput] = useState('');
@@ -11,7 +10,7 @@ const Index = props => {
   const [release, setRelease] = useState('');
   const [format, setFormat] = useState('');
   const [stars, setStars] = useState('');
-  
+
   const {
     addHandler,
     byNameHandler,
@@ -22,31 +21,41 @@ const Index = props => {
     getAllHandler,
     byActorHandler,
   } = props;
-  
+
   return (
     <div>
-      <div >
+      <div>
         <button
+          type="submit"
           onClick={initHandler}
-        >init </button>
+        >init
+        </button>
         <button
+          type="submit"
           onClick={getAllHandler}
-        > getAll</button>
+        > getAll
+        </button>
         {props.block === 1 ? (
           <button
-            onClick={() => addHandler({title, release, format, stars})}
+            type="submit"
+            onClick={() => addHandler({
+              title, release, format, stars,
+            })}
             disabled
           >
             addNew
           </button>
         ) : (
           <button
-            onClick={() => addHandler({title, release, format, stars})}
+            type="submit"
+            onClick={() => addHandler({
+              title, release, format, stars,
+            })}
           >
             addNew
           </button>
         )}
-        <br/>
+        <br />
         <input
           label="name"
           name="title"
@@ -57,8 +66,8 @@ const Index = props => {
           name="release"
           type="number"
           onChange={e => setRelease(e.target.value)}
-        />{' '}
-        <br/>
+        />
+        <br />
         <input
           name="format"
           type="text"
@@ -70,9 +79,10 @@ const Index = props => {
           onChange={e => setStars(e.target.value)}
         />
       </div>
-      {' '}
-      <div >
+
+      <div>
         <button
+          type="submit"
           onClick={() => byActorHandler(byActorInput)}
         >
           searchByActor
@@ -80,8 +90,8 @@ const Index = props => {
         <input
           type="text"
           onChange={e => setByActorInput(e.target.value)}
-        />{' '}
-        <br/>
+        />
+        <br />
         <button
           onClick={() => byNameHandler(byNameInput)}
         >
@@ -92,26 +102,39 @@ const Index = props => {
           type="text"
           onChange={e => setByNameInput(e.target.value)}
         />
-        <br/>
-        <button onClick={sortDownHandler}>
+        <br />
+        <button type="submit" onClick={sortDownHandler}>
           ↑
         </button>
-        <button onClick={sortUpHandler}>f
+        <button type="submit" onClick={sortUpHandler}>f
           ↓
         </button>
       </div>
-      {' '}
-      <div >
-        
-        <ReactFileReader fileTypes={['.txt']} handleFiles={handleFiles}
-                         multipleFiles={false}>
-          <button>
+      <div>
+
+        <ReactFileReader
+          fileTypes={['.txt']}
+          handleFiles={handleFiles}
+          multipleFiles={false}
+        >
+          <button type="submit">
             Upload
           </button>
         </ReactFileReader>
       </div>
     </div>
   );
+};
+
+Index.propTypes = {
+  addHandler: PropTypes.func,
+  byNameHandler: PropTypes.func,
+  sortDownHandler: PropTypes.func,
+  sortUpHandler: PropTypes.func,
+  handleFiles: PropTypes.func,
+  initHandler: PropTypes.func,
+  getAllHandler: PropTypes.func,
+  byActorHandler: PropTypes.func,
 };
 
 export default Index;

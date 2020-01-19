@@ -1,0 +1,14 @@
+@import "../../styles/animations";
+
+.error {
+  @include animation-appear-quick;
+  border: 1px solid #ffb3c5;
+  padding: 20px;
+  margin-top:20px;
+  margin-bottom: 20px;
+
+  &-message {
+    font-size: 14px;
+    color: #d9373a;
+  }
+}
