@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import '../../styles/index.scss';
 import ReactFileReader from 'react-file-reader';
 import PropTypes from 'prop-types';
+import ButtonComponent from '../../ButtonComponent';
+import InputComponent from '../../InputComponent';
 
 const Index = props => {
-  const [byNameInput, setByNameInput] = useState('');
-  const [byActorInput, setByActorInput] = useState('');
+  const [byNameInputComponent, setByNameInputComponent] = useState('');
+  const [byActorInputComponent, setByActorInputComponent] = useState('');
   const [title, setTitle] = useState('');
   const [release, setRelease] = useState('');
   const [format, setFormat] = useState('');
@@ -25,18 +27,18 @@ const Index = props => {
   return (
     <div>
       <div>
-        <button
+        <ButtonComponent
           type="submit"
           onClick={initHandler}
         >init
-        </button>
-        <button
+        </ButtonComponent>
+        <ButtonComponent
           type="submit"
           onClick={getAllHandler}
         > getAll
-        </button>
+        </ButtonComponent>
         {props.block === 1 ? (
-          <button
+          <ButtonComponent
             type="submit"
             onClick={() => addHandler({
               title, release, format, stars,
@@ -44,36 +46,36 @@ const Index = props => {
             disabled
           >
             addNew
-          </button>
+          </ButtonComponent>
         ) : (
-          <button
+          <ButtonComponent
             type="submit"
             onClick={() => addHandler({
               title, release, format, stars,
             })}
           >
             addNew
-          </button>
+          </ButtonComponent>
         )}
         <br />
-        <input
+        <InputComponent
           label="name"
           name="title"
           type="text"
           onChange={e => setTitle(e.target.value)}
         />
-        <input
+        <InputComponent
           name="release"
           type="number"
           onChange={e => setRelease(e.target.value)}
         />
         <br />
-        <input
+        <InputComponent
           name="format"
           type="text"
           onChange={e => setFormat(e.target.value)}
         />
-        <input
+        <InputComponent
           name="stars"
           type="text"
           onChange={e => setStars(e.target.value)}
@@ -81,34 +83,34 @@ const Index = props => {
       </div>
 
       <div>
-        <button
+        <ButtonComponent
           type="submit"
-          onClick={() => byActorHandler(byActorInput)}
+          onClick={() => byActorHandler(byActorInputComponent)}
         >
           searchByActor
-        </button>
-        <input
+        </ButtonComponent>
+        <InputComponent
           type="text"
-          onChange={e => setByActorInput(e.target.value)}
+          onChange={e => setByActorInputComponent(e.target.value)}
         />
         <br />
-        <button
-          onClick={() => byNameHandler(byNameInput)}
+        <ButtonComponent
+          onClick={() => byNameHandler(byNameInputComponent)}
         >
           searchByName
-        </button>
-        <input
+        </ButtonComponent>
+        <InputComponent
           id="standard-name"
           type="text"
-          onChange={e => setByNameInput(e.target.value)}
+          onChange={e => setByNameInputComponent(e.target.value)}
         />
         <br />
-        <button type="submit" onClick={sortDownHandler}>
+        <ButtonComponent type="submit" onClick={sortDownHandler}>
           ↑
-        </button>
-        <button type="submit" onClick={sortUpHandler}>f
+        </ButtonComponent>
+        <ButtonComponent type="submit" onClick={sortUpHandler}>f
           ↓
-        </button>
+        </ButtonComponent>
       </div>
       <div>
 
@@ -117,9 +119,9 @@ const Index = props => {
           handleFiles={handleFiles}
           multipleFiles={false}
         >
-          <button type="submit">
+          <ButtonComponent type="submit">
             Upload
-          </button>
+          </ButtonComponent>
         </ReactFileReader>
       </div>
     </div>
